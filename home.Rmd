@@ -1,0 +1,21 @@
+---
+output: html_document
+---
+
+# Test for git page
+
+Some random plot ...
+
+```{r, message = FALSE, echo = FALSE}
+library(tidyverse)
+
+plot_d <- diamonds %>% 
+  group_by(cut) %>% 
+  summarise(mean_price = mean(price)) %>% 
+  mutate(cut = factor(cut, levels = cut[order(mean_price)]))
+
+plot_d %>% 
+  ggplot(aes(x = cut, y = mean_price)) +
+  geom_col(colour = "black", fill = "dark blue")
+```
+
