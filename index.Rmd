@@ -2,20 +2,19 @@
 output: html_document
 ---
 
-# Test for git page
+# under construction
 
-Some random plot ...
+I didn't get around to setting up this page properly yet, but look at this unicorn presenting you [Benford's Law](https://en.wikipedia.org/wiki/Benford%27s_law) while waiting!
 
-```{r, message = FALSE, echo = FALSE}
-library(tidyverse)
+```{r setup, echo = FALSE, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, echo = FALSE, include = TRUE, 
+                      fig.align = "center")
 
-plot_d <- diamonds %>% 
-  group_by(cut) %>% 
-  summarise(mean_price = mean(price)) %>% 
-  mutate(cut = factor(cut, levels = cut[order(mean_price)]))
-
-plot_d %>% 
-  ggplot(aes(x = cut, y = mean_price)) +
-  geom_col(colour = "black", fill = "dark blue")
+library(knitr)
 ```
 
+```{r, out.width = '60%'}
+include_graphics("./pics/unicorn.gif")
+```
+
+Came here for the [Skeptics in the Pub talk](https://einglasrotwein.github.io/skeptics_praesi)?
