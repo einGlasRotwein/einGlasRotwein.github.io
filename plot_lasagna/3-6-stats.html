@@ -140,7 +140,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3" data-path="3-3-customisation.html"><a href="3-3-customisation.html"><i class="fa fa-check"></i><b>3.3</b> Customisation</a></li>
 <li class="chapter" data-level="3.4" data-path="3-4-more-useful.html"><a href="3-4-more-useful.html"><i class="fa fa-check"></i><b>3.4</b> More useful</a></li>
 <li class="chapter" data-level="3.5" data-path="3-5-lowering-the-bar.html"><a href="3-5-lowering-the-bar.html"><i class="fa fa-check"></i><b>3.5</b> Lowering the bar</a></li>
-<li class="chapter" data-level="3.6" data-path="3-6-stats.html"><a href="3-6-stats.html"><i class="fa fa-check"></i><b>3.6</b> Stats</a></li>
+<li class="chapter" data-level="3.6" data-path="3-6-stats.html"><a href="3-6-stats.html"><i class="fa fa-check"></i><b>3.6</b> Stats</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="3-6-stats.html"><a href="3-6-stats.html#add-significance"><i class="fa fa-check"></i><b>3.6.1</b> Add significance</a></li>
+</ul></li>
 <li class="chapter" data-level="3.7" data-path="3-7-lets-get-wild.html"><a href="3-7-lets-get-wild.html"><i class="fa fa-check"></i><b>3.7</b> Let’s get wild</a></li>
 </ul></li>
 </ul>
@@ -191,6 +193,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span class="st">  </span><span class="kw">stat_summary</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>)</code></pre>
 <p><img src="plot_lasagna_gitbook_files/figure-html/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="add-significance" class="section level3">
+<h3><span class="header-section-number">3.6.1</span> Add significance</h3>
+<p>Want to have these fancy little asterisks in your plots? Check out <code>ggpubr</code> (for a detailed blog post, go <a href="https://www.r-bloggers.com/add-p-values-and-significance-levels-to-ggplots/">here</a>)! The default is a Kruskal Wallis test for the overall effect and Wilcoxon Tests for the pairwise comparisons, but we can specify an ANOVA and a t.test (better double check with your results anyways). The pairwise comparisons are already Bonferroni corrected.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggpubr)
+pairwise_comparisons &lt;-<span class="st"> </span><span class="kw">list</span>( <span class="kw">c</span>(<span class="st">&quot;Fair&quot;</span>, <span class="st">&quot;Very Good&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;Very Good&quot;</span>, <span class="st">&quot;Ideal&quot;</span>), 
+                              <span class="kw">c</span>(<span class="st">&quot;Fair&quot;</span>, <span class="st">&quot;Ideal&quot;</span>) )
+
+diamonds_small <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> price)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean,
+               <span class="dt">fun.ymax =</span> <span class="cf">function</span>(x) <span class="kw">mean</span>(x) <span class="op">+</span><span class="st"> </span><span class="kw">sd</span>(x),
+               <span class="dt">fun.ymin =</span> <span class="cf">function</span>(x) <span class="kw">mean</span>(x) <span class="op">-</span><span class="st"> </span><span class="kw">sd</span>(x)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_compare_means</span>(<span class="dt">comparisons =</span> pairwise_comparisons, <span class="dt">method =</span> <span class="st">&quot;t.test&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_compare_means</span>(<span class="dt">label.y =</span> <span class="dv">50</span>, <span class="dt">method =</span> <span class="st">&quot;anova&quot;</span>)</code></pre>
+<p><img src="plot_lasagna_gitbook_files/figure-html/unnamed-chunk-30-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Fancy something a bit more minimalistic?</p>
+<pre class="sourceCode r"><code class="sourceCode r">pairwise_comparisons &lt;-<span class="st"> </span><span class="kw">list</span>( <span class="kw">c</span>(<span class="st">&quot;Fair&quot;</span>, <span class="st">&quot;Very Good&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;Very Good&quot;</span>, <span class="st">&quot;Ideal&quot;</span>), 
+                              <span class="kw">c</span>(<span class="st">&quot;Fair&quot;</span>, <span class="st">&quot;Ideal&quot;</span>) )
+
+diamonds_small <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> price)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean,
+               <span class="dt">fun.ymax =</span> <span class="cf">function</span>(x) <span class="kw">mean</span>(x) <span class="op">+</span><span class="st"> </span><span class="kw">sd</span>(x),
+               <span class="dt">fun.ymin =</span> <span class="cf">function</span>(x) <span class="kw">mean</span>(x) <span class="op">-</span><span class="st"> </span><span class="kw">sd</span>(x)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_compare_means</span>(<span class="dt">comparisons =</span> pairwise_comparisons, <span class="dt">method =</span> <span class="st">&quot;t.test&quot;</span>,
+                     <span class="dt">label =</span>  <span class="st">&quot;p.signif&quot;</span>, <span class="dt">label.y =</span> <span class="kw">c</span>(<span class="dv">10000</span>, <span class="dv">11000</span>, <span class="dv">12000</span>))</code></pre>
+<p><img src="plot_lasagna_gitbook_files/figure-html/unnamed-chunk-31-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>You can also speficy reference groups, it works for grouped plots as well … possibilities are endless!</p>
+</div>
 </div>
             </section>
 

@@ -140,7 +140,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3" data-path="3-3-customisation.html"><a href="3-3-customisation.html"><i class="fa fa-check"></i><b>3.3</b> Customisation</a></li>
 <li class="chapter" data-level="3.4" data-path="3-4-more-useful.html"><a href="3-4-more-useful.html"><i class="fa fa-check"></i><b>3.4</b> More useful</a></li>
 <li class="chapter" data-level="3.5" data-path="3-5-lowering-the-bar.html"><a href="3-5-lowering-the-bar.html"><i class="fa fa-check"></i><b>3.5</b> Lowering the bar</a></li>
-<li class="chapter" data-level="3.6" data-path="3-6-stats.html"><a href="3-6-stats.html"><i class="fa fa-check"></i><b>3.6</b> Stats</a></li>
+<li class="chapter" data-level="3.6" data-path="3-6-stats.html"><a href="3-6-stats.html"><i class="fa fa-check"></i><b>3.6</b> Stats</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="3-6-stats.html"><a href="3-6-stats.html#add-significance"><i class="fa fa-check"></i><b>3.6.1</b> Add significance</a></li>
+</ul></li>
 <li class="chapter" data-level="3.7" data-path="3-7-lets-get-wild.html"><a href="3-7-lets-get-wild.html"><i class="fa fa-check"></i><b>3.7</b> Let’s get wild</a></li>
 </ul></li>
 </ul>
@@ -170,14 +172,14 @@ diamonds_small <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">stat_summary</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">transition_reveal</span>(<span class="kw">stat</span>(x))</code></pre>
-<p><img src="plot_lasagna_gitbook_files/figure-html/unnamed-chunk-30-1.gif" style="display: block; margin: auto;" /></p>
+<p><img src="plot_lasagna_gitbook_files/figure-html/unnamed-chunk-32-1.gif" style="display: block; margin: auto;" /></p>
 <p>Or we could transition between the different degrees of clarity.</p>
 <pre class="sourceCode r"><code class="sourceCode r">diamonds_small <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> price, <span class="dt">fill =</span> color)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;summary&quot;</span>, <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;{closest_state}&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">transition_states</span>(clarity)</code></pre>
-<p><img src="plot_lasagna_gitbook_files/figure-html/unnamed-chunk-31-1.gif" style="display: block; margin: auto;" /></p>
+<p><img src="plot_lasagna_gitbook_files/figure-html/unnamed-chunk-33-1.gif" style="display: block; margin: auto;" /></p>
 </div>
 <!-- </div> -->
             </section>
