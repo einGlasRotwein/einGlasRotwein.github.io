@@ -6,7 +6,7 @@ output: html_document
 
 I didn't get around to setting up this page properly yet, but look at this unicorn below presenting you [Benford's Law](https://en.wikipedia.org/wiki/Benford%27s_law) while waiting!
 
-You could also take a look at this simulation of the [epic fight](https://einglasrotwein.github.io/wilcoxon_wars) between the t-test and the Wilcoxon rank sum test against the perils of violated assumtions.
+You could also take a look at this simulation of the [epic fight](https://einglasrotwein.github.io/wilcoxon_wars.html) between the t-test and the Wilcoxon rank sum test against the perils of violated assumtions.
 
 Or did you come here for the [Skeptics in the Pub talk](https://einglasrotwein.github.io/skeptics_praesi)? (sorry, German)
 
