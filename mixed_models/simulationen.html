@@ -112,34 +112,34 @@
 ## Formula: y ~ x + (1 | groups)
 ##    Data: run1
 ## 
-## REML criterion at convergence: 260.2
+## REML criterion at convergence: 244.4
 ## 
 ## Scaled residuals: 
 ##      Min       1Q   Median       3Q      Max 
-## -2.26476 -0.54921 -0.01318  0.54876  2.59763 
+## -3.02937 -0.57172  0.00258  0.53754  2.32268 
 ## 
 ## Random effects:
 ##  Groups   Name        Variance Std.Dev.
-##  groups   (Intercept) 0.26446  0.5143  
-##  Residual             0.05416  0.2327  
+##  groups   (Intercept) 0.18976  0.4356  
+##  Residual             0.05813  0.2411  
 ## Number of obs: 300, groups:  groups, 100
 ## 
 ## Fixed effects:
 ##             Estimate Std. Error t value
-## (Intercept)  2.00228    0.05316   37.67
-## x            0.52750    0.01531   34.45
+## (Intercept)  1.97195    0.04573   43.12
+## x            0.48974    0.01677   29.20
 ## 
 ## Correlation of Fixed Effects:
 ##   (Intr)
-## x -0.011</code></pre>
+## x 0.006</code></pre>
 <p>Summary: Okay, krass. Der residual standard error hat eine SD von .25, wie auch dem error term e in der Simulation zugewiesen wurde. x wird - wie spezifiziert - auf .5 geschätzt. Und das intercept - passt auch - auf 1.9. Das intercept der groups hat eine SD von .48 - wie zuvor in u übergeben. Bin noch nicht vollkommen sicher, wie ich die aufgeklärte Varianz beurteilen soll.</p>
 <p>Vergleiche <code>broom</code>-Output:</p>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["effect"],"name":[1],"type":["chr"],"align":["left"]},{"label":["group"],"name":[2],"type":["chr"],"align":["left"]},{"label":["term"],"name":[3],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"fixed","2":"NA","3":"(Intercept)","4":"2.0022845","5":"0.05315577","6":"37.66825"},{"1":"fixed","2":"NA","3":"x","4":"0.5274951","5":"0.01531216","6":"34.44944"},{"1":"ran_pars","2":"groups","3":"sd__(Intercept)","4":"0.5142599","5":"NA","6":"NA"},{"1":"ran_pars","2":"Residual","3":"sd__Observation","4":"0.2327245","5":"NA","6":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["effect"],"name":[1],"type":["chr"],"align":["left"]},{"label":["group"],"name":[2],"type":["chr"],"align":["left"]},{"label":["term"],"name":[3],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"fixed","2":"NA","3":"(Intercept)","4":"1.9719491","5":"0.04573159","6":"43.12006"},{"1":"fixed","2":"NA","3":"x","4":"0.4897380","5":"0.01677212","6":"29.19953"},{"1":"ran_pars","2":"groups","3":"sd__(Intercept)","4":"0.4356093","5":"NA","6":"NA"},{"1":"ran_pars","2":"Residual","3":"sd__Observation","4":"0.2410959","5":"NA","6":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p>Intraclass correlation: Groups klären <span class="math inline">\(83.00\)</span> <span class="math inline">\(\%\)</span> der Gesamtvarianz auf.</p>
+<p>Intraclass correlation: Groups klären <span class="math inline">\(76.55\)</span> <span class="math inline">\(\%\)</span> der Gesamtvarianz auf.</p>
 <div id="density-plot" class="section level4">
 <h4><span class="header-section-number">2.5.1.1</span> Density plot</h4>
 <p>Orange ist der Mittelwert, der 0 ist. Spannend aber, wie asymmetrisch das ist.
