@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2.5 Simulationen | NOTIZEN</title>
+  <meta name="description" content="2.5 Simulationen | NOTIZEN" />
+  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2.5 Simulationen | NOTIZEN" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2.5 Simulationen | NOTIZEN" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="mixed-model-in-r.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="first-things-first.html"><a href="first-things-first.html"><i class="fa fa-check"></i><b>1</b> First Things First</a><ul>
+<li class="chapter" data-level="1.1" data-path="hilfreiche-definitionen.html"><a href="hilfreiche-definitionen.html"><i class="fa fa-check"></i><b>1.1</b> Hilfreiche Definitionen</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="hilfreiche-definitionen.html"><a href="hilfreiche-definitionen.html#nested-und-clustered"><i class="fa fa-check"></i><b>1.1.1</b> Nested und clustered</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="random-intercept-models.html"><a href="random-intercept-models.html"><i class="fa fa-check"></i><b>2</b> Random intercept models</a><ul>
+<li class="chapter" data-level="2.1" data-path="generelle-logik.html"><a href="generelle-logik.html"><i class="fa fa-check"></i><b>2.1</b> Generelle Logik</a></li>
+<li class="chapter" data-level="2.2" data-path="fancy-plot-zum-klauen.html"><a href="fancy-plot-zum-klauen.html"><i class="fa fa-check"></i><b>2.2</b> Fancy Plot zum Klauen</a></li>
+<li class="chapter" data-level="2.3" data-path="problem-einfache-regression.html"><a href="problem-einfache-regression.html"><i class="fa fa-check"></i><b>2.3</b> Problem einfache Regression</a></li>
+<li class="chapter" data-level="2.4" data-path="mixed-model-in-r.html"><a href="mixed-model-in-r.html"><i class="fa fa-check"></i><b>2.4</b> Mixed Model in R</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="mixed-model-in-r.html"><a href="mixed-model-in-r.html#vergleich-einfache-regression-vs.-mixed-model"><i class="fa fa-check"></i><b>2.4.1</b> Vergleich einfache Regression vs. mixed model</a></li>
+<li class="chapter" data-level="2.4.2" data-path="mixed-model-in-r.html"><a href="mixed-model-in-r.html#predictions-plotten"><i class="fa fa-check"></i><b>2.4.2</b> Predictions plotten</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="simulationen.html"><a href="simulationen.html"><i class="fa fa-check"></i><b>2.5</b> Simulationen</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="simulationen.html"><a href="simulationen.html#run-1"><i class="fa fa-check"></i><b>2.5.1</b> Run 1</a></li>
+<li class="chapter" data-level="2.5.2" data-path="simulationen.html"><a href="simulationen.html#run-2"><i class="fa fa-check"></i><b>2.5.2</b> Run 2</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">NOTIZEN</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="simulationen" class="section level2">
+<h2><span class="header-section-number">2.5</span> Simulationen</h2>
+<p>Zum besseren Verständnis: Rumspielen mit verschiedenen Parametern von simulierten Daten und das entsprechende Resultat im mixed model. In den Notes anstatt in den Übungen, weil echt hilfreich.</p>
+<p>“In what follows we’ll change various aspects of the data, then rerun the model after each change […]. For each note specifically at least one thing that changed in the results.”</p>
+<p><span style=" font-weight: bold;    color: #ad4f19 !important;">0. First calculate or simply eyeball the intraclass correlation coefficient:</span></p>
+<p><span class="math display">\[\frac{\textrm{random effect variance}}{\textrm{residual + random effect variance}}\]</span>
+<span style=" font-weight: bold;    color: #ad4f19 !important;">In addition, create a density plot of the random effects.</span></p>
+<div id="run-1" class="section level3">
+<h3><span class="header-section-number">2.5.1</span> Run 1</h3>
+<p><strong>Which of the above represent the fixed and random effects?</strong></p>
+<p>x = fixed effect; u[groups] = random effect</p>
+<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
+## Formula: y ~ x + (1 | groups)
+##    Data: run1
+## 
+## REML criterion at convergence: 260.2
+## 
+## Scaled residuals: 
+##      Min       1Q   Median       3Q      Max 
+## -2.26476 -0.54921 -0.01318  0.54876  2.59763 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  groups   (Intercept) 0.26446  0.5143  
+##  Residual             0.05416  0.2327  
+## Number of obs: 300, groups:  groups, 100
+## 
+## Fixed effects:
+##             Estimate Std. Error t value
+## (Intercept)  2.00228    0.05316   37.67
+## x            0.52750    0.01531   34.45
+## 
+## Correlation of Fixed Effects:
+##   (Intr)
+## x -0.011</code></pre>
+<p>Summary: Okay, krass. Der residual standard error hat eine SD von .25, wie auch dem error term e in der Simulation zugewiesen wurde. x wird - wie spezifiziert - auf .5 geschätzt. Und das intercept - passt auch - auf 1.9. Das intercept der groups hat eine SD von .48 - wie zuvor in u übergeben. Bin noch nicht vollkommen sicher, wie ich die aufgeklärte Varianz beurteilen soll.</p>
+<p>Vergleiche <code>broom</code>-Output:</p>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["effect"],"name":[1],"type":["chr"],"align":["left"]},{"label":["group"],"name":[2],"type":["chr"],"align":["left"]},{"label":["term"],"name":[3],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"fixed","2":"NA","3":"(Intercept)","4":"2.0022845","5":"0.05315577","6":"37.66825"},{"1":"fixed","2":"NA","3":"x","4":"0.5274951","5":"0.01531216","6":"34.44944"},{"1":"ran_pars","2":"groups","3":"sd__(Intercept)","4":"0.5142599","5":"NA","6":"NA"},{"1":"ran_pars","2":"Residual","3":"sd__Observation","4":"0.2327245","5":"NA","6":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Intraclass correlation: Groups klären <span class="math inline">\(83.00\)</span> <span class="math inline">\(\%\)</span> der Gesamtvarianz auf.</p>
+<div id="density-plot" class="section level4">
+<h4><span class="header-section-number">2.5.1.1</span> Density plot</h4>
+<p>Orange ist der Mittelwert, der 0 ist. Spannend aber, wie asymmetrisch das ist.
+<img src="01_first_things_first_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+</div>
+<div id="noch-mehr-plots" class="section level4">
+<h4><span class="header-section-number">2.5.1.2</span> Noch mehr Plots</h4>
+<p>Problem beim Plotten: Das sind 100 3er-Grüppchen. Es ist nicht so sinnvoll, den Plot danach zu gruppieren. Daher hier mal vier rausgegriffen und der Rest zusammengefasst. Jede Gruppe hat eine lineare Regressionslinie bekommen.</p>
+<p><img src="01_first_things_first_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>Interessanterweise sieht es hier so aus, als wäre auch ein random slope pro Gruppe angemessen. Mal zum Vergleich die Schätzungen des linearen Modells:</p>
+<p><img src="01_first_things_first_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>D.h. wenn man jede Gruppe für sich linear schätzt (was <code>geom_smooth</code> mit <code>method = "lm"</code> hier ja tut), ergibt sich ein anderes Bild als durch das mixed model. Wir wissen ja durch die Simulation, dass es keine random slopes pro Gruppe gibt (vermutlich würde auch das lineare Modell ähnliche Schätzungen liefern, wenn es nicht nur drei Datenpunkte pro Gruppe wären). Schon krass irgendwo, dass ein mixed Model viel mehr ist (sein kann?) als einfach nur ein lineares Modell pro Gruppe. Man beachte, dass die zusammengefasste Schätzung für die restlichen Gruppen einen anderen Slope hat, weil hier die unterschiedlichen Intercepts (minus die der gehighlighteten Gruppen) alle aufeinander prallen.</p>
+<p><span style=" font-weight: bold;    color: #E8793A !important;">TO DO:</span> Hier noch mal zurückkommen, wenn random slopes dazu kommen und schauen,
+ob die Ergebnisse von linearen Schätzungen pro Gruppe (Plot 1) und einem mixed model mit random slopes (allein und mit random intercepts?) sich unterscheiden!</p>
+</div>
+</div>
+<div id="run-2" class="section level3">
+<h3><span class="header-section-number">2.5.2</span> Run 2</h3>
+<p><span style=" font-weight: bold;    color: #ad4f19 !important;">1. Change the random effect variance/sd and/or the residual variance/sd and note your new estimate of the ICC, and plot the random effect as before.</span></p>
+</div>
+</div>
+<!-- </div> -->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="mixed-model-in-r.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": 2,
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

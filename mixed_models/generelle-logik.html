@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>NOTIZEN</title>
-  <meta name="description" content="NOTIZEN" />
+  <title>2.1 Generelle Logik | NOTIZEN</title>
+  <meta name="description" content="2.1 Generelle Logik | NOTIZEN" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="NOTIZEN" />
+  <meta property="og:title" content="2.1 Generelle Logik | NOTIZEN" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="NOTIZEN" />
+  <meta name="twitter:title" content="2.1 Generelle Logik | NOTIZEN" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="hilfreiche-definitionen.html">
+<link rel="prev" href="random-intercept-models.html">
+<link rel="next" href="fancy-plot-zum-klauen.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -97,21 +97,38 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">NOTIZEN</h1>
-<h2 class="subtitle"><em>Mixed Models Workshop Michael Clark</em></h2>
-</div>
-<div id="first-things-first" class="section level1">
-<h1><span class="header-section-number">1</span> First Things First</h1>
-<p><span style=" font-weight: bold;    color: #E8793A !important;">wichtiges Highlight</span> – <span style=" font-weight: bold;    color: #6BBFA6 !important;">nicht ganz so wichtiges Highlight</span> – <span style=" font-weight: bold;    color: #397367 !important;">Link</span></p> 
+<div id="generelle-logik" class="section level2">
+<h2><span class="header-section-number">2.1</span> Generelle Logik</h2>
+<p>Studenten werden an verschiedenen Zeitpunkten (occasions) getestet (GPA). Zeitpunkte sind ein Haupteffekt. Individuelle Effekte der Studenten werden Modell hinzugefügt:</p>
+<p><span class="math display">\[
+\mathrm{gpa}=b_{\mathrm{intercept}}+b_{\mathrm{occ}} \cdot \text { occasion }+\left(\text {effect }_{\mathrm{student}}+\epsilon\right)
+\]</span></p>
+<ul>
+<li>Der einzige Unterschied zwischen einem mixed model und einer standardmäßigen Regression: <span style=" font-weight: bold;    color: #6BBFA6 !important;">random student effect</span>
+<ul>
+<li>Normalverteilt mit <span class="math inline">\(M = 0\)</span> und irgendeiner geschätzten Standardabweichung <span class="math inline">\(\tau\)</span></li>
+<li>Im Mittel kein Effekt, aber variiert von Student zu Student im Mittel um <span class="math inline">\(\tau\)</span></li>
+</ul></li>
+</ul>
+<p><span class="math display">\[
+\text{effect}_\text{student} \sim \mathscr { N } ( 0 , \tau )
+\]</span></p>
+<p>Jeder Student hat seinen eigenen Effekt, der zum allgemeinen intercept hinzugefügt wird. Das heißt, jeder Student hat sein eigenes intercept, mit anderen “Worten”:</p>
+<p><span class="math display">\[
+\mathrm{gpa}=b_{\mathrm{int} \text { student }}+b_{\mathrm{occ}} \cdot \text { occasion }+\epsilon
+\]</span>
+Das heißt: <span style=" font-weight: bold;    color: #E8793A !important;">Intercepts</span> sind jetzt normalverteilt. Das overall intercept als Mittelwert mit irgendeiner SD <span class="math inline">\(\tau\)</span>.</p>
+<p><span class="math display">\[
+b_{\text { int } \text { student }} \sim \mathscr{N}\left(b_{\text { intercept }}, \tau\right)
+\]</span></p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="hilfreiche-definitionen.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="random-intercept-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="fancy-plot-zum-klauen.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
