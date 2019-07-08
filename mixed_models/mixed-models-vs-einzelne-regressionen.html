@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.1 Fancy Plot zum Klauen | NOTIZEN</title>
-  <meta name="description" content="2.1 Fancy Plot zum Klauen | NOTIZEN" />
+  <title>3.1 Mixed Models vs. einzelne Regressionen | NOTIZEN</title>
+  <meta name="description" content="3.1 Mixed Models vs. einzelne Regressionen | NOTIZEN" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.1 Fancy Plot zum Klauen | NOTIZEN" />
+  <meta property="og:title" content="3.1 Mixed Models vs. einzelne Regressionen | NOTIZEN" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.1 Fancy Plot zum Klauen | NOTIZEN" />
+  <meta name="twitter:title" content="3.1 Mixed Models vs. einzelne Regressionen | NOTIZEN" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="random-intercept-models.html">
-<link rel="next" href="problem-einfache-regression.html">
+<link rel="prev" href="randomslopes.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -167,40 +167,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="fancy-plot-zum-klauen" class="section level2">
-<h2><span class="header-section-number">2.1</span> Fancy Plot zum Klauen</h2>
-<p><a href="https://m-clark.github.io/mixed-models-with-R/random_intercepts.html#application"><span style=" font-weight: bold;    color: #397367 !important;">Sehr coole Visualisierung</span></a> der Variablität in Startpunkten und Entwicklung über die Zeit.
-- Individuelle Pfade sowie genereller Trend trotzdem noch anschaulich abgebildet.</p>
-<p>Reproduzierung - ist bestimmt nützlich, wenn man es selbst mal darstellen muss:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&quot;data/gpa.RData&quot;</span>)
-
-<span class="co"># Random 10 Einzellinien highlighten</span>
-gpa &lt;-<span class="st"> </span>gpa <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">highlight =</span> <span class="kw">ifelse</span>(student <span class="op">%in%</span><span class="st"> </span><span class="kw">sample</span>(<span class="kw">unique</span>(student), <span class="dv">10</span>), <span class="ot">TRUE</span>, <span class="ot">FALSE</span>))</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">gpa <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> occasion, <span class="dt">y =</span> gpa)) <span class="op">+</span>
-<span class="st">  </span><span class="co"># Kehrt Reihenfolge um, damit TRUE über FALSE geplottet wird und </span>
-<span class="st">  </span><span class="co"># gehighlightete Linien nicht von den anderen überdeckt werden</span>
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">group =</span> student, <span class="dt">colour =</span> <span class="kw">rev</span>(highlight), <span class="dt">alpha =</span> <span class="kw">rev</span>(highlight), 
-                <span class="dt">size =</span> <span class="kw">rev</span>(highlight))) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">colour =</span> farbschema[<span class="dv">1</span>], <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_alpha_discrete</span>(<span class="dt">range =</span> <span class="kw">c</span>(.<span class="dv">1</span>, <span class="dv">1</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_size_discrete</span>(<span class="dt">range =</span> <span class="kw">c</span>(.<span class="dv">5</span>, <span class="dv">1</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_colour_manual</span>(<span class="dt">values =</span> <span class="kw">pick_colour</span>(<span class="dv">2</span>, <span class="st">&quot;mono_green&quot;</span>)) <span class="op">+</span>
-<span class="st">  </span>julis_theme <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</code></pre>
-<p><img src="01_first_things_first_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<p><span class="math inline">\(\to\)</span> Siehe Skript uebungen.R – Übung #1 für einfache Regression.</p>
+<div id="mixed-models-vs.-einzelne-regressionen" class="section level2">
+<h2><span class="header-section-number">3.1</span> Mixed Models vs. einzelne Regressionen</h2>
+<p>Der Vergleich mit einer einzelnen Regression pro Student liegt nahe, aber hier wird es etwas merkwürdig. Er gibt hier den folgenden Code an, um separate Regressionen pro Student durchzuführen (ich habe ihn etwas modifiziert). Aus der Beschreibung von <code>lmList</code>, scheinbar eine extrem lustige Funktion: “Fit a list of <code>lm</code> or <code>glm</code> objects with a common model for different subgroups of the data.”</p>
+<pre class="sourceCode r"><code class="sourceCode r">gpa_lm_by_group &lt;-<span class="st"> </span><span class="kw">lmList</span>(gpa <span class="op">~</span><span class="st"> </span>occasion <span class="op">|</span><span class="st"> </span>student, gpa)</code></pre>
+<p>Clark schreibt dazu: “Let’s compare these results to the ones we would have gotten had we run a separate regression for each student. In what follows we see the distribution of of (sic) the estimated intercept and slope coefficients for all the students. Note that these are the same estimates one would have gotten with a fixed effects model with an occasion by student interaction.” Aber irgendwie scheint das alles nicht dasselbe zu sein, denn ich habe besagtes Modell auch aufgestellt und es kommt was anderes dabei rum (zumal das Intercept in dem Fall ja auch immer dasselbe ist). Ich weiß nicht, was er sonst damit meinen sollte und ich finde es verstörend. Vielleicht geht mir da noch ein Licht auf.</p>
+<pre class="sourceCode r"><code class="sourceCode r">lm_regr &lt;-<span class="st"> </span><span class="kw">lm</span>(gpa <span class="op">~</span><span class="st"> </span>occasion<span class="op">*</span>student, <span class="dt">data =</span> gpa)</code></pre>
+<p><img src="01_first_things_first_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<p><img src="01_first_things_first_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p>In jedem Fall dürfte die Regression Student für Student mit dem Code, den er verwendet hat, das sein, was uns interessiert. Und auch in den zusätzlichen Plots basierend auf Simulationen, <a href="https://m-clark.github.io/mixed-models-with-R/random_slopes.html#comparison-to-many-regressions">die er bastelt</a>, wird die Hauptmessage deutlich: Die Intercepts und Slopes von mixed Models sind weniger extrem und tummeln sich stärker um den overall Effect. Je stärker der Effekt der Subgruppen, desto größer die Unsicherheit über den overall Effect.</p>
+<p>Schöne Erklärung auch zu <span style=" font-weight: bold;    color: #E8793A !important;">partial pooling</span>: <span style=" font-weight: bold;    color: #6BBFA6 !important;">Complete pooling</span> wäre ein standard Regressionsmodell, das Cluster völlig ignoriert. <span style=" font-weight: bold;    color: #6BBFA6 !important;">Gar kein pooling</span> hat man bei der Herangehensweise mit den einzelnen Regressionen pro Student, wie wir das gerade gemacht haben. Mixed models kann man mit <span style=" font-weight: bold;    color: #6BBFA6 !important;">partial pooling</span> beschreiben, weil die Ähnlichkeit zwischen den Clustern geschätzt wird, wobei die Daten über alle Observations hinweg die Schätzung der Cluster informieren.</p>
+<p>Spannend wird es, wenn man die Vorhersagen der beiden Herangehensweisen (mixed model vs. einzelne Regressionen) visualisiert:</p>
+<p><img src="01_first_things_first_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<p><img src="01_first_things_first_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p><span style=" font-weight: bold;    color: #E8793A !important;">TO DO:</span> Rausfinden, wieso die Linien im zweiten Plot nicht korrekt gehighlighted werden.</p>
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="random-intercept-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="problem-einfache-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="randomslopes.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
