@@ -145,6 +145,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5.3" data-path="simulationen.html"><a href="simulationen.html#run-3---different-residual-variance"><i class="fa fa-check"></i><b>2.5.3</b> Run 3 - Different residual variance</a></li>
 <li class="chapter" data-level="2.5.4" data-path="simulationen.html"><a href="simulationen.html#run-4---different-random-effect-and-residual-variance"><i class="fa fa-check"></i><b>2.5.4</b> Run 4 - Different random effect and residual variance</a></li>
 <li class="chapter" data-level="2.5.5" data-path="simulationen.html"><a href="simulationen.html#ubersicht"><i class="fa fa-check"></i><b>2.5.5</b> Übersicht</a></li>
+<li class="chapter" data-level="2.5.6" data-path="simulationen.html"><a href="simulationen.html#veranderung-der-gruppengroen"><i class="fa fa-check"></i><b>2.5.6</b> Veränderung der Gruppengrößen</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -210,7 +211,7 @@ model1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(y <span class=
   </script>
 </div>
 <p>Einmal die Tabelle hier zur Veranschaulichung, alles Weitere in der Vergleichstabelle für alle Läufe unten. Intraclass Correlations und Density Plots ebenfalls unten.</p>
-<p>Hier sehen wir aber zunächst, dass sich die von uns spezifizierten Parameter genau im Modell ablesen lassen: Der Residual Standard Error liegt bei .23 - wir haben dem error term e in der Simulation ja .25 zugewiesen. x wird (fast) genau wie spezifiziert auf .5 geschätzt. Und das Intercept passt auch: 1.95 (übergeben: 2). Das Intercept der groups hat einen Residual Standard Error von .50 - passt auch beinahe genau. Bin noch nicht vollkommen sicher, wie ich die aufgeklärte Varianz beurteilen soll.</p>
+<p>Hier sehen wir aber zunächst, dass sich die von uns spezifizierten Parameter genau im Modell ablesen lassen: Die Residual Standard Deviation liegt bei .23 - wir haben dem error term e in der Simulation ja .25 zugewiesen. x wird (fast) genau wie spezifiziert auf .5 geschätzt. Und das Intercept passt auch: 1.95 (übergeben: 2). Das Intercept der groups hat eine Standard Deviation von .50 - passt auch beinahe genau. Bin noch nicht vollkommen sicher, wie ich die aufgeklärte Varianz beurteilen soll.</p>
 <pre class="sourceCode r"><code class="sourceCode r">tb_intracl &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">formatVC</span>(<span class="kw">VarCorr</span>(model1), <span class="dt">comp =</span> <span class="kw">c</span>(<span class="st">&quot;Var&quot;</span>, <span class="st">&quot;Std&quot;</span>))) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Variance =</span> <span class="kw">as.numeric</span>(<span class="kw">as.character</span>(Variance)))
 
@@ -232,7 +233,7 @@ run2 &lt;-<span class="st"> </span><span class="kw">rand_int_sim</span>(Ngroups,
                      sdFixedEffect, AvIntercept)
 
 model2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(y <span class="op">~</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>groups), <span class="dt">data =</span> run2)</code></pre>
-<p>Siehe Zusammenfassung unten: Im Prinzip sind alle Werte dieselben bis auf den Residual Standard Error für das Intercept der Groups. Der ist jetzt bei 1 (vorher .50), und das ist ja auch das Einzige, was ich geändert habe. Interessanterweise gibt es leichte Abweichungen in den anderen Werten. Das sollte nicht daran liegen, dass ich eingangs zwar denselben Seed gesetzt habe, aber den Prozess des Samplings dann durch Änderungen in den Parametern vor dem Sampling des Intercepts verändert habe. Das sollte dann passieren, wenn ich das N ändere und somit der Startpunkt (vom Seed aus) für das Sampling des Intercepts ein anderer ist. Aber wenn ich hier keinen Denkfehler mache, wurde das Intercept leicht durch die Varianz des random effects (auf das Intercept) beeinflusst … ?</p>
+<p>Siehe Zusammenfassung unten: Im Prinzip sind alle Werte dieselben bis auf die Standard Deviation für das Intercept der Groups. Der ist jetzt bei 1 (vorher .50), und das ist ja auch das Einzige, was ich geändert habe. Interessanterweise gibt es leichte Abweichungen in den anderen Werten. Das sollte nicht daran liegen, dass ich eingangs zwar denselben Seed gesetzt habe, aber den Prozess des Samplings dann durch Änderungen in den Parametern vor dem Sampling des Intercepts verändert habe. Das sollte dann passieren, wenn ich das N ändere und somit der Startpunkt (vom Seed aus) für das Sampling des Intercepts ein anderer ist. Aber wenn ich hier keinen Denkfehler mache, wurde das Intercept leicht durch die Varianz des random effects (auf das Intercept) beeinflusst … ?</p>
 <p>Intraclass correlation: Groups klären <span class="math inline">\(94.94\)</span> <span class="math inline">\(\%\)</span> der Gesamtvarianz auf. Was mega krass ist. Ergibt natürlich Sinn, weil ich die Varianz der Gruppen brutal hochgeschraubt habe. Ich verstehe nur noch nicht ganz, wieso die fixed effects hier nicht einbezogen werden, sondern nur der Effekt von group durch group <span class="math inline">\(+\)</span> residual gerechnet wird? Hat vermutlich damit zu tun, dass der Effekt von <span class="math inline">\(x\)</span> ja mit oder ohne random intercept derselbe bleibt.</p>
 </div>
 <div id="run-3---different-residual-variance" class="section level3">
@@ -250,7 +251,7 @@ run3 &lt;-<span class="st"> </span><span class="kw">rand_int_sim</span>(Ngroups,
                      sdFixedEffect, AvIntercept)
 
 model3 &lt;-<span class="st"> </span><span class="kw">lmer</span>(y <span class="op">~</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>groups), <span class="dt">data =</span> run3)</code></pre>
-<p>Siehe Zusammenfassung unten. Vergleich zum Default Model 1: Geändert hat sich nur der Residual Standard Error: Von .23 auf .47.</p>
+<p>Siehe Zusammenfassung unten. Vergleich zum Default Model 1: Geändert hat sich nur die Residual Standard Deviation: Von .23 auf .47.</p>
 <p>Intraclass correlation: Groups klären <span class="math inline">\(51.75\)</span> <span class="math inline">\(\%\)</span> der Gesamtvarianz auf. Also viel weniger als in Lauf 1 oder 2, weil das Residual natürlich umso mehr Varianz aufklärt.</p>
 </div>
 <div id="run-4---different-random-effect-and-residual-variance" class="section level3">
@@ -516,20 +517,383 @@ run4
 </table>
 <div id="density-plots" class="section level4">
 <h4><span class="header-section-number">2.5.5.1</span> Density Plots</h4>
-<p>Orange ist der Mittelwert, der 0 ist. Spannend aber, wie asymmetrisch die sind. Run 2: Höhere Varianz des Random Effects bedeutet mehr Unsicherheit, wo er liegt? Run 3: Weil das Residual größer ist, schätzen wir den Effekt der Gruppe aufs Intercept eher auf 0? Rund 4: Sieht eher aus wie der aus Run 2. Die größere Varianz des Random Effects hat mehr Einfluss als der größere Residual Standard Error?</p>
+<p>Orange ist der Mittelwert, der 0 ist. Spannend aber, wie asymmetrisch die sind. Run 2: Höhere Varianz des Random Effects bedeutet mehr Unsicherheit, wo er liegt? Run 3: Weil das Residual größer ist, schätzen wir den Effekt der Gruppe aufs Intercept eher auf 0? Rund 4: Sieht eher aus wie der aus Run 2. Die größere Varianz des Random Effects hat mehr Einfluss als die größere Residual Standard Deviation?</p>
 <p><img src="01_first_things_first_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 </div>
 <div id="lineare-regressionen" class="section level4">
 <h4><span class="header-section-number">2.5.5.2</span> Lineare Regressionen</h4>
 <p>Problem beim Plotten: Die Daten bestehen aus 100 3er-Grüppchen. Es ist nicht so übersichtlich, den Plot danach zu gruppieren. Daher hier mal vier rausgegriffen und der Rest zusammengefasst. Jede Gruppe hat eine lineare Regressionslinie bekommen. (Blau/orange vier herausgepickte Gruppen, grün-beige die restlichen Gruppen zusammengefasst.) Interessanterweise sieht es hier so aus, als wären auch ein Random Slopes pro Gruppe angemessen.</p>
-<p><img src="01_first_things_first_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="01_first_things_first_files/figure-html/unnamed-chunk-31-1.png" width="110%" /></p>
 </div>
 <div id="mixed-models" class="section level4">
 <h4><span class="header-section-number">2.5.5.3</span> Mixed Models</h4>
-<p><img src="01_first_things_first_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p><img src="01_first_things_first_files/figure-html/unnamed-chunk-32-1.png" width="110%" /></p>
 <p>D.h. wenn man jede Gruppe für sich linear schätzt (was <code>geom_smooth</code> mit <code>method = "lm"</code> hier ja tut), ergibt sich ein anderes Bild als durch das mixed model. Wir wissen ja durch die Simulation, dass es keine random slopes pro Gruppe gibt (vermutlich würde auch das lineare Modell ähnliche Schätzungen liefern, wenn es nicht nur drei Datenpunkte pro Gruppe wären). Schon krass irgendwo, dass ein mixed Model viel mehr ist (sein kann?) als einfach nur ein lineares Modell pro Gruppe. Man beachte, dass die zusammengefasste Schätzung für die restlichen Gruppen einen anderen Slope hat, weil hier die unterschiedlichen Intercepts (minus die der gehighlighteten Gruppen) alle aufeinander prallen.</p>
 <p>Man bedenke auch: Der angenommene Effekt für x ändert sich ja nicht dadurch, dass ein random Intercept dazu kommt. Während ich bei den linearen Regressionsplots eine lineare Regression innerhalb jeder Gruppe rechne, verschiebe ich beim mixed Model die “mittlere” lineare Regression an der y-Achse entlang (oder?).</p>
 <p><span style=" font-weight: bold;    color: #E8793A !important;">TO DO:</span> Hier noch mal zurückkommen, wenn random slopes dazu kommen und schauen, ob die Ergebnisse von linearen Schätzungen pro Gruppe (Plot 1) und einem mixed model mit random slopes (allein und mit random intercepts?) sich unterscheiden!</p>
+</div>
+</div>
+<div id="veranderung-der-gruppengroen" class="section level3">
+<h3><span class="header-section-number">2.5.6</span> Veränderung der Gruppengrößen</h3>
+<p><span style=" font-weight: bold;    color: #ad4f19 !important;">2. Reset the values to the original. Change Ngroups to 50. What differences do you see in the confidence interval estimates?</span></p>
+<p><span style=" font-weight: bold;    color: #ad4f19 !important;">3. Set the Ngroups back to 100. Now change NperGroup to 10, and note again the how the CI is different from the base condition.</span></p>
+<ul>
+<li>Run 1: <code>NGroups</code> = 100, <code>NperGroup</code> = 3</li>
+<li>Run 5: <code>NGroups</code> = 50, <code>NperGroup</code> = 3</li>
+<li>Run 6: <code>NGroups</code> = 100, <code>NperGroup</code> = 10</li>
+</ul>
+<table class="table table-striped" style="font-size: 14px; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:unnamed-chunk-34">Table 1.8: </span>Simulationsübersicht variierende Sample Sizes
+</caption>
+<thead>
+<tr>
+<th style="border-bottom:hidden" colspan="3">
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Standardabweichung
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Standard Error
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+effect
+</th>
+<th style="text-align:left;">
+group
+</th>
+<th style="text-align:left;">
+term
+</th>
+<th style="text-align:left;">
+run1
+</th>
+<th style="text-align:left;">
+run5
+</th>
+<th style="text-align:left;">
+run6
+</th>
+<th style="text-align:left;">
+run1
+</th>
+<th style="text-align:left;">
+run5
+</th>
+<th style="text-align:left;">
+run6
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+fixed
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Intercept
+</td>
+<td style="text-align:left;">
+1.95
+</td>
+<td style="text-align:left;">
+1.90
+</td>
+<td style="text-align:left;">
+1.95
+</td>
+<td style="text-align:left;">
+0.05
+</td>
+<td style="text-align:left;">
+0.08
+</td>
+<td style="text-align:left;">
+0.05
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+fixed
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+x
+</td>
+<td style="text-align:left;">
+0.50
+</td>
+<td style="text-align:left;">
+0.50
+</td>
+<td style="text-align:left;">
+0.51
+</td>
+<td style="text-align:left;">
+0.02
+</td>
+<td style="text-align:left;">
+0.02
+</td>
+<td style="text-align:left;">
+0.01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+random
+</td>
+<td style="text-align:left;">
+groups
+</td>
+<td style="text-align:left;">
+SD Intercept
+</td>
+<td style="text-align:left;">
+0.50
+</td>
+<td style="text-align:left;">
+0.56
+</td>
+<td style="text-align:left;">
+0.51
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+random
+</td>
+<td style="text-align:left;">
+residual
+</td>
+<td style="text-align:left;">
+SD Observation
+</td>
+<td style="text-align:left;">
+0.23
+</td>
+<td style="text-align:left;">
+0.25
+</td>
+<td style="text-align:left;">
+0.25
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-35">Table 1.9: </span>Intraclass Correlations
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+run1
+</th>
+<th style="text-align:left;">
+run5
+</th>
+<th style="text-align:left;">
+run6
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+81.99
+</td>
+<td style="text-align:left;">
+83.77
+</td>
+<td style="text-align:left;">
+81.30
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="01_first_things_first_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p><img src="01_first_things_first_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<p>Die vorherige Vermutung bestätigt sich: Je mehr Datenpunkte pro Gruppe es gibt, desto näher kommt die Schätzung durch lineare Regressionen pro Gruppe an die des Mixed Models dran.</p>
+<p><img src="01_first_things_first_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<div id="confidence-intervals" class="section level4">
+<h4><span class="header-section-number">2.5.6.1</span> Confidence Intervals</h4>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-39">Table 1.10: </span>CIs für variierende Sample Sizes
+</caption>
+<thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+run1
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+run5
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+run6
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+2.5 %
+</th>
+<th style="text-align:left;">
+97.5%
+</th>
+<th style="text-align:left;">
+2.5 %
+</th>
+<th style="text-align:left;">
+97.5%
+</th>
+<th style="text-align:left;">
+2.5 %
+</th>
+<th style="text-align:left;">
+97.5%
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+group
+</td>
+<td style="text-align:left;">
+0.43
+</td>
+<td style="text-align:left;">
+0.58
+</td>
+<td style="text-align:left;">
+0.45
+</td>
+<td style="text-align:left;">
+0.69
+</td>
+<td style="text-align:left;">
+0.45
+</td>
+<td style="text-align:left;">
+0.59
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+residual
+</td>
+<td style="text-align:left;">
+0.21
+</td>
+<td style="text-align:left;">
+0.26
+</td>
+<td style="text-align:left;">
+0.21
+</td>
+<td style="text-align:left;">
+0.28
+</td>
+<td style="text-align:left;">
+0.24
+</td>
+<td style="text-align:left;">
+0.26
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:left;">
+1.85
+</td>
+<td style="text-align:left;">
+2.05
+</td>
+<td style="text-align:left;">
+1.74
+</td>
+<td style="text-align:left;">
+2.06
+</td>
+<td style="text-align:left;">
+1.85
+</td>
+<td style="text-align:left;">
+2.05
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+x
+</td>
+<td style="text-align:left;">
+0.47
+</td>
+<td style="text-align:left;">
+0.53
+</td>
+<td style="text-align:left;">
+0.45
+</td>
+<td style="text-align:left;">
+0.55
+</td>
+<td style="text-align:left;">
+0.49
+</td>
+<td style="text-align:left;">
+0.52
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>group = Standardabweichug vom Fixed Effect durch group</li>
+<li>residual = Residual Standard Deviation von group</li>
+</ul>
+<p>Eine kleinere Gesamtstichprobe vergrößert die Unsicherheit über die Auswirkung von group, aber sonst nichts. Ein größeres n pro Gruppe (da das Gesamt-N gleich bleibt also weniger Gruppen) verändert … gar nichts?</p>
 </div>
 </div>
 </div>
