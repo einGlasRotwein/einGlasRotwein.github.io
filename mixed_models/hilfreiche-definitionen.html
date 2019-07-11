@@ -129,15 +129,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="first-things-first.html"><a href="first-things-first.html"><i class="fa fa-check"></i><b>1</b> First Things First</a><ul>
 <li class="chapter" data-level="1.1" data-path="hilfreiche-definitionen.html"><a href="hilfreiche-definitionen.html"><i class="fa fa-check"></i><b>1.1</b> Hilfreiche Definitionen</a><ul>
 <li class="chapter" data-level="1.1.1" data-path="hilfreiche-definitionen.html"><a href="hilfreiche-definitionen.html#nested-und-clustered"><i class="fa fa-check"></i><b>1.1.1</b> Nested und clustered</a></li>
+<li class="chapter" data-level="1.1.2" data-path="hilfreiche-definitionen.html"><a href="hilfreiche-definitionen.html#pooling"><i class="fa fa-check"></i><b>1.1.2</b> Pooling</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="random-intercept-models.html"><a href="random-intercept-models.html"><i class="fa fa-check"></i><b>2</b> Random intercept models</a><ul>
 <li class="chapter" data-level="2.1" data-path="generelle-logik.html"><a href="generelle-logik.html"><i class="fa fa-check"></i><b>2.1</b> Generelle Logik</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="generelle-logik.html"><a href="generelle-logik.html#problem-einfache-regression"><i class="fa fa-check"></i><b>2.1.1</b> Problem einfache Regression</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="mixed-model-in-r.html"><a href="mixed-model-in-r.html"><i class="fa fa-check"></i><b>2.2</b> Mixed Model in R</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="mixed-model-in-r.html"><a href="mixed-model-in-r.html#vergleich-einfache-regression-vs.-mixed-model"><i class="fa fa-check"></i><b>2.2.1</b> Vergleich einfache Regression vs. mixed model</a></li>
-<li class="chapter" data-level="2.2.2" data-path="mixed-model-in-r.html"><a href="mixed-model-in-r.html#predictions-plotten"><i class="fa fa-check"></i><b>2.2.2</b> Predictions plotten</a></li>
+<li class="chapter" data-level="2.2" data-path="in-r.html"><a href="in-r.html"><i class="fa fa-check"></i><b>2.2</b> in R</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="in-r.html"><a href="in-r.html#vergleich-einfache-regression-vs.-mixed-model"><i class="fa fa-check"></i><b>2.2.1</b> Vergleich einfache Regression vs. mixed model</a></li>
+<li class="chapter" data-level="2.2.2" data-path="in-r.html"><a href="in-r.html#predictions-plotten"><i class="fa fa-check"></i><b>2.2.2</b> Predictions plotten</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="simulationen.html"><a href="simulationen.html"><i class="fa fa-check"></i><b>2.3</b> Simulationen</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="simulationen.html"><a href="simulationen.html#run-1---default"><i class="fa fa-check"></i><b>2.3.1</b> Run 1 - default</a></li>
@@ -153,7 +154,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.1" data-path="mixed-models-vs-einzelne-regressionen.html"><a href="mixed-models-vs-einzelne-regressionen.html#regularisierende-effekte"><i class="fa fa-check"></i><b>3.1.1</b> Regularisierende Effekte</a></li>
 <li class="chapter" data-level="3.1.2" data-path="mixed-models-vs-einzelne-regressionen.html"><a href="mixed-models-vs-einzelne-regressionen.html#predictions"><i class="fa fa-check"></i><b>3.1.2</b> Predictions</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="simulationen-1.html"><a href="simulationen-1.html"><i class="fa fa-check"></i><b>3.2</b> Simulationen</a></li>
+<li class="chapter" data-level="3.2" data-path="simulationen-1.html"><a href="simulationen-1.html"><i class="fa fa-check"></i><b>3.2</b> Simulationen</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="simulationen-1.html"><a href="simulationen-1.html#intercept-und-slopes-unkorreliert"><i class="fa fa-check"></i><b>3.2.1</b> Intercept und Slopes unkorreliert</a></li>
+<li class="chapter" data-level="3.2.2" data-path="simulationen-1.html"><a href="simulationen-1.html#starkerer-slope"><i class="fa fa-check"></i><b>3.2.2</b> Stärkerer Slope</a></li>
+</ul></li>
 </ul></li>
 </ul>
 
@@ -190,6 +194,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Es ist aber nicht so, dass die Teilnehmer innerhalb der Aufgaben genestet wären. Das wäre der Fall, wenn z.B. ein Test nur Teilnehmern 1 - 10 gegeben würde, der andere nur Teilnemern 11 - 20 etc.</li>
 </ul></li>
 <li>Der Ansatz bleibt bei allen mixed models ungefähr derselbe: “Clustering is really more a property of the data than the model.”</li>
+</ul>
+</div>
+<div id="pooling" class="section level3">
+<h3><span class="header-section-number">1.1.2</span> Pooling</h3>
+<ul>
+<li>Informationen, die ein Modell berücksichtigt: Werden Daten über Cluster hinweg gepooled oder nicht?</li>
+<li>(<span style=" font-weight: bold;    color: #E8793A !important;">Complete pooling</span>: Cluster werden völlig ignoriert und <span style=" font-weight: bold;    color: #6BBFA6 !important;">alle Daten zusammengefasst</span> betrachtet.
+<ul>
+<li>Bsp: Das standard Regressionsmodell.</li>
+</ul></li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Gar kein pooling</span>: Es wird <span style=" font-weight: bold;    color: #6BBFA6 !important;">Cluster für Cluster</span> (z.B. das Intercept und die Steigung) individuell berücksichtigt, ohne den overall Effekt in Betracht zu ziehen.
+<ul>
+<li>Bsp.: einzelne Regressionen pro Cluster bzw. eine Regression mit Interaktionsterm Cluster:Haupteffekt.</li>
+</ul></li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Partial pooling</span>: <span style=" font-weight: bold;    color: #6BBFA6 !important;">Unterschiede zwischen den Clustern</span> werden berücksichtigt, aber auch die <span style=" font-weight: bold;    color: #6BBFA6 !important;">Ähnlichkeit zwischen den Clustern</span>. Dabei informieren die gepoolten Daten über alle Observations hinweg die Schätzung der Cluster.
+<ul>
+<li>Bsp.: mixed Model.</li>
+</ul></li>
 </ul>
 </div>
 </div>

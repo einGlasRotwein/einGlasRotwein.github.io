@@ -129,15 +129,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="first-things-first.html"><a href="first-things-first.html"><i class="fa fa-check"></i><b>1</b> First Things First</a><ul>
 <li class="chapter" data-level="1.1" data-path="hilfreiche-definitionen.html"><a href="hilfreiche-definitionen.html"><i class="fa fa-check"></i><b>1.1</b> Hilfreiche Definitionen</a><ul>
 <li class="chapter" data-level="1.1.1" data-path="hilfreiche-definitionen.html"><a href="hilfreiche-definitionen.html#nested-und-clustered"><i class="fa fa-check"></i><b>1.1.1</b> Nested und clustered</a></li>
+<li class="chapter" data-level="1.1.2" data-path="hilfreiche-definitionen.html"><a href="hilfreiche-definitionen.html#pooling"><i class="fa fa-check"></i><b>1.1.2</b> Pooling</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="random-intercept-models.html"><a href="random-intercept-models.html"><i class="fa fa-check"></i><b>2</b> Random intercept models</a><ul>
 <li class="chapter" data-level="2.1" data-path="generelle-logik.html"><a href="generelle-logik.html"><i class="fa fa-check"></i><b>2.1</b> Generelle Logik</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="generelle-logik.html"><a href="generelle-logik.html#problem-einfache-regression"><i class="fa fa-check"></i><b>2.1.1</b> Problem einfache Regression</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="mixed-model-in-r.html"><a href="mixed-model-in-r.html"><i class="fa fa-check"></i><b>2.2</b> Mixed Model in R</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="mixed-model-in-r.html"><a href="mixed-model-in-r.html#vergleich-einfache-regression-vs.-mixed-model"><i class="fa fa-check"></i><b>2.2.1</b> Vergleich einfache Regression vs. mixed model</a></li>
-<li class="chapter" data-level="2.2.2" data-path="mixed-model-in-r.html"><a href="mixed-model-in-r.html#predictions-plotten"><i class="fa fa-check"></i><b>2.2.2</b> Predictions plotten</a></li>
+<li class="chapter" data-level="2.2" data-path="in-r.html"><a href="in-r.html"><i class="fa fa-check"></i><b>2.2</b> in R</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="in-r.html"><a href="in-r.html#vergleich-einfache-regression-vs.-mixed-model"><i class="fa fa-check"></i><b>2.2.1</b> Vergleich einfache Regression vs. mixed model</a></li>
+<li class="chapter" data-level="2.2.2" data-path="in-r.html"><a href="in-r.html#predictions-plotten"><i class="fa fa-check"></i><b>2.2.2</b> Predictions plotten</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="simulationen.html"><a href="simulationen.html"><i class="fa fa-check"></i><b>2.3</b> Simulationen</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="simulationen.html"><a href="simulationen.html#run-1---default"><i class="fa fa-check"></i><b>2.3.1</b> Run 1 - default</a></li>
@@ -153,7 +154,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.1" data-path="mixed-models-vs-einzelne-regressionen.html"><a href="mixed-models-vs-einzelne-regressionen.html#regularisierende-effekte"><i class="fa fa-check"></i><b>3.1.1</b> Regularisierende Effekte</a></li>
 <li class="chapter" data-level="3.1.2" data-path="mixed-models-vs-einzelne-regressionen.html"><a href="mixed-models-vs-einzelne-regressionen.html#predictions"><i class="fa fa-check"></i><b>3.1.2</b> Predictions</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="simulationen-1.html"><a href="simulationen-1.html"><i class="fa fa-check"></i><b>3.2</b> Simulationen</a></li>
+<li class="chapter" data-level="3.2" data-path="simulationen-1.html"><a href="simulationen-1.html"><i class="fa fa-check"></i><b>3.2</b> Simulationen</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="simulationen-1.html"><a href="simulationen-1.html#intercept-und-slopes-unkorreliert"><i class="fa fa-check"></i><b>3.2.1</b> Intercept und Slopes unkorreliert</a></li>
+<li class="chapter" data-level="3.2.2" data-path="simulationen-1.html"><a href="simulationen-1.html#starkerer-slope"><i class="fa fa-check"></i><b>3.2.2</b> Stärkerer Slope</a></li>
+</ul></li>
 </ul></li>
 </ul>
 
@@ -186,8 +190,549 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N)
   y &lt;-<span class="st"> </span>(AvIntercept <span class="op">+</span><span class="st"> </span>rand_int[groups]) <span class="op">+</span><span class="st"> </span>(sdFixedEffect <span class="op">+</span><span class="st"> </span>rand_slope[groups]) <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>e
   
-  <span class="kw">return</span>(<span class="kw">data.frame</span>(x, y, groups))
+  <span class="kw">return</span>(<span class="kw">data.frame</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">groups =</span> groups))
 }</code></pre>
+<div id="intercept-und-slopes-unkorreliert" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Intercept und Slopes unkorreliert</h3>
+<p>“This next bit of code shows a way to run a mixed model while specifying that there is no correlation between intercepts and slopes. There is generally no reason to do this unless the study design warrants it, but you could do it as a step in the model-building process, such that you fit a model with no correlation, then one with it.”</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">2806</span>)
+slope_sim1 &lt;-<span class="st"> </span><span class="kw">rand_slope_sim</span>()
+
+model_ints_only &lt;-<span class="st"> </span><span class="kw">lmer</span>(y <span class="op">~</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>groups), <span class="dt">data =</span> slope_sim1)
+model_with_slopes &lt;-<span class="st"> </span><span class="kw">lmer</span>(y <span class="op">~</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>groups) <span class="op">+</span><span class="st"> </span>(<span class="dv">0</span> <span class="op">+</span><span class="st"> </span>x<span class="op">|</span>groups), <span class="dt">data =</span> slope_sim1)
+model_with_slopes_cor &lt;-<span class="st"> </span><span class="kw">lmer</span>(y <span class="op">~</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>x<span class="op">|</span>groups), <span class="dt">data =</span> slope_sim1)</code></pre>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-60">Table 3.1: </span>Modelle mit oder ohne Slopes - mit dem Intercept korreliert oder nicht
+</caption>
+<thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Intercept only
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+mit Slopes - unkorreliert
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+mit Slopes - korreliert
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+estimate
+</th>
+<th style="text-align:left;">
+Standard Error
+</th>
+<th style="text-align:left;">
+estimate
+</th>
+<th style="text-align:left;">
+Standard Error
+</th>
+<th style="text-align:left;">
+estimate
+</th>
+<th style="text-align:left;">
+Standard Error
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:left;">
+1.96
+</td>
+<td style="text-align:left;">
+0.05
+</td>
+<td style="text-align:left;">
+1.97
+</td>
+<td style="text-align:left;">
+0.05
+</td>
+<td style="text-align:left;">
+1.96
+</td>
+<td style="text-align:left;">
+0.05
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+fixed effet x
+</td>
+<td style="text-align:left;">
+0.50
+</td>
+<td style="text-align:left;">
+0.03
+</td>
+<td style="text-align:left;">
+0.49
+</td>
+<td style="text-align:left;">
+0.04
+</td>
+<td style="text-align:left;">
+0.49
+</td>
+<td style="text-align:left;">
+0.04
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SD Intercept group
+</td>
+<td style="text-align:left;">
+0.49
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+0.48
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+0.48
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SD Slope group
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+0.29
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+0.28
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Intercept x Slope
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+-0.06
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SD residual
+</td>
+<td style="text-align:left;">
+0.36
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+0.25
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+0.25
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+<p>Die Rownames für die Konfidenzintervalle sind wieder sehr kryptisch benannt: .sig01, .sig02, .sig03, .sigma, (Intercept) und x. Wobei .sig02 vom Modell mit vs. ohne Korrelation nicht dasselbe ist. Meine Beschriftung sollte hoffentlich passen.</p>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-61">Table 3.2: </span>CIs für Modelle mit oder ohne Slopes - mit dem Intercept korreliert oder nicht
+</caption>
+<thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Intercept only
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+mit Slopes - unkorreliert
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+mit Slopes - korreliert
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+2.5 %
+</th>
+<th style="text-align:left;">
+97.5%
+</th>
+<th style="text-align:left;">
+2.5 %
+</th>
+<th style="text-align:left;">
+97.5%
+</th>
+<th style="text-align:left;">
+2.5 %
+</th>
+<th style="text-align:left;">
+97.5%
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+SD Intercept group
+</td>
+<td style="text-align:left;">
+0.41
+</td>
+<td style="text-align:left;">
+0.57
+</td>
+<td style="text-align:left;">
+0.41
+</td>
+<td style="text-align:left;">
+0.56
+</td>
+<td style="text-align:left;">
+0.41
+</td>
+<td style="text-align:left;">
+0.56
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SD Slope group
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+0.22
+</td>
+<td style="text-align:left;">
+0.36
+</td>
+<td style="text-align:left;">
+0.22
+</td>
+<td style="text-align:left;">
+0.35
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Intercept x group
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+-0.33
+</td>
+<td style="text-align:left;">
+0.21
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SD residual
+</td>
+<td style="text-align:left;">
+0.33
+</td>
+<td style="text-align:left;">
+0.40
+</td>
+<td style="text-align:left;">
+0.22
+</td>
+<td style="text-align:left;">
+0.29
+</td>
+<td style="text-align:left;">
+0.22
+</td>
+<td style="text-align:left;">
+0.29
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:left;">
+1.86
+</td>
+<td style="text-align:left;">
+2.07
+</td>
+<td style="text-align:left;">
+1.86
+</td>
+<td style="text-align:left;">
+2.07
+</td>
+<td style="text-align:left;">
+1.86
+</td>
+<td style="text-align:left;">
+2.07
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+fixed effect x
+</td>
+<td style="text-align:left;">
+0.45
+</td>
+<td style="text-align:left;">
+0.54
+</td>
+<td style="text-align:left;">
+0.42
+</td>
+<td style="text-align:left;">
+0.56
+</td>
+<td style="text-align:left;">
+0.42
+</td>
+<td style="text-align:left;">
+0.56
+</td>
+</tr>
+</tbody>
+</table>
+<p>Es scheint mit der zusätzlichen Korrelation etwas weniger Unsicherheit über den Effekt des Slopes pro Gruppe zu geben, aber das ist wohl vernachlässigbar. Interessant ist, wie viel Unsicherheit über die Korrelation zwischen Intercept und Slope besteht.</p>
+<p><span style=" font-weight: bold;    color: #ad4f19 !important;">Compare model fit using the AIC function, e.g. AIC(model). The model with the lower AIC is the better model, so which would you choose?</span></p>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-62">Table 3.3: </span>Modell Intercept only
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+sigma
+</th>
+<th style="text-align:left;">
+logLik
+</th>
+<th style="text-align:left;">
+AIC
+</th>
+<th style="text-align:left;">
+BIC
+</th>
+<th style="text-align:left;">
+REMLcrit
+</th>
+<th style="text-align:left;">
+df.residual
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+0.36
+</td>
+<td style="text-align:left;">
+-218.85
+</td>
+<td style="text-align:left;">
+445.71
+</td>
+<td style="text-align:left;">
+460.52
+</td>
+<td style="text-align:left;">
+437.71
+</td>
+<td style="text-align:left;">
+296.00
+</td>
+</tr>
+</tbody>
+</table>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-63">Table 3.4: </span>Modell mit Slopes unkorreliert
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+sigma
+</th>
+<th style="text-align:left;">
+logLik
+</th>
+<th style="text-align:left;">
+AIC
+</th>
+<th style="text-align:left;">
+BIC
+</th>
+<th style="text-align:left;">
+REMLcrit
+</th>
+<th style="text-align:left;">
+df.residual
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+0.25
+</td>
+<td style="text-align:left;">
+-194.79
+</td>
+<td style="text-align:left;">
+399.57
+</td>
+<td style="text-align:left;">
+418.09
+</td>
+<td style="text-align:left;">
+389.57
+</td>
+<td style="text-align:left;">
+295.00
+</td>
+</tr>
+</tbody>
+</table>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-64">Table 3.5: </span>Modell mit Slopes korreliert
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+sigma
+</th>
+<th style="text-align:left;">
+logLik
+</th>
+<th style="text-align:left;">
+AIC
+</th>
+<th style="text-align:left;">
+BIC
+</th>
+<th style="text-align:left;">
+REMLcrit
+</th>
+<th style="text-align:left;">
+df.residual
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+0.25
+</td>
+<td style="text-align:left;">
+-194.68
+</td>
+<td style="text-align:left;">
+401.37
+</td>
+<td style="text-align:left;">
+423.59
+</td>
+<td style="text-align:left;">
+389.37
+</td>
+<td style="text-align:left;">
+294.00
+</td>
+</tr>
+</tbody>
+</table>
+<p>Das Modell mit Slopes eine geringere residual Standard Deviation und passt besser hinsichtlich z.B. AIC oder BIC. Mit Korrelation ändert sich nicht so bedeutend viel, nur der Fit wird ein klein wenig besser.</p>
+</div>
+<div id="starkerer-slope" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Stärkerer Slope</h3>
+<p>Was passiert, wenn man die Slopes stärker variieren lässt?</p>
+</div>
 </div>
 <!-- </div> -->
             </section>

@@ -129,15 +129,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="first-things-first.html"><a href="first-things-first.html"><i class="fa fa-check"></i><b>1</b> First Things First</a><ul>
 <li class="chapter" data-level="1.1" data-path="hilfreiche-definitionen.html"><a href="hilfreiche-definitionen.html"><i class="fa fa-check"></i><b>1.1</b> Hilfreiche Definitionen</a><ul>
 <li class="chapter" data-level="1.1.1" data-path="hilfreiche-definitionen.html"><a href="hilfreiche-definitionen.html#nested-und-clustered"><i class="fa fa-check"></i><b>1.1.1</b> Nested und clustered</a></li>
+<li class="chapter" data-level="1.1.2" data-path="hilfreiche-definitionen.html"><a href="hilfreiche-definitionen.html#pooling"><i class="fa fa-check"></i><b>1.1.2</b> Pooling</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="random-intercept-models.html"><a href="random-intercept-models.html"><i class="fa fa-check"></i><b>2</b> Random intercept models</a><ul>
 <li class="chapter" data-level="2.1" data-path="generelle-logik.html"><a href="generelle-logik.html"><i class="fa fa-check"></i><b>2.1</b> Generelle Logik</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="generelle-logik.html"><a href="generelle-logik.html#problem-einfache-regression"><i class="fa fa-check"></i><b>2.1.1</b> Problem einfache Regression</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="mixed-model-in-r.html"><a href="mixed-model-in-r.html"><i class="fa fa-check"></i><b>2.2</b> Mixed Model in R</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="mixed-model-in-r.html"><a href="mixed-model-in-r.html#vergleich-einfache-regression-vs.-mixed-model"><i class="fa fa-check"></i><b>2.2.1</b> Vergleich einfache Regression vs. mixed model</a></li>
-<li class="chapter" data-level="2.2.2" data-path="mixed-model-in-r.html"><a href="mixed-model-in-r.html#predictions-plotten"><i class="fa fa-check"></i><b>2.2.2</b> Predictions plotten</a></li>
+<li class="chapter" data-level="2.2" data-path="in-r.html"><a href="in-r.html"><i class="fa fa-check"></i><b>2.2</b> in R</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="in-r.html"><a href="in-r.html#vergleich-einfache-regression-vs.-mixed-model"><i class="fa fa-check"></i><b>2.2.1</b> Vergleich einfache Regression vs. mixed model</a></li>
+<li class="chapter" data-level="2.2.2" data-path="in-r.html"><a href="in-r.html#predictions-plotten"><i class="fa fa-check"></i><b>2.2.2</b> Predictions plotten</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="simulationen.html"><a href="simulationen.html"><i class="fa fa-check"></i><b>2.3</b> Simulationen</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="simulationen.html"><a href="simulationen.html#run-1---default"><i class="fa fa-check"></i><b>2.3.1</b> Run 1 - default</a></li>
@@ -153,7 +154,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.1" data-path="mixed-models-vs-einzelne-regressionen.html"><a href="mixed-models-vs-einzelne-regressionen.html#regularisierende-effekte"><i class="fa fa-check"></i><b>3.1.1</b> Regularisierende Effekte</a></li>
 <li class="chapter" data-level="3.1.2" data-path="mixed-models-vs-einzelne-regressionen.html"><a href="mixed-models-vs-einzelne-regressionen.html#predictions"><i class="fa fa-check"></i><b>3.1.2</b> Predictions</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="simulationen-1.html"><a href="simulationen-1.html"><i class="fa fa-check"></i><b>3.2</b> Simulationen</a></li>
+<li class="chapter" data-level="3.2" data-path="simulationen-1.html"><a href="simulationen-1.html"><i class="fa fa-check"></i><b>3.2</b> Simulationen</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="simulationen-1.html"><a href="simulationen-1.html#intercept-und-slopes-unkorreliert"><i class="fa fa-check"></i><b>3.2.1</b> Intercept und Slopes unkorreliert</a></li>
+<li class="chapter" data-level="3.2.2" data-path="simulationen-1.html"><a href="simulationen-1.html#starkerer-slope"><i class="fa fa-check"></i><b>3.2.2</b> Stärkerer Slope</a></li>
+</ul></li>
 </ul></li>
 </ul>
 
@@ -174,7 +178,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="mixed-models-vs.-einzelne-regressionen" class="section level2">
 <h2><span class="header-section-number">3.1</span> Mixed Models vs. einzelne Regressionen</h2>
-<p>Mixed Models und Regressionen pro Cluster oder über die gesamte Stichprobe hinweg unterscheiden sich hinsichtlich der Informationen, die sie berücksichtigen. Das standard Regressionsmodell ignoriert Cluster völlig, poolt also alle Daten (<span style=" font-weight: bold;    color: #6BBFA6 !important;">Complete pooling</span>). <span style=" font-weight: bold;    color: #6BBFA6 !important;">Gar kein pooling</span> hat man bei der Herangehensweise mit den einzelnen Regressionen pro Student bzw. einer Regression mit Interaktionsterm; die overall Effekte bleiben unberücksichtigt. Was bei mixed Models passiert ist <span style=" font-weight: bold;    color: #6BBFA6 !important;">partial pooling</span>, weil die Unterschiede zwischen den Clustern berücksichtig werden, aber auch die Ähnlichkeit zwischen den Clustern geschätzt wird. Dabei informieren die gepoolten Daten über alle Observations hinweg die Schätzung der Cluster.</p>
+<p>Mixed Models und Regressionen pro Cluster oder über die gesamte Stichprobe hinweg unterscheiden sich hinsichtlich der Informationen, die sie berücksichtigen. Das standard Regressionsmodell ignoriert Cluster völlig, poolt also alle Daten (<span style=" font-weight: bold;    color: #6BBFA6 !important;">Complete pooling</span>). <span style=" font-weight: bold;    color: #6BBFA6 !important;">Gar kein pooling</span> hat man bei der Herangehensweise mit den einzelnen Regressionen pro Student bzw. einer Regression mit Interaktionsterm; die overall Effekte bleiben unberücksichtigt. Was bei mixed Models passiert ist <span style=" font-weight: bold;    color: #6BBFA6 !important;">partial pooling</span>, weil die Unterschiede zwischen den Clustern berücksichtigt werden, aber auch die Ähnlichkeit zwischen den Clustern geschätzt wird. Dabei informieren die gepoolten Daten über alle Observations hinweg die Schätzung der Cluster.</p>
 <div id="regularisierende-effekte" class="section level3">
 <h3><span class="header-section-number">3.1.1</span> Regularisierende Effekte</h3>
 <p>Der Vergleich mit einer einzelnen Regression pro Student liegt nahe. Dieser Code führt separate Regressionen pro Student durch. Aus der Beschreibung von <code>lmList</code>, scheinbar eine ziemlich lustige Funktion: “Fit a list of <code>lm</code> or <code>glm</code> objects with a common model for different subgroups of the data.”</p>
