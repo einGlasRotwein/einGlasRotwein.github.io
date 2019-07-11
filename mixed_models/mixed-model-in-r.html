@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.3 Mixed Model in R | NOTIZEN</title>
-  <meta name="description" content="2.3 Mixed Model in R | NOTIZEN" />
+  <title>2.2 Mixed Model in R | NOTIZEN</title>
+  <meta name="description" content="2.2 Mixed Model in R | NOTIZEN" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.3 Mixed Model in R | NOTIZEN" />
+  <meta property="og:title" content="2.2 Mixed Model in R | NOTIZEN" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.3 Mixed Model in R | NOTIZEN" />
+  <meta name="twitter:title" content="2.2 Mixed Model in R | NOTIZEN" />
   
   
   
@@ -29,7 +29,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="problem-einfache-regression.html">
+<link rel="prev" href="generelle-logik.html">
 <link rel="next" href="simulationen.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -132,26 +132,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="random-intercept-models.html"><a href="random-intercept-models.html"><i class="fa fa-check"></i><b>2</b> Random intercept models</a><ul>
-<li class="chapter" data-level="2.1" data-path="fancy-plot-zum-klauen.html"><a href="fancy-plot-zum-klauen.html"><i class="fa fa-check"></i><b>2.1</b> Fancy Plot zum Klauen</a></li>
-<li class="chapter" data-level="2.2" data-path="problem-einfache-regression.html"><a href="problem-einfache-regression.html"><i class="fa fa-check"></i><b>2.2</b> Problem einfache Regression</a></li>
-<li class="chapter" data-level="2.3" data-path="mixed-model-in-r.html"><a href="mixed-model-in-r.html"><i class="fa fa-check"></i><b>2.3</b> Mixed Model in R</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="mixed-model-in-r.html"><a href="mixed-model-in-r.html#vergleich-einfache-regression-vs.-mixed-model"><i class="fa fa-check"></i><b>2.3.1</b> Vergleich einfache Regression vs. mixed model</a></li>
-<li class="chapter" data-level="2.3.2" data-path="mixed-model-in-r.html"><a href="mixed-model-in-r.html#predictions-plotten"><i class="fa fa-check"></i><b>2.3.2</b> Predictions plotten</a></li>
+<li class="chapter" data-level="2.1" data-path="generelle-logik.html"><a href="generelle-logik.html"><i class="fa fa-check"></i><b>2.1</b> Generelle Logik</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="generelle-logik.html"><a href="generelle-logik.html#problem-einfache-regression"><i class="fa fa-check"></i><b>2.1.1</b> Problem einfache Regression</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="simulationen.html"><a href="simulationen.html"><i class="fa fa-check"></i><b>2.4</b> Simulationen</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="simulationen.html"><a href="simulationen.html#run-1---default"><i class="fa fa-check"></i><b>2.4.1</b> Run 1 - default</a></li>
-<li class="chapter" data-level="2.4.2" data-path="simulationen.html"><a href="simulationen.html#run-2---different-random-effect-variance"><i class="fa fa-check"></i><b>2.4.2</b> Run 2 - Different random effect variance</a></li>
-<li class="chapter" data-level="2.4.3" data-path="simulationen.html"><a href="simulationen.html#run-3---different-residual-variance"><i class="fa fa-check"></i><b>2.4.3</b> Run 3 - Different residual variance</a></li>
-<li class="chapter" data-level="2.4.4" data-path="simulationen.html"><a href="simulationen.html#run-4---different-random-effect-and-residual-variance"><i class="fa fa-check"></i><b>2.4.4</b> Run 4 - Different random effect and residual variance</a></li>
-<li class="chapter" data-level="2.4.5" data-path="simulationen.html"><a href="simulationen.html#ubersicht"><i class="fa fa-check"></i><b>2.4.5</b> Übersicht</a></li>
-<li class="chapter" data-level="2.4.6" data-path="simulationen.html"><a href="simulationen.html#veranderung-der-gruppengroen"><i class="fa fa-check"></i><b>2.4.6</b> Veränderung der Gruppengrößen</a></li>
+<li class="chapter" data-level="2.2" data-path="mixed-model-in-r.html"><a href="mixed-model-in-r.html"><i class="fa fa-check"></i><b>2.2</b> Mixed Model in R</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="mixed-model-in-r.html"><a href="mixed-model-in-r.html#vergleich-einfache-regression-vs.-mixed-model"><i class="fa fa-check"></i><b>2.2.1</b> Vergleich einfache Regression vs. mixed model</a></li>
+<li class="chapter" data-level="2.2.2" data-path="mixed-model-in-r.html"><a href="mixed-model-in-r.html#predictions-plotten"><i class="fa fa-check"></i><b>2.2.2</b> Predictions plotten</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="simulationen.html"><a href="simulationen.html"><i class="fa fa-check"></i><b>2.3</b> Simulationen</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="simulationen.html"><a href="simulationen.html#run-1---default"><i class="fa fa-check"></i><b>2.3.1</b> Run 1 - default</a></li>
+<li class="chapter" data-level="2.3.2" data-path="simulationen.html"><a href="simulationen.html#run-2---different-random-effect-variance"><i class="fa fa-check"></i><b>2.3.2</b> Run 2 - Different random effect variance</a></li>
+<li class="chapter" data-level="2.3.3" data-path="simulationen.html"><a href="simulationen.html#run-3---different-residual-variance"><i class="fa fa-check"></i><b>2.3.3</b> Run 3 - Different residual variance</a></li>
+<li class="chapter" data-level="2.3.4" data-path="simulationen.html"><a href="simulationen.html#run-4---different-random-effect-and-residual-variance"><i class="fa fa-check"></i><b>2.3.4</b> Run 4 - Different random effect and residual variance</a></li>
+<li class="chapter" data-level="2.3.5" data-path="simulationen.html"><a href="simulationen.html#ubersicht"><i class="fa fa-check"></i><b>2.3.5</b> Übersicht</a></li>
+<li class="chapter" data-level="2.3.6" data-path="simulationen.html"><a href="simulationen.html#veranderung-der-gruppengroen"><i class="fa fa-check"></i><b>2.3.6</b> Veränderung der Gruppengrößen</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="randomslopes.html"><a href="randomslopes.html"><i class="fa fa-check"></i><b>3</b> Random slope models</a><ul>
 <li class="chapter" data-level="3.1" data-path="mixed-models-vs-einzelne-regressionen.html"><a href="mixed-models-vs-einzelne-regressionen.html"><i class="fa fa-check"></i><b>3.1</b> Mixed Models vs. einzelne Regressionen</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="mixed-models-vs-einzelne-regressionen.html"><a href="mixed-models-vs-einzelne-regressionen.html#density"><i class="fa fa-check"></i><b>3.1.1</b> Density</a></li>
+<li class="chapter" data-level="3.1.1" data-path="mixed-models-vs-einzelne-regressionen.html"><a href="mixed-models-vs-einzelne-regressionen.html#regularisierende-effekte"><i class="fa fa-check"></i><b>3.1.1</b> Regularisierende Effekte</a></li>
 <li class="chapter" data-level="3.1.2" data-path="mixed-models-vs-einzelne-regressionen.html"><a href="mixed-models-vs-einzelne-regressionen.html#predictions"><i class="fa fa-check"></i><b>3.1.2</b> Predictions</a></li>
 </ul></li>
+<li class="chapter" data-level="3.2" data-path="simulationen-1.html"><a href="simulationen-1.html"><i class="fa fa-check"></i><b>3.2</b> Simulationen</a></li>
 </ul></li>
 </ul>
 
@@ -171,7 +173,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="mixed-model-in-r" class="section level2">
-<h2><span class="header-section-number">2.3</span> Mixed Model in R</h2>
+<h2><span class="header-section-number">2.2</span> Mixed Model in R</h2>
 <p>Notation, um das Intercept <code>1</code> pro Student variieren zu lassen: <code>(1|student)</code>. Ich benutze broom bzw. broom.mixed, um die Modelle aufgeräumt darzustellen. Im Code verwendet er summary, aber das ist da eher ein Krampf. Interessanterweise räumt er selbst seine Tabellen vor der Darstellung auch auf. Vermutlich per Hand.</p>
 <p><span class="math inline">\(\to\)</span> Siehe Skript uebungen.R – Übung #2 für mixed Model.</p>
 <pre class="sourceCode r"><code class="sourceCode r">gpa_mixed &lt;-<span class="st"> </span><span class="kw">lmer</span>(gpa <span class="op">~</span><span class="st"> </span>occasion <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>student), <span class="dt">data =</span> gpa)
@@ -179,13 +181,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 gpa_mixed_coef &lt;-<span class="st"> </span><span class="kw">tidy</span>(gpa_mixed)
 gpa_mixed_fit &lt;-<span class="st"> </span><span class="kw">glance</span>(gpa_mixed)</code></pre>
 <div id="vergleich-einfache-regression-vs.-mixed-model" class="section level3">
-<h3><span class="header-section-number">2.3.1</span> Vergleich einfache Regression vs. mixed model</h3>
+<h3><span class="header-section-number">2.2.1</span> Vergleich einfache Regression vs. mixed model</h3>
 <p>Mixed model hat keine p-values im Output - auch nicht mit <code>summary</code>.</p>
 <p>Interessant hierzu in mitgeliefertem Notebook <code>mixed_models_basics.Rmd</code>: “People always ask where the p-values are, but the answer is… complicated. Other packages and programs present them as if they are trivially obtained, but that is not the case, and the <code>lme4</code> developers would rather not make unnecessary assumptions. On the plus side, you can get interval estimates easily enough, even though they are poorly named for the variance components. <code>sigma01</code> is the student variance.”</p>
 <p>Später schreibt er dazu, dass man in mixed models verschiedene Stichprobengrößen von Cluster zu Cluster hat, sowie das N der Gesamtstichprobe. Was es schwierig macht, eine Referenzverteilung zu bestimmen, bzgl. Freiheitsgrade und so.</p>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-6">Table 2.1: </span>std. regression
+<span id="tab:unnamed-chunk-6">Table 1.1: </span>std. regression
 </caption>
 <thead>
 <tr>
@@ -245,7 +247,7 @@ p &lt; .001
 </table>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-7">Table 2.2: </span>mixed model
+<span id="tab:unnamed-chunk-7">Table 1.2: </span>mixed model
 </caption>
 <thead>
 <tr>
@@ -258,13 +260,13 @@ group
 <th style="text-align:left;">
 term
 </th>
-<th style="text-align:right;">
+<th style="text-align:left;">
 estimate
 </th>
-<th style="text-align:right;">
+<th style="text-align:left;">
 std.error
 </th>
-<th style="text-align:right;">
+<th style="text-align:left;">
 statistic
 </th>
 </tr>
@@ -280,14 +282,14 @@ NA
 <td style="text-align:left;">
 (Intercept)
 </td>
-<td style="text-align:right;">
-2.5992143
+<td style="text-align:left;">
+2.60
 </td>
-<td style="text-align:right;">
-0.0216964
+<td style="text-align:left;">
+0.02
 </td>
-<td style="text-align:right;">
-119.7995
+<td style="text-align:left;">
+119.80
 </td>
 </tr>
 <tr>
@@ -300,14 +302,14 @@ NA
 <td style="text-align:left;">
 occasion
 </td>
-<td style="text-align:right;">
-0.1063143
+<td style="text-align:left;">
+0.11
 </td>
-<td style="text-align:right;">
-0.0040739
+<td style="text-align:left;">
+0.00
 </td>
-<td style="text-align:right;">
-26.0964
+<td style="text-align:left;">
+26.10
 </td>
 </tr>
 <tr>
@@ -320,13 +322,13 @@ student
 <td style="text-align:left;">
 sd__(Intercept)
 </td>
-<td style="text-align:right;">
-0.2524265
+<td style="text-align:left;">
+0.25
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 NA
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 NA
 </td>
 </tr>
@@ -340,13 +342,13 @@ Residual
 <td style="text-align:left;">
 sd__Observation
 </td>
-<td style="text-align:right;">
-0.2410156
+<td style="text-align:left;">
+0.24
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 NA
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 NA
 </td>
 </tr>
@@ -365,7 +367,7 @@ NA
 </ul>
 <table>
 <caption>
-<span id="tab:unnamed-chunk-8">Table 2.3: </span>std. regression pt. I
+<span id="tab:unnamed-chunk-8">Table 1.3: </span>std. regression pt. I
 </caption>
 <thead>
 <tr>
@@ -414,7 +416,7 @@ df
 </table>
 <table>
 <caption>
-<span id="tab:unnamed-chunk-9">Table 2.4: </span>std. regression pt. II
+<span id="tab:unnamed-chunk-9">Table 1.4: </span>std. regression pt. II
 </caption>
 <thead>
 <tr>
@@ -457,7 +459,7 @@ df.residual
 </table>
 <table>
 <caption>
-<span id="tab:unnamed-chunk-10">Table 2.5: </span>mixed model
+<span id="tab:unnamed-chunk-10">Table 1.5: </span>mixed model
 </caption>
 <thead>
 <tr>
@@ -522,7 +524,7 @@ df.residual
 ##  Residual             0.058089 0.24102</code></pre>
 <p>Das können wir auch direkt nutzen (die Varianz steckt im Broom-Output nicht drin), um die Varianz, die durch die Studenten aufgeklärt wird in Bezug zur Gesamtvarianz zu setzen: <code>.064 / .064 + .058 =</code> 1.058. Genauer gesagt ist das das Verhältnis der Varianz between clusters zur Gesamtvarianz in <span class="math inline">\(y\)</span>. Das ist dann die <span style=" font-weight: bold;    color: #E8793A !important;">intraclass correlation</span>, weil das gleichzeitig auch ein Schätzer der Korrelation innerhalb eines Clusters ist.</p>
 <div id="zugriff-auf-die-geschatzten-abweichungen-einzelner-individuen" class="section level4">
-<h4><span class="header-section-number">2.3.1.1</span> Zugriff auf die geschätzten Abweichungen einzelner Individuen</h4>
+<h4><span class="header-section-number">2.2.1.1</span> Zugriff auf die geschätzten Abweichungen einzelner Individuen</h4>
 <p>Hier wird also geschätzt, wie sehr jeder Student vom mittleren Intercept abweicht (im Mittel um 0!). Schätzungen bezeichnet man - höhö - als <span style=" font-weight: bold;    color: #6BBFA6 !important;">BLUPs oder EBLUPs</span> (= (empirical) best linear unbiased prediction). Im Workshop unter <a href="https://m-clark.github.io/mixed-models-with-R/random_intercepts.html#application"><span style=" font-weight: bold;    color: #397367 !important;">Application</span></a> <span class="math inline">\(\to\)</span> Estimates of the random effects findet sich auch Code, um geschätzte Intervalle für die Effekte via Bootstrapping zu finden und sehr schick zu plotten.</p>
 <pre class="sourceCode r"><code class="sourceCode r">(random_effects &lt;-<span class="st"> </span><span class="kw">ranef</span>(gpa_mixed)<span class="op">$</span>student)</code></pre>
 <div data-pagedtable="false">
@@ -532,7 +534,7 @@ df.residual
 </div>
 </div>
 <div id="addiert-zu-den-fixed-effects" class="section level4">
-<h4><span class="header-section-number">2.3.1.2</span> … addiert zu den fixed effects</h4>
+<h4><span class="header-section-number">2.2.1.2</span> … addiert zu den fixed effects</h4>
 <p>Hier werden die individuellen Effekte zu den <span style=" font-weight: bold;    color: #6BBFA6 !important;">fixed effects</span> dazugerechnet; damit erhalten wir <span style=" font-weight: bold;    color: #E8793A !important;">random coefficients</span>. Für <code>occasion</code> ändert sich nichts, weil wir nicht erlaubt haben, dass der slope pro Student variiert.</p>
 <pre class="sourceCode r"><code class="sourceCode r">(random_coefficients &lt;-<span class="st"> </span><span class="kw">coef</span>(gpa_mixed)<span class="op">$</span>student)</code></pre>
 <div data-pagedtable="false">
@@ -550,7 +552,7 @@ df.residual
 </div>
 </div>
 <div id="predictions-plotten" class="section level3">
-<h3><span class="header-section-number">2.3.2</span> Predictions plotten</h3>
+<h3><span class="header-section-number">2.2.2</span> Predictions plotten</h3>
 <p>Sehr nice: Mal der Vergleich für die ersten drei Studenten für</p>
 <ul>
 <li><ol style="list-style-type: lower-alpha">
@@ -606,7 +608,7 @@ df_for_plot &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
           </div>
         </div>
       </div>
-<a href="problem-einfache-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="generelle-logik.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="simulationen.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

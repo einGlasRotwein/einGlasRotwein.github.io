@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>NOTIZEN</title>
-  <meta name="description" content="NOTIZEN" />
+  <title>2.1 Generelle Logik | NOTIZEN</title>
+  <meta name="description" content="2.1 Generelle Logik | NOTIZEN" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="NOTIZEN" />
+  <meta property="og:title" content="2.1 Generelle Logik | NOTIZEN" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="NOTIZEN" />
+  <meta name="twitter:title" content="2.1 Generelle Logik | NOTIZEN" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="hilfreiche-definitionen.html">
+<link rel="prev" href="random-intercept-models.html">
+<link rel="next" href="mixed-model-in-r.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -172,21 +172,74 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">NOTIZEN</h1>
-<h2 class="subtitle"><em>Mixed Models Workshop Michael Clark</em></h2>
+<div id="generelle-logik" class="section level2">
+<h2><span class="header-section-number">2.1</span> Generelle Logik</h2>
+<p>Studenten werden an verschiedenen Zeitpunkten (occasions) getestet (GPA). Zeitpunkte sind ein Haupteffekt. Individuelle Effekte der Studenten werden Modell hinzugefügt:</p>
+<p><span class="math display">\[
+\mathrm{gpa}=b_{\mathrm{intercept}}+b_{\mathrm{occ}} \cdot \text { occasion }+\left(\text {effect }_{\mathrm{student}}+\epsilon\right)
+\]</span></p>
+<ul>
+<li>Der einzige Unterschied zwischen einem mixed model und einer standardmäßigen Regression: <span style=" font-weight: bold;    color: #6BBFA6 !important;">random student effect</span>
+<ul>
+<li>Normalverteilt mit <span class="math inline">\(M = 0\)</span> und irgendeiner geschätzten Standardabweichung <span class="math inline">\(\tau\)</span></li>
+<li>Im Mittel kein Effekt, aber variiert von Student zu Student im Mittel um <span class="math inline">\(\tau\)</span></li>
+</ul></li>
+</ul>
+<p><span class="math display">\[
+\text{effect}_\text{student} \sim \mathscr { N } ( 0 , \tau )
+\]</span></p>
+<p>Jeder Student hat seinen eigenen Effekt, der zum allgemeinen intercept hinzugefügt wird. Das heißt, jeder Student hat sein eigenes intercept, mit anderen “Worten”:</p>
+<p><span class="math display">\[
+\mathrm{gpa}=b_{\mathrm{int} \text { student }}+b_{\mathrm{occ}} \cdot \text { occasion }+\epsilon
+\]</span>
+Das heißt: <span style=" font-weight: bold;    color: #E8793A !important;">Intercepts</span> sind jetzt normalverteilt. Das overall Intercept als Mittelwert mit irgendeiner SD <span class="math inline">\(\tau\)</span>.</p>
+<p><span class="math display">\[
+b_{\text { int } \text { student }} \sim \mathscr{N}\left(b_{\text { intercept }}, \tau\right)
+\]</span></p>
+<p>Wenn man die einzelnen Studenten plottet, sieht man gut, wieso es eine gute Idee ist, die Individualität pro Student zu berücksichtigen: Die Variablität in den Startpunkten und die Entwicklung über die Zeit ist ist hoch.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&quot;data/gpa.RData&quot;</span>)
+
+<span class="co"># Random 10 Einzellinien highlighten</span>
+gpa &lt;-<span class="st"> </span>gpa <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">highlight =</span> <span class="kw">ifelse</span>(student <span class="op">%in%</span><span class="st"> </span><span class="kw">sample</span>(<span class="kw">unique</span>(student), <span class="dv">10</span>), <span class="ot">TRUE</span>, <span class="ot">FALSE</span>))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">gpa <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> occasion, <span class="dt">y =</span> gpa)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">group =</span> student, <span class="dt">colour =</span> highlight, <span class="dt">alpha =</span> highlight, 
+                <span class="dt">size =</span> highlight)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">colour =</span> farbschema[<span class="dv">1</span>], <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_alpha_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(.<span class="dv">1</span>, <span class="dv">1</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_size_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(.<span class="dv">5</span>, <span class="dv">1</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_colour_manual</span>(<span class="dt">values =</span> <span class="kw">pick_colour</span>(<span class="dv">2</span>, <span class="st">&quot;mono_green&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Rohdaten&quot;</span>) <span class="op">+</span>
+<span class="st">  </span>julis_theme <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</code></pre>
+<p><img src="01_first_things_first_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><span class="math inline">\(\to\)</span> Siehe Skript uebungen.R – Übung #1 für einfache Regression.</p>
+<div id="problem-einfache-regression" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Problem einfache Regression</h3>
+<ul>
+<li>Clustering wird ignoriert.
+<ul>
+<li>Man verpasst die (interessanten) Studenten-Effekte.</li>
+<li>Die Standardfehler sind biased <span class="math inline">\(\to\)</span> Aussagen über statistische Signifikanz werden hinfällig</li>
+</ul></li>
+<li>Eine Regression pro Student
+<ul>
+<li>hätte zu wenig Daten.</li>
+<li>“over-contextualised” <span class="math inline">\(\to\)</span> ignoriert, was die Studenten gemeinsam haben</li>
+</ul></li>
+</ul>
 </div>
-<div id="first-things-first" class="section level1">
-<h1><span class="header-section-number">1</span> First Things First</h1>
-<p><span style=" font-weight: bold;    color: #E8793A !important;">wichtiges Highlight</span> – <span style=" font-weight: bold;    color: #6BBFA6 !important;">nicht ganz so wichtiges Highlight</span> – <span style=" font-weight: bold;    color: #397367 !important;">Link</span></p> 
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="hilfreiche-definitionen.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="random-intercept-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mixed-model-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
