@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Single-Trial EEG Analysis</title>
+  <meta name="description" content="Single-Trial EEG Analysis" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Single-Trial EEG Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Single-Trial EEG Analysis" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="smith-and-kutas-2015a.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html"><i class="fa fa-check"></i><b>1</b> Frömer et al. (2018)</a><ul>
+<li class="chapter" data-level="1.1" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#comparison-of-methods"><i class="fa fa-check"></i><b>1.1</b> Comparison of Methods</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#anova-limitations"><i class="fa fa-check"></i><b>1.1.1</b> ANOVA limitations</a></li>
+<li class="chapter" data-level="1.1.2" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#advantages-of-mixed-models"><i class="fa fa-check"></i><b>1.1.2</b> Advantages of mixed Models</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#determining-time-windows"><i class="fa fa-check"></i><b>1.2</b> Determining Time Windows</a></li>
+<li class="chapter" data-level="1.3" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#cookbook"><i class="fa fa-check"></i><b>1.3</b> Cookbook</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="smith-and-kutas-2015a.html"><a href="smith-and-kutas-2015a.html"><i class="fa fa-check"></i><b>2</b> Smith and Kutas 2015a</a></li>
+<li class="chapter" data-level="3" data-path="smith-and-kutas-2015b.html"><a href="smith-and-kutas-2015b.html"><i class="fa fa-check"></i><b>3</b> Smith and Kutas 2015b</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Single-Trial EEG Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Single-Trial EEG Analysis</h1>
+<h2 class="subtitle"><em>Mixed Models and Friends</em></h2>
+</div>
+<div id="fromer-et-al.-2018" class="section level1">
+<h1><span class="header-section-number">1</span> Frömer et al. (2018)</h1>
+<p>Frömer <span class="citation">(2018)</span>. <strong>Group-Level EEG-Processing Pipeline for Flexible Single Trial-Based Analyses Including Linear Mixed Models</strong></p>
+<p>Here we present an application of an EEG processing pipeline customizing EEGLAB and FieldTrip functions, specifically optimized to flexibly analyze EEG data based on single trial information. The key component of our approach is to create a comprehensive 3-D EEG data structure including all trials and all participants maintaining the original order of recording. This allows straightforward access to subsets of the data based on any information available in a behavioral data structure matched with the EEG data (experimental conditions, but also performance indicators, such accuracy or RTs of single trials). In the present study we exploit this structure to compute linear mixed models (LMMs, using lmer in R) including random intercepts and slopes for items. This information can easily be read out fromthematched behavioral data, whereas itmight not be accessible in traditional ERP approaches without substantial effort.We further provide easily adaptable scripts for performing cluster-based permutation tests (as implemented in FieldTrip), as a more robust alternative to traditional omnibus ANOVAs. Our approach is particularly advantageous for data with parametric within-subject covariates (e.g., performance) and/or multiple complex stimuli (such as words, faces or objects) that vary in features affecting cognitive processes and ERPs (such as word frequency, salience or familiarity), which are sometimes hard to control experimentally or might themselves constitute variables of interest. The present dataset was recorded from 40 participants who performed a visual search task on previously unfamiliar objects, presented either visually intact or blurred. MATLAB as well as R scripts are provided that can be adapted to different datasets.</p>
+<div id="comparison-of-methods" class="section level2">
+<h2><span class="header-section-number">1.1</span> Comparison of Methods</h2>
+<p><img src="pics/froemer_tab1.jpg" width="100%" /></p>
+<div id="anova-limitations" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> ANOVA limitations</h3>
+<p>ANOVA means: averaging within conditions and participants</p>
+<ol style="list-style-type: decimal">
+<li>Limited by the <span style=" font-weight: bold;    color: #E8793A !important;">implicit assumption</span> that every participant’s average has the <span style=" font-weight: bold;    color: #6BBFA6 !important;">same quality</span> and that the <span style=" font-weight: bold;    color: #6BBFA6 !important;">same number of observations</span> constitutes each of those averages.</li>
+</ol>
+<ul>
+<li>Differences in performance accuracy and artifact rejection <span class="math inline">\(\to\)</span> <span style=" font-weight: bold;    color: #6BBFA6 !important;">Unequal numbers of trials</span> contributing to individual averages within participants and conditions.</li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">But:</span> All these averages have the same weights in an ANOVA.</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Limited by the <span style=" font-weight: bold;    color: #E8793A !important;">implicit assumption</span> that experimental manipulations yield<span style=" font-weight: bold;    color: #6BBFA6 !important;">uniform effects</span> across all participants and items.</p></li>
+<li><p>Limited by the <span style=" font-weight: bold;    color: #E8793A !important;">dependency on discrete factor levels</span> and its resulting inability to test for parametric effects.</p></li>
+</ol>
+</div>
+<div id="advantages-of-mixed-models" class="section level3">
+<h3><span class="header-section-number">1.1.2</span> Advantages of mixed Models</h3>
+<ul>
+<li>Can deal with <span style=" font-weight: bold;    color: #6BBFA6 !important;">unequal numbers of observations</span> per cell and missing values.</li>
+<li>Regularised estimates: More robust, <span style=" font-weight: bold;    color: #6BBFA6 !important;">avoiding type I errors</span>.</li>
+<li>Many observations needed for averages per discrete category; but not when discrete variables can be left intact.
+<ul>
+<li>“To illustrate, when investigating the effect of reward on feedback related potentials, in order to obtain reliable ERPs for each type of reward one would need at least 30 trials of each reward magnitude. On the other hand, in a regression-based approach, on the same overall number of trials, reward could be varied continuously from a given low to a given high reward, and linear, but also quadratic or cubic effects of reward across that range could be tested”</li>
+</ul></li>
+</ul>
+<p><span class="citation">Smith &amp; Kutas (2015a)</span> describe an alternative to averaging: ERPs can be estimated using regression procedures; the averaging method is merely a special case of the least squares method underlying regression.</p>
+</div>
+</div>
+<div id="determining-time-windows" class="section level2">
+<h2><span class="header-section-number">1.2</span> Determining Time Windows</h2>
+<ul>
+<li>Determining the right time-windows and regions of interest (ROIs) to test group-level effects is a challenge.
+<ul>
+<li>The problem is amplified when new effects are explored and there is no substantial previous literature to help develop direct hypotheses on the nature of those effects (e.g., time course or spatial distribution).</li>
+</ul></li>
+<li>One statistically robust way to determine suitable time windows and electrode sites are <span style=" font-weight: bold;    color: #E8793A !important;">cluster-based permutation tests (CBPT)</span> as implemented in FieldTrip.
+<ul>
+<li>In a nutshell, this approach tests the null hypothesis that observations for different conditions are drawn fromthe same distribution and are therefore <span style=" font-weight: bold;    color: #6BBFA6 !important;">exchangeable</span>.</li>
+<li>Therefore, if observing similar effects <span style=" font-weight: bold;    color: #6BBFA6 !important;">under random assignment of condition labels</span> is highly unlikely (less than 5% of the permutations show them), this hypothesis is rejected and the observed condition effect is considered significant.</li>
+<li>The cluster-based procedure further makes use of the EEG property that observations on adjacent sites and time points are often correlated, because a real effect most likely affects multiple electrodes similarly and persists across several tens to hundreds of milliseconds (or sampling points).</li>
+</ul></li>
+</ul>
+</div>
+<div id="cookbook" class="section level2">
+<h2><span class="header-section-number">1.3</span> Cookbook</h2>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>EEG-data processing with EEGlab for data cleaning, structuring and plotting</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>applying cluster-based permutationtests as implemented in FieldTrip for data screening and ROI selection</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>single-trial based LMM analyses using the lme4 package for R</li>
+</ol></li>
+</ul>
+<p><img src="pics/froemer_fig1.jpg" width="100%" /></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="smith-and-kutas-2015a.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": 3,
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
