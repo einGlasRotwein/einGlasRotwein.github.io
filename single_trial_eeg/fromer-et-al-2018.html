@@ -143,7 +143,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.5" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#brain-results-n2"><i class="fa fa-check"></i><b>1.5</b> Brain Results N2</a></li>
 <li class="chapter" data-level="1.6" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#brain-results-p3b"><i class="fa fa-check"></i><b>1.6</b> Brain Results P3b</a></li>
-<li class="chapter" data-level="1.7" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#to-do"><i class="fa fa-check"></i><b>1.7</b> TO DO</a></li>
+<li class="chapter" data-level="1.7" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#results-brain-behaviour-relationship"><i class="fa fa-check"></i><b>1.7</b> Results Brain Behaviour Relationship</a></li>
+<li class="chapter" data-level="1.8" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#to-do"><i class="fa fa-check"></i><b>1.8</b> TO DO</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="smith-and-kutas-2015a.html"><a href="smith-and-kutas-2015a.html"><i class="fa fa-check"></i><b>2</b> Smith and Kutas 2015a</a></li>
 <li class="chapter" data-level="3" data-path="smith-and-kutas-2015b.html"><a href="smith-and-kutas-2015b.html"><i class="fa fa-check"></i><b>3</b> Smith and Kutas 2015b</a></li>
@@ -171,7 +172,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="fromer-et-al.-2018" class="section level1">
 <h1><span class="header-section-number">1</span> Frömer et al. (2018)</h1>
-<p>Frömer <span class="citation">(2018)</span>. <strong>Group-Level EEG-Processing Pipeline for Flexible Single Trial-Based Analyses Including Linear Mixed Models</strong></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5810264/">Frömer</a> <span class="citation">(2018)</span>. <strong>Group-Level EEG-Processing Pipeline for Flexible Single Trial-Based Analyses Including Linear Mixed Models</strong></p>
 <p>Here we present an application of an EEG processing pipeline customizing EEGLAB and FieldTrip functions, specifically optimized to flexibly analyze EEG data based on single trial information. The key component of our approach is to create a comprehensive 3-D EEG data structure including all trials and all participants maintaining the original order of recording. This allows straightforward access to subsets of the data based on any information available in a behavioral data structure matched with the EEG data (experimental conditions, but also performance indicators, such accuracy or RTs of single trials). In the present study we exploit this structure to compute linear mixed models (LMMs, using lmer in R) including random intercepts and slopes for items. This information can easily be read out fromthematched behavioral data, whereas itmight not be accessible in traditional ERP approaches without substantial effort.We further provide easily adaptable scripts for performing cluster-based permutation tests (as implemented in FieldTrip), as a more robust alternative to traditional omnibus ANOVAs. Our approach is particularly advantageous for data with parametric within-subject covariates (e.g., performance) and/or multiple complex stimuli (such as words, faces or objects) that vary in features affecting cognitive processes and ERPs (such as word frequency, salience or familiarity), which are sometimes hard to control experimentally or might themselves constitute variables of interest. The present dataset was recorded from 40 participants who performed a visual search task on previously unfamiliar objects, presented either visually intact or blurred. MATLAB as well as R scripts are provided that can be adapted to different datasets.</p>
 <div id="comparison-of-methods" class="section level2">
 <h2><span class="header-section-number">1.1</span> Comparison of Methods</h2>
@@ -287,7 +288,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 <div id="for-brain-data" class="section level4">
-<h4><span class="header-section-number">1.3.3.1</span> For Brain Data</h4>
+<h4><span class="header-section-number">1.3.3.1</span> For brain data</h4>
 <p><img src="pics/froemer_fig4.jpg" width="100%" /></p>
 <ul>
 <li><span style=" font-weight: bold;    color: #6BBFA6 !important;">CBPTs comparing mean amplitudes</span> over the epoch 0 – 800 ms for blurred vs. intact stimulus conditions
@@ -306,15 +307,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 </div>
+<div id="brain-data-predicting-behaviour" class="section level4">
+<h4><span class="header-section-number">1.3.3.2</span> Brain data predicting behaviour</h4>
+<ul>
+<li>Centered amplitudes for N2 and P3b as predictors for behaviour.
+<ul>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Open question:</span> That is: Mean amplitude for specified time window?</li>
+<li>“For these analyses, we divided all single trial amplitudes by 10, as <code>lme4</code> suggested rescaling of the variables to support model identifiability. Thus, the estimates from these analyses relate to amplitude changes of <span class="math inline">\(10 \mu V\)</span>.”
+<ul>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">TO DO:</span> How to scale variables properly?</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
 <div id="fixed-effects" class="section level4">
-<h4><span class="header-section-number">1.3.3.2</span> Fixed Effects</h4>
+<h4><span class="header-section-number">1.3.3.3</span> Fixed Effects</h4>
 <ul>
 <li>Perceptual uncertainty (blurred or not)</li>
 <li>Position (left or right)</li>
 </ul>
 </div>
 <div id="random-effects" class="section level4">
-<h4><span class="header-section-number">1.3.3.3</span> Random Effects</h4>
+<h4><span class="header-section-number">1.3.3.4</span> Random Effects</h4>
 <ul>
 <li><p>Random Intercepts for:</p>
 <ul>
@@ -461,12 +475,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Stepwise model reduction: First, interaction excluded. Then: Position excluded altogether.</li>
 <li>However: Random slope per participant for position still included, because removing it significantly decreased model fit.</li>
-<li><span style=" font-weight: bold;    color: #E8793A !important;">Open question:</span> Is that possible/wise? How do you interpret the random effect without a main effect?</li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Open question:</span> Is that possible/wise? How do you interpret the random effect without a main effect? Because the standard deviation of the effect is pretty meaningless when you don’t know the effect?</li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Author interpretation:</span> "[…] while there is no group level effect of deviant position, there are reliable individual differences in this effect, which might reflect differences in the use of top-down information for decision-making.</li>
+</ul></li>
+<li>Comparison to ANOVA and regression: Same results, but better fit for LMM.</li>
+</ul>
+</div>
+<div id="results-brain-behaviour-relationship" class="section level2">
+<h2><span class="header-section-number">1.7</span> Results Brain Behaviour Relationship</h2>
+<ul>
+<li><p>Centered amplitudes of N2 and P3b as predictors for behaviour.</p>
+<ul>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">See</span> <a href="fromer-et-al-2018.html#froemeranalyses">analyses</a> for details/open questions.</li>
+</ul></li>
+<li><p>No 4- or 3-way-interactions, no interactions of perceptual certainty with position or N2 <span class="math inline">\(\to\)</span> excluded from the model. (There’s still an awful lot of stuff left in this model.)</p>
+<ul>
+<li>Fit not significantly worse; fit indices even smaller (= better fit).</li>
+</ul></li>
+<li><p>No main effect of N2 on accuracy, but interaction N2 <span class="math inline">\(\times\)</span> position.</p>
+<ul>
+<li>For left position: Larger N2 amplitudes related to higher detection likelihood.</li>
+<li>For right position: No effect; descriptively if anything smaller amplitudes.#</li>
+</ul></li>
+<li><p>Accuracy increased with increasing P3b amplitude.</p></li>
+<li><p>P3b <span class="math inline">\(\times\)</span> perception certainty: P3b effects on blurred and intact.</p></li>
+<li><p>P3b <span class="math inline">\(\times\)</span> position: P3b effects on left and right.</p></li>
+<li><p>N2 <span class="math inline">\(\times\)</span> P3b: Accuracy increased more strongly with P3b when N2 was smaller.</p></li>
+<li><p>Comparison with logistic regression: Similar results, but no interaction between P3b and perceptual certainty.</p></li>
+<li><p>Better fit for GLMM.</p></li>
+<li><p>“We ran additional GLMMs, sequentially omitting random effects per item and random slopes, to see what produces the difference between the two methods. <span style=" font-weight: bold;    color: #6BBFA6 !important;">The estimate decreased when omitting the crossed random structure</span> and was no longer significant in the model with random intercept per participants only. Thus this effect was revealed when controlling for variance in effects across participants.”</p>
+<ul>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Open question:</span> What estimate are they referring to? How can a fixed effect (?) decrease when omitting random effects? It cannot be the estimate of the standard error, because then the effect would rather be significant instead of no longer being significant?</li>
 </ul></li>
 </ul>
 </div>
 <div id="to-do" class="section level2">
-<h2><span class="header-section-number">1.7</span> TO DO</h2>
+<h2><span class="header-section-number">1.8</span> TO DO</h2>
 <ul>
 <li>Get their data and see if I can reproduce the analyses.
 <ul>
