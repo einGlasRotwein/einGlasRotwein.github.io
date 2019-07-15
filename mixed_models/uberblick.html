@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.1 Hilfreiche Definitionen | NOTIZEN</title>
-  <meta name="description" content="1.1 Hilfreiche Definitionen | NOTIZEN" />
-  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
+  <title>1.1 Überblick | Mixed Models</title>
+  <meta name="description" content="1.1 Überblick | Mixed Models" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.1 Hilfreiche Definitionen | NOTIZEN" />
+  <meta property="og:title" content="1.1 Überblick | Mixed Models" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.1 Hilfreiche Definitionen | NOTIZEN" />
+  <meta name="twitter:title" content="1.1 Überblick | Mixed Models" />
   
   
   
@@ -127,9 +127,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <ul class="summary">
 <li class="chapter" data-level="1" data-path="first-things-first.html"><a href="first-things-first.html"><i class="fa fa-check"></i><b>1</b> First Things First</a><ul>
-<li class="chapter" data-level="1.1" data-path="hilfreiche-definitionen.html"><a href="hilfreiche-definitionen.html"><i class="fa fa-check"></i><b>1.1</b> Hilfreiche Definitionen</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="hilfreiche-definitionen.html"><a href="hilfreiche-definitionen.html#nested-und-clustered"><i class="fa fa-check"></i><b>1.1.1</b> Nested und clustered</a></li>
-<li class="chapter" data-level="1.1.2" data-path="hilfreiche-definitionen.html"><a href="hilfreiche-definitionen.html#pooling"><i class="fa fa-check"></i><b>1.1.2</b> Pooling</a></li>
+<li class="chapter" data-level="1.1" data-path="uberblick.html"><a href="uberblick.html"><i class="fa fa-check"></i><b>1.1</b> Überblick</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="uberblick.html"><a href="uberblick.html#fixed-vs.-random-effects"><i class="fa fa-check"></i><b>1.1.1</b> Fixed vs. random Effects</a></li>
+<li class="chapter" data-level="1.1.2" data-path="uberblick.html"><a href="uberblick.html#ziel"><i class="fa fa-check"></i><b>1.1.2</b> Ziel</a></li>
+<li class="chapter" data-level="1.1.3" data-path="uberblick.html"><a href="uberblick.html#nested-und-clustered"><i class="fa fa-check"></i><b>1.1.3</b> Nested und clustered</a></li>
+<li class="chapter" data-level="1.1.4" data-path="uberblick.html"><a href="uberblick.html#pooling"><i class="fa fa-check"></i><b>1.1.4</b> Pooling</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="random-intercept-models.html"><a href="random-intercept-models.html"><i class="fa fa-check"></i><b>2</b> Random intercept models</a><ul>
@@ -168,7 +170,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">NOTIZEN</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Mixed Models</a>
           </h1>
         </div>
 
@@ -176,16 +178,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="hilfreiche-definitionen" class="section level2">
-<h2><span class="header-section-number">1.1</span> Hilfreiche Definitionen</h2>
+<div id="uberblick" class="section level2">
+<h2><span class="header-section-number">1.1</span> Überblick</h2>
+<div id="fixed-vs.-random-effects" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> Fixed vs. random Effects</h3>
 <ul>
 <li>Tausende von Namen für mixed models</li>
 <li>Mischung aus fixed und random effects</li>
-<li>“<span style=" font-weight: bold;    color: #E8793A !important;">Fixed effects</span> is perhaps a poor but nonetheless stubborn term for the typical <span style=" font-weight: bold;    color: #6BBFA6 !important;">main effects</span> one would see in a linear regression model, i.e. the non-random part of a mixed model, and in some contexts they are referred to as the <span style=" font-weight: bold;    color: #6BBFA6 !important;">population average effect</span>.”</li>
-<li>“<span style=" font-weight: bold;    color: #E8793A !important;">Random effects</span> are simply those <span style=" font-weight: bold;    color: #6BBFA6 !important;">specific to an observational unit</span>, however defined.”</li>
+<li>“<span style=" font-weight: bold;    color: #E8793A !important;">Fixed effects</span> is perhaps a poor but nonetheless stubborn term for the typical <span style=" font-weight: bold;    color: #6BBFA6 !important;">main effects</span> one would see in a linear regression model, i.e. the non-random part of a mixed model, and in some contexts they are referred to as the <span style=" font-weight: bold;    color: #6BBFA6 !important;">population average effect</span>.”
+<ul>
+<li>Intercept (i.d.R. (je nach Kontrast) der grand Mean über alle Teilnehmer und Bedingungen hinweg)</li>
+<li>Effektschätzungen für jeden Prädiktor (z.B. experimentelle Bedingung oder Kovariate)</li>
+<li>spezifizierte Interaktionsterme</li>
+</ul></li>
+<li>“<span style=" font-weight: bold;    color: #E8793A !important;">Random effects</span> are simply those <span style=" font-weight: bold;    color: #6BBFA6 !important;">specific to an observational unit</span>, however defined.”
+<ul>
+<li>Schätzung der Varianz der oben genannten random Effects</li>
+</ul></li>
 </ul>
+</div>
+<div id="ziel" class="section level3">
+<h3><span class="header-section-number">1.1.2</span> Ziel</h3>
+<ul>
+<li>Mixed Models schätzen die Regressionsgewichte (oder Kontraste) auf Gruppenebene (fixed Effects) und außerdem die systematische Varianz zwischen Individuen (random Effects). Das heißt, sie schätzen gleichzeitig Gruppeneffekte und individuelle Unterschiede - letztere werden von klassischen Modellen einfach als Rauschen betrachtet.</li>
+<li>Die Schätzung der Haupteffekte bleibt dieselbe, aber die Unsicherheit verringert sich.</li>
+<li>Außerdem können Korrelationen zwischen random Effects untersucht werden, also wie z.B. individuelle Unterschiede (bzw. pro Cluster) im Verhältnis zueinander stehen.</li>
+</ul>
+</div>
 <div id="nested-und-clustered" class="section level3">
-<h3><span class="header-section-number">1.1.1</span> Nested und clustered</h3>
+<h3><span class="header-section-number">1.1.3</span> Nested und clustered</h3>
 <ul>
 <li><span style=" font-weight: bold;    color: #6BBFA6 !important;">Clustering</span> aus verschiedenen Quellen in den Daten; kann <span style=" font-weight: bold;    color: #6BBFA6 !important;">hierarchisch or nicht</span> sein. Clusters können <span style=" font-weight: bold;    color: #6BBFA6 !important;">balanced oder nicht</span> sein.</li>
 <li>Clusters genestet in Clustern; <span style=" font-weight: bold;    color: #E8793A !important;">nested</span>: Wiederholte Testung von Studenten – Wiederholte Testung genestet innerhalb von studenten, Studenten genestet innerhalb von Schulen, Schulen genested innerhalb von Bezirken.</li>
@@ -197,7 +218,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 <div id="pooling" class="section level3">
-<h3><span class="header-section-number">1.1.2</span> Pooling</h3>
+<h3><span class="header-section-number">1.1.4</span> Pooling</h3>
 <ul>
 <li>Informationen, die ein Modell berücksichtigt: Werden Daten über Cluster hinweg gepooled oder nicht?</li>
 <li>(<span style=" font-weight: bold;    color: #E8793A !important;">Complete pooling</span>: Cluster werden völlig ignoriert und <span style=" font-weight: bold;    color: #6BBFA6 !important;">alle Daten zusammengefasst</span> betrachtet.
