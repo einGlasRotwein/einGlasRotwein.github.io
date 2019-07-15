@@ -134,10 +134,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.3" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#cookbook"><i class="fa fa-check"></i><b>1.3</b> Cookbook</a><ul>
 <li class="chapter" data-level="1.3.1" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#example-task"><i class="fa fa-check"></i><b>1.3.1</b> Example Task</a></li>
 <li class="chapter" data-level="1.3.2" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#scripts"><i class="fa fa-check"></i><b>1.3.2</b> Scripts</a></li>
-<li class="chapter" data-level="1.3.3" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#analyses"><i class="fa fa-check"></i><b>1.3.3</b> Analyses</a></li>
+<li class="chapter" data-level="1.3.3" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#froemeranalyses"><i class="fa fa-check"></i><b>1.3.3</b> Analyses</a></li>
 <li class="chapter" data-level="1.3.4" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#model"><i class="fa fa-check"></i><b>1.3.4</b> Model</a></li>
 <li class="chapter" data-level="1.3.5" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#brain-stuff"><i class="fa fa-check"></i><b>1.3.5</b> Brain Stuff</a></li>
 </ul></li>
+<li class="chapter" data-level="1.4" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#behavioural-results"><i class="fa fa-check"></i><b>1.4</b> Behavioural Results</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#comparison-to-standard-anova-and-regression"><i class="fa fa-check"></i><b>1.4.1</b> Comparison to standard ANOVA and regression</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#brain-results-n2"><i class="fa fa-check"></i><b>1.5</b> Brain Results N2</a></li>
+<li class="chapter" data-level="1.6" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#brain-results-p3b"><i class="fa fa-check"></i><b>1.6</b> Brain Results P3b</a></li>
+<li class="chapter" data-level="1.7" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#to-do"><i class="fa fa-check"></i><b>1.7</b> TO DO</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="smith-and-kutas-2015a.html"><a href="smith-and-kutas-2015a.html"><i class="fa fa-check"></i><b>2</b> Smith and Kutas 2015a</a></li>
 <li class="chapter" data-level="3" data-path="smith-and-kutas-2015b.html"><a href="smith-and-kutas-2015b.html"><i class="fa fa-check"></i><b>3</b> Smith and Kutas 2015b</a></li>
@@ -256,13 +262,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Based on aggregated data obtained with <code>F03_prep_permutation_tests.m</code>.</li>
 </ul></li>
 <li>Relevant time windows of the single trial EEG data, as determined using CBPT were then exported for single trial LMM analyses using <code>F05_export.m</code>.</li>
-<li>ERP data were plotted using F06_plotting.m.
+<li>ERP data were plotted using <code>F06_plotting.m</code>.
 <ul>
 <li><span style=" font-weight: bold;    color: #E8793A !important;">TO DO:</span> See if <code>R</code> can do a better job?</li>
 </ul></li>
 </ul>
 </div>
-<div id="analyses" class="section level3">
+<div id="froemeranalyses" class="section level3">
 <h3><span class="header-section-number">1.3.3</span> Analyses</h3>
 <ul>
 <li>With <code>lme4</code>; <span class="math inline">\(p-\)</span>values with <code>lmerTest</code> (<span style=" font-weight: bold;    color: #6BBFA6 !important;">Satterthwaite approximation</span> for degrees of freedom):
@@ -274,16 +280,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>That means: Manual inspection/decisions? See different steps in script <code>F00</code>.</li>
 </ul></li>
+<li>“We followed up the <span style=" font-weight: bold;    color: #E8793A !important;">significant interactions</span> by running <span style=" font-weight: bold;    color: #6BBFA6 !important;">additional models with the two factors nested within each other</span> to obtain the effects of one factor at each level of the other factor, respectively.”
+<ul>
+<li>“Note that for this procedure to be accurate, these models need to be specified identically to the original model except for the nesting.”</li>
+<li>Another way shown in script: Obtain these with the <code>difflsmeans</code> function from the <code>lmerTest</code> package.</li>
+</ul></li>
 </ul>
+<div id="for-brain-data" class="section level4">
+<h4><span class="header-section-number">1.3.3.1</span> For Brain Data</h4>
+<p><img src="pics/froemer_fig4.jpg" width="100%" /></p>
+<ul>
+<li><span style=" font-weight: bold;    color: #6BBFA6 !important;">CBPTs comparing mean amplitudes</span> over the epoch 0 – 800 ms for blurred vs. intact stimulus conditions
+<ul>
+<li>Differences started around 100 ms after stimulus onset and remained throughout the whole epoch.</li>
+<li>Three clusters:
+<ul>
+<li>From 116 ms on, the blurred condition evoked more positive amplitudes at central, parietal and frontocentral electrode sites (p = 0.002).</li>
+<li>Between 124 and 594 ms, the blurred condition evoked lower amplitudes at parietal and occipital electrodes (p = 0.002).</li>
+<li>Between 640 and 800 ms, the blurred condition evoked lower amplitudes at frontal and frontocentral electrodes (p = 0.008).</li>
+</ul></li>
+</ul></li>
+<li>“<span style=" font-weight: bold;    color: #E8793A !important;">Here we limit the follow-up analyses</span> to the fronto-central N2 between 250 and 350ms (FC1, FC2, C1, Cz, C2), as well as the centro-parietal P3b/CPP (CP3, CP1, CPz, CP2, CP4, P3, Pz, P4, PO3, POz, PO4) between 400 and 550 ms.”
+<ul>
+<li>That means: Rather arbitrary decision that is not guided roughly, but not all <em>too</em> much by CBPT results (and partly by literature).</li>
+</ul></li>
+</ul>
+</div>
 <div id="fixed-effects" class="section level4">
-<h4><span class="header-section-number">1.3.3.1</span> Fixed Effects</h4>
+<h4><span class="header-section-number">1.3.3.2</span> Fixed Effects</h4>
 <ul>
 <li>Perceptual uncertainty (blurred or not)</li>
 <li>Position (left or right)</li>
 </ul>
 </div>
 <div id="random-effects" class="section level4">
-<h4><span class="header-section-number">1.3.3.2</span> Random Effects</h4>
+<h4><span class="header-section-number">1.3.3.3</span> Random Effects</h4>
 <ul>
 <li><p>Random Intercepts for:</p>
 <ul>
@@ -311,7 +342,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span class="st">       </span>(n_b <span class="op">+</span><span class="st"> </span>DeviantPosRL<span class="op">|</span>Objektpaar), 
      <span class="dt">data =</span> a1,
      <span class="dt">REML =</span> <span class="ot">FALSE</span>)</code></pre>
-<p>Then, they use these models to get the interactions. <span style=" font-weight: bold;    color: #E8793A !important;">To do:</span> Check how this works.</p>
+<p>Then, they use these models to get the interactions. <span style=" font-weight: bold;    color: #E8793A !important;">See</span> <a href="fromer-et-al-2018.html#froemeranalyses">analyses</a> for specification.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># deviant position within perceptual certainty</span>
 <span class="kw">lmer</span>(RT <span class="op">~</span><span class="st"> </span>n_b<span class="op">/</span>DeviantPosRL <span class="op">+</span><span class="st"> </span>(n_b <span class="op">+</span><span class="st"> </span>DeviantPosRL<span class="op">|</span>vpn) <span class="op">+</span><span class="st"> </span>
 <span class="st">       </span>(n_b <span class="op">+</span><span class="st"> </span>DeviantPosRL<span class="op">|</span>Objektpaar), 
@@ -340,6 +371,109 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
      <span class="dt">family =</span> binomial)</code></pre>
 <p>They try some different versions with various interactions and compare the models to each other with ANOVAs. <span style=" font-weight: bold;    color: #E8793A !important;">To do:</span> Get clear what we want to look at and why.</p>
 </div>
+</div>
+<div id="behavioural-results" class="section level2">
+<h2><span class="header-section-number">1.4</span> Behavioural Results</h2>
+<ul>
+<li>For hit rates: main effects of pecerptual certainty and position.
+<ul>
+<li>And an interaction.</li>
+</ul></li>
+<li>For RT: main effect of perceptual certainty, but <span style=" font-weight: bold;    color: #6BBFA6 !important;">position n.s.</span> (see comparison below).
+<ul>
+<li>And an interaction.</li>
+</ul></li>
+<li>Following up on interactions:
+<ul>
+<li>Accuracy
+<ul>
+<li>Effect of position for blurred, but not intact stimuli.</li>
+<li>Effect of perceptual certainty for both positions.</li>
+</ul></li>
+<li>RT
+<ul>
+<li>No effect of postion for both blurred and intact stimuli.</li>
+<li>Effect of perceptual certainty for both positions.</li>
+</ul></li>
+</ul></li>
+</ul>
+<div id="comparison-to-standard-anova-and-regression" class="section level3">
+<h3><span class="header-section-number">1.4.1</span> Comparison to standard ANOVA and regression</h3>
+<div id="on-rt-data" class="section level4">
+<h4><span class="header-section-number">1.4.1.1</span> on RT data</h4>
+<ul>
+<li>ANOVA: only main effect of perceptual certainty.</li>
+<li>Regression: main effects of perceptual certainty and position.
+<ul>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Open question:</span> In mixed model, there was no main effect of position. Naturally, estimates of effects stay the same in mixed model vs. regression (they do stay roughly the same; <a href="https://osf.io/uycsd/">see commented out results in their analysis script</a>), but the standard error changes and hence, the significance of the effect.</li>
+<li>They compare the original LLM with
+<ul>
+<li><ol style="list-style-type: lower-alpha">
+<li>one omitting the random effects for items</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-alpha">
+<li>one with random intercepts for participants only (without random effects)</li>
+</ol></li>
+</ul></li>
+<li><span class="math inline">\(\to\)</span> The standard error of the effect for position drops across these models.</li>
+</ul></li>
+<li>They say: “[T]he LMM was more sensitive than the ANOVA and more specific than the ordinary regression.”
+<ul>
+<li>Probably because the LMM picked up an interaction and the ANOVA didn’t.</li>
+<li>Probably because the regression picked up a main effect of position where the LLM found none.
+<ul>
+<li>However, the regression also missed the interaction effect.</li>
+</ul></li>
+</ul></li>
+<li>Better model fit for LMM than for regression (obviously).</li>
+</ul>
+</div>
+<div id="on-accuracy-data" class="section level4">
+<h4><span class="header-section-number">1.4.1.2</span> On accuracy data</h4>
+<ul>
+<li>ANOVA not appropriate, but logistic regression.</li>
+<li>Same results with regards to significant effects.</li>
+<li>But: Underestimation of standard errors.</li>
+<li>Better model fit for GLMM than for regression (obviously).</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="brain-results-n2" class="section level2">
+<h2><span class="header-section-number">1.5</span> Brain Results N2</h2>
+<ul>
+<li><p>“The model estimates are summarized in Table 3 and can be read out directly as mean differences in <span class="math inline">\(\mu V\)</span> (<span style=" font-weight: bold;    color: #E8793A !important;">Note:</span> Should be due to sliding differences.) for main effects. Note that the N2 is a negative component; so negative estimates correspond to an increase in amplitude and positive estimates to a decrease in amplitude.”</p></li>
+<li><p>Main effect of perceptual certainty: Reduced N2 for blurred vs. intact.</p></li>
+<li><p>Main effect of position: Reduced N2 for right vs. left stimuli.</p></li>
+<li><p>And an interaction.</p>
+<ul>
+<li>Significant effect of perceptual certainty for right and left position.</li>
+<li>Position effect for intact but not for blurred stimuli.</li>
+</ul></li>
+<li><p>Comparison to ANOVA and regression: Same results, but better fit for LMM.</p></li>
+</ul>
+</div>
+<div id="brain-results-p3b" class="section level2">
+<h2><span class="header-section-number">1.6</span> Brain Results P3b</h2>
+<ul>
+<li>Main effect of perceptual certainty: Reduced P3b for blurred vs. intact stimuli.</li>
+<li>No main effect of/interaction with position.
+<ul>
+<li>Stepwise model reduction: First, interaction excluded. Then: Position excluded altogether.</li>
+<li>However: Random slope per participant for position still included, because removing it significantly decreased model fit.</li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Open question:</span> Is that possible/wise? How do you interpret the random effect without a main effect?</li>
+</ul></li>
+</ul>
+</div>
+<div id="to-do" class="section level2">
+<h2><span class="header-section-number">1.7</span> TO DO</h2>
+<ul>
+<li>Get their data and see if I can reproduce the analyses.
+<ul>
+<li>Maybe with preprocessing in BrainVision Analyzer instead of Matlab?</li>
+<li>Apply modified procedure to Laura’s data.</li>
+</ul></li>
+</ul>
 </div>
 </div>
             </section>
