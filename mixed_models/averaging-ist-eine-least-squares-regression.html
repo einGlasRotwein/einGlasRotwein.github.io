@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Mixed Models</title>
-  <meta name="description" content="Mixed Models" />
+  <title>2.1 Averaging ist eine Least-Squares Regression | Mixed Models</title>
+  <meta name="description" content="2.1 Averaging ist eine Least-Squares Regression | Mixed Models" />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Mixed Models" />
+  <meta property="og:title" content="2.1 Averaging ist eine Least-Squares Regression | Mixed Models" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Mixed Models" />
+  <meta name="twitter:title" content="2.1 Averaging ist eine Least-Squares Regression | Mixed Models" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="uberblick.html">
+<link rel="prev" href="exkurs-regressionen.html">
+<link rel="next" href="von-averaging-zur-regression.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -188,26 +188,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Mixed Models</h1>
-</div>
-<div id="first-things-first" class="section level1">
-<h1><span class="header-section-number">1</span> First Things First</h1>
-<p><span style=" font-weight: bold;    color: #E8793A !important;">wichtiges Highlight</span> – <span style=" font-weight: bold;    color: #6BBFA6 !important;">nicht ganz so wichtiges Highlight</span> – <span style=" font-weight: bold;    color: #397367 !important;">Link</span></p>
-<p>Quellen:</p>
+<div id="averaging-ist-eine-least-squares-regression" class="section level2">
+<h2><span class="header-section-number">2.1</span> Averaging ist eine Least-Squares Regression</h2>
+<p>Anstatt die gesamte EEG-Welle als Ganzes zu schätzen, schätzen wir zunächst den Wert jeder Elektrode zu jedem Messzeitpunkt - also z.B. 136 ms nach einem Stimulus an der Elektrode Cz. Wenn wir das hinkriegen, können wir den Rest der Welle schätzen, indem wir die Prozedur für jede Elektrode und jeden Messzeitpunkt (davon haben wir im EEG natürlich … viele) wiederholen. Die Schätzung für jeden Trial sieht so aus:</p>
+<p><span class="math display">\[
+y_i =\beta + \textrm{noise}_i
+\]</span></p>
 <ul>
-<li>Michael Clark. <a href="https://m-clark.github.io/mixed-models-with-R/">Mixed Models in R</a></li>
-<li>Einzelne Infos auch aus einem <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5810264/">Paper</a> von <span class="citation">Frömer, Maier, &amp; Abdel Rahman (2018)</span></li>
-<li>Generelle Logik von Regressionen adaptiert aus dem <a href="https://www.ncbi.nlm.nih.gov/pubmed/25141770">Paper</a> von <span class="citation">Smith &amp; Kutas (2015)</span></li>
-</ul> 
+<li>Das Noise ist in jedem Trial anders, aber der Wert des ERPs (also das vom Gehirn produzierte Signal) ist - zu diesem Zeitpunkt an dieser Elektrode - immer dasselbe.</li>
+<li>Standardmäßige Schätzung von <span class="math inline">\(\beta\)</span>: Über <span class="math inline">\(y_i\)</span> mitteln.</li>
+<li>Würden wir das Noise in jedem Trial oder die Schätzung von <span class="math inline">\(\beta\)</span> kennen, könnten wir die Gleichung(en) einfach lösen, aber wir kennen beides nicht.</li>
+</ul>
+<p>Was wir stattdessen tun könnenn: Das Prinzip der <span style=" font-weight: bold;    color: #E8793A !important;">least squares</span> anwenden: Wir sollten für unsere Schätzung das <span class="math inline">\(\beta\)</span> wählen, das unsere Schätzung des <span style=" font-weight: bold;    color: #6BBFA6 !important;">total squared noise</span>,</p>
+<p><span class="math display">\[
+\textrm{squared noise} =\sum_{i=1}^{n}\left(\textrm{noise }_{i}\right)^{2}=\sum_{i=1}^{n}\left(y_{i}-\beta\right)^{2}
+\]</span></p>
+<p>so klein wie möglich macht. Wir ziehen also die <span style=" font-weight: bold;    color: #E8793A !important;">Ableitung</span> der Formel:</p>
+<p><span class="math display">\[
+\frac{d}{d \beta} \textrm{ squared noise }=\frac{d}{d \beta} \sum_{i=1}^{n}\left(y_{i}-\beta\right)^{2}=\sum_{i=1}^{n}-2\left(y_{i}-\beta\right)
+\]</span></p>
+<p>Und setzen sie gleich Null:</p>
+<p><span class="math display">\[
+\sum_{i=1}^{n}-2\left(y_{i}-\beta\right)=0
+\]</span></p>
+<p>Und lösen nach <span class="math inline">\(\beta\)</span> auf:</p>
+<p><span class="math display">\[
+\begin{aligned}-2\left(\sum_{i=1}^{n} y_{i}-\sum_{i=1}^{n} \beta\right) &amp;=0 \\ \sum_{i=1}^{n} y_{i} &amp;=\sum_{i=1}^{n} \beta \\ \sum_{i=1}^{n} y_{i} &amp;=n \beta \\ \frac{1}{n} \sum_{i=1}^{n} y_{i} &amp;=\beta \end{aligned}
+\]</span></p>
+<p><span style=" font-weight: bold;    color: #6BBFA6 !important;">Bäm: Die finale Formel ist auch die Standardformul, um den Mittelwert zu berechnen!</span> Das bedeutet, gemäß des Least-Squares-Prinzips ist der beste Weg, um <span class="math inline">\(\beta\)</span> zu schätzen: Alle gemessenen Werte <span class="math inline">\(y_i, ..., y_n\)</span> mitteln. Daher ergibt es zunächst Sinn zu mitteln, wenn man ERPs schätzen will.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="uberblick.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="exkurs-regressionen.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="von-averaging-zur-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

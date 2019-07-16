@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Random intercept models | Mixed Models</title>
-  <meta name="description" content="2 Random intercept models | Mixed Models" />
+  <title>3 Random intercept models | Mixed Models</title>
+  <meta name="description" content="3 Random intercept models | Mixed Models" />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 Random intercept models | Mixed Models" />
+  <meta property="og:title" content="3 Random intercept models | Mixed Models" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Random intercept models | Mixed Models" />
+  <meta name="twitter:title" content="3 Random intercept models | Mixed Models" />
   
   
   
@@ -29,7 +29,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="uberblick.html">
+<link rel="prev" href="pradiktoren-definieren.html">
 <link rel="next" href="generelle-logik.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -134,33 +134,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.1.4" data-path="uberblick.html"><a href="uberblick.html#pooling"><i class="fa fa-check"></i><b>1.1.4</b> Pooling</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="random-intercept-models.html"><a href="random-intercept-models.html"><i class="fa fa-check"></i><b>2</b> Random intercept models</a><ul>
-<li class="chapter" data-level="2.1" data-path="generelle-logik.html"><a href="generelle-logik.html"><i class="fa fa-check"></i><b>2.1</b> Generelle Logik</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="generelle-logik.html"><a href="generelle-logik.html#problem-einfache-regression"><i class="fa fa-check"></i><b>2.1.1</b> Problem einfache Regression</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="in-r.html"><a href="in-r.html"><i class="fa fa-check"></i><b>2.2</b> in R</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="in-r.html"><a href="in-r.html#vergleich-einfache-regression-vs.-mixed-model"><i class="fa fa-check"></i><b>2.2.1</b> Vergleich einfache Regression vs. mixed model</a></li>
-<li class="chapter" data-level="2.2.2" data-path="in-r.html"><a href="in-r.html#predictions-plotten"><i class="fa fa-check"></i><b>2.2.2</b> Predictions plotten</a></li>
-</ul></li>
-<li class="chapter" data-level="2.3" data-path="simulationen.html"><a href="simulationen.html"><i class="fa fa-check"></i><b>2.3</b> Simulationen</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="simulationen.html"><a href="simulationen.html#run-1---default"><i class="fa fa-check"></i><b>2.3.1</b> Run 1 - default</a></li>
-<li class="chapter" data-level="2.3.2" data-path="simulationen.html"><a href="simulationen.html#run-2---different-random-effect-variance"><i class="fa fa-check"></i><b>2.3.2</b> Run 2 - Different random effect variance</a></li>
-<li class="chapter" data-level="2.3.3" data-path="simulationen.html"><a href="simulationen.html#run-3---different-residual-variance"><i class="fa fa-check"></i><b>2.3.3</b> Run 3 - Different residual variance</a></li>
-<li class="chapter" data-level="2.3.4" data-path="simulationen.html"><a href="simulationen.html#run-4---different-random-effect-and-residual-variance"><i class="fa fa-check"></i><b>2.3.4</b> Run 4 - Different random effect and residual variance</a></li>
-<li class="chapter" data-level="2.3.5" data-path="simulationen.html"><a href="simulationen.html#ubersicht"><i class="fa fa-check"></i><b>2.3.5</b> Übersicht</a></li>
-<li class="chapter" data-level="2.3.6" data-path="simulationen.html"><a href="simulationen.html#veranderung-der-gruppengroen"><i class="fa fa-check"></i><b>2.3.6</b> Veränderung der Gruppengrößen</a></li>
+<li class="chapter" data-level="2" data-path="exkurs-regressionen.html"><a href="exkurs-regressionen.html"><i class="fa fa-check"></i><b>2</b> Exkurs Regressionen</a><ul>
+<li class="chapter" data-level="2.1" data-path="averaging-ist-eine-least-squares-regression.html"><a href="averaging-ist-eine-least-squares-regression.html"><i class="fa fa-check"></i><b>2.1</b> Averaging ist eine Least-Squares Regression</a></li>
+<li class="chapter" data-level="2.2" data-path="von-averaging-zur-regression.html"><a href="von-averaging-zur-regression.html"><i class="fa fa-check"></i><b>2.2</b> Von Averaging zur Regression</a></li>
+<li class="chapter" data-level="2.3" data-path="pradiktoren-definieren.html"><a href="pradiktoren-definieren.html"><i class="fa fa-check"></i><b>2.3</b> Prädiktoren definieren</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="pradiktoren-definieren.html"><a href="pradiktoren-definieren.html#beispielexperiment"><i class="fa fa-check"></i><b>2.3.1</b> Beispielexperiment</a></li>
+<li class="chapter" data-level="2.3.2" data-path="pradiktoren-definieren.html"><a href="pradiktoren-definieren.html#das-traditionelle-erp-als-intercept"><i class="fa fa-check"></i><b>2.3.2</b> Das traditionelle ERP als Intercept</a></li>
+<li class="chapter" data-level="2.3.3" data-path="pradiktoren-definieren.html"><a href="pradiktoren-definieren.html#multiple-erps-via-dummy-coding"><i class="fa fa-check"></i><b>2.3.3</b> Multiple ERPs via Dummy-Coding</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="randomslopes.html"><a href="randomslopes.html"><i class="fa fa-check"></i><b>3</b> Random slope models</a><ul>
-<li class="chapter" data-level="3.1" data-path="mixed-models-vs-einzelne-regressionen.html"><a href="mixed-models-vs-einzelne-regressionen.html"><i class="fa fa-check"></i><b>3.1</b> Mixed Models vs. einzelne Regressionen</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="mixed-models-vs-einzelne-regressionen.html"><a href="mixed-models-vs-einzelne-regressionen.html#regularisierende-effekte"><i class="fa fa-check"></i><b>3.1.1</b> Regularisierende Effekte</a></li>
-<li class="chapter" data-level="3.1.2" data-path="mixed-models-vs-einzelne-regressionen.html"><a href="mixed-models-vs-einzelne-regressionen.html#predictions"><i class="fa fa-check"></i><b>3.1.2</b> Predictions</a></li>
+<li class="chapter" data-level="3" data-path="random-intercept-models.html"><a href="random-intercept-models.html"><i class="fa fa-check"></i><b>3</b> Random intercept models</a><ul>
+<li class="chapter" data-level="3.1" data-path="generelle-logik.html"><a href="generelle-logik.html"><i class="fa fa-check"></i><b>3.1</b> Generelle Logik</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="generelle-logik.html"><a href="generelle-logik.html#problem-einfache-regression"><i class="fa fa-check"></i><b>3.1.1</b> Problem einfache Regression</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="simulationen-1.html"><a href="simulationen-1.html"><i class="fa fa-check"></i><b>3.2</b> Simulationen</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="simulationen-1.html"><a href="simulationen-1.html#intercept-und-slopes-unkorreliert"><i class="fa fa-check"></i><b>3.2.1</b> Intercept und Slopes unkorreliert</a></li>
-<li class="chapter" data-level="3.2.2" data-path="simulationen-1.html"><a href="simulationen-1.html#starkerer-slope"><i class="fa fa-check"></i><b>3.2.2</b> Stärkerer Slope</a></li>
+<li class="chapter" data-level="3.2" data-path="in-r.html"><a href="in-r.html"><i class="fa fa-check"></i><b>3.2</b> in R</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="in-r.html"><a href="in-r.html#vergleich-einfache-regression-vs.-mixed-model"><i class="fa fa-check"></i><b>3.2.1</b> Vergleich einfache Regression vs. mixed model</a></li>
+<li class="chapter" data-level="3.2.2" data-path="in-r.html"><a href="in-r.html#predictions-plotten"><i class="fa fa-check"></i><b>3.2.2</b> Predictions plotten</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="simulationen.html"><a href="simulationen.html"><i class="fa fa-check"></i><b>3.3</b> Simulationen</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="simulationen.html"><a href="simulationen.html#run-1---default"><i class="fa fa-check"></i><b>3.3.1</b> Run 1 - default</a></li>
+<li class="chapter" data-level="3.3.2" data-path="simulationen.html"><a href="simulationen.html#run-2---different-random-effect-variance"><i class="fa fa-check"></i><b>3.3.2</b> Run 2 - Different random effect variance</a></li>
+<li class="chapter" data-level="3.3.3" data-path="simulationen.html"><a href="simulationen.html#run-3---different-residual-variance"><i class="fa fa-check"></i><b>3.3.3</b> Run 3 - Different residual variance</a></li>
+<li class="chapter" data-level="3.3.4" data-path="simulationen.html"><a href="simulationen.html#run-4---different-random-effect-and-residual-variance"><i class="fa fa-check"></i><b>3.3.4</b> Run 4 - Different random effect and residual variance</a></li>
+<li class="chapter" data-level="3.3.5" data-path="simulationen.html"><a href="simulationen.html#ubersicht"><i class="fa fa-check"></i><b>3.3.5</b> Übersicht</a></li>
+<li class="chapter" data-level="3.3.6" data-path="simulationen.html"><a href="simulationen.html#veranderung-der-gruppengroen"><i class="fa fa-check"></i><b>3.3.6</b> Veränderung der Gruppengrößen</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path="randomslopes.html"><a href="randomslopes.html"><i class="fa fa-check"></i><b>4</b> Random slope models</a><ul>
+<li class="chapter" data-level="4.1" data-path="mixed-models-vs-einzelne-regressionen.html"><a href="mixed-models-vs-einzelne-regressionen.html"><i class="fa fa-check"></i><b>4.1</b> Mixed Models vs. einzelne Regressionen</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="mixed-models-vs-einzelne-regressionen.html"><a href="mixed-models-vs-einzelne-regressionen.html#regularisierende-effekte"><i class="fa fa-check"></i><b>4.1.1</b> Regularisierende Effekte</a></li>
+<li class="chapter" data-level="4.1.2" data-path="mixed-models-vs-einzelne-regressionen.html"><a href="mixed-models-vs-einzelne-regressionen.html#predictions"><i class="fa fa-check"></i><b>4.1.2</b> Predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="simulationen-1.html"><a href="simulationen-1.html"><i class="fa fa-check"></i><b>4.2</b> Simulationen</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="simulationen-1.html"><a href="simulationen-1.html#intercept-und-slopes-unkorreliert"><i class="fa fa-check"></i><b>4.2.1</b> Intercept und Slopes unkorreliert</a></li>
+<li class="chapter" data-level="4.2.2" data-path="simulationen-1.html"><a href="simulationen-1.html#starkerer-slope"><i class="fa fa-check"></i><b>4.2.2</b> Stärkerer Slope</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="referenzen.html"><a href="referenzen.html"><i class="fa fa-check"></i>Referenzen</a></li>
 </ul>
 
       </nav>
@@ -179,14 +189,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="random-intercept-models" class="section level1">
-<h1><span class="header-section-number">2</span> Random intercept models</h1> 
+<h1><span class="header-section-number">3</span> Random intercept models</h1> 
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="uberblick.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pradiktoren-definieren.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="generelle-logik.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Mixed Models</title>
-  <meta name="description" content="Mixed Models" />
+  <title>2.3 Prädiktoren definieren | Mixed Models</title>
+  <meta name="description" content="2.3 Prädiktoren definieren | Mixed Models" />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Mixed Models" />
+  <meta property="og:title" content="2.3 Prädiktoren definieren | Mixed Models" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Mixed Models" />
+  <meta name="twitter:title" content="2.3 Prädiktoren definieren | Mixed Models" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="uberblick.html">
+<link rel="prev" href="von-averaging-zur-regression.html">
+<link rel="next" href="random-intercept-models.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -188,26 +188,61 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Mixed Models</h1>
+<div id="pradiktoren-definieren" class="section level2">
+<h2><span class="header-section-number">2.3</span> Prädiktoren definieren</h2>
+<div id="beispielexperiment" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> Beispielexperiment</h3>
+<p>Beispiel ist hier ein Sprachverständnisexperiment, in dem ein Kontext Erwartungen bei den Teilnehmern für ein bestimmtes Wort, <em>a</em> oder <em>an</em>, generiert. Siehe: <em>The day was breezy so the boy went outside to fly (<strong>a</strong> kite/<strong>an</strong> airplane)</em>. Wir haben also eine kategorische Kovariate (Wort: <em>a</em> vs. <em>an</em>) und eine kontinuierliche Kovariate: Die Erwartung des Wortes, die zwischen 0 und 1 liegt.</p>
 </div>
-<div id="first-things-first" class="section level1">
-<h1><span class="header-section-number">1</span> First Things First</h1>
-<p><span style=" font-weight: bold;    color: #E8793A !important;">wichtiges Highlight</span> – <span style=" font-weight: bold;    color: #6BBFA6 !important;">nicht ganz so wichtiges Highlight</span> – <span style=" font-weight: bold;    color: #397367 !important;">Link</span></p>
-<p>Quellen:</p>
+<div id="das-traditionelle-erp-als-intercept" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> Das traditionelle ERP als Intercept</h3>
+<p>Angenommen, wir haben einen einzigen Prädiktor: <span class="math inline">\(x_{1i} = 1\)</span></p>
+<p>In der Sprache linearer Regressionen ist dieser Prädiktor ein Intercept. Unsere Regressionsgleichung ist dann:</p>
+<p><span class="math display">\[
+y_{i}=\beta_{1} x_{1 i}+\textrm{ noise }_{i}=\beta_{1}+\textrm{ noise }_{i}
+\]</span></p>
+<p>Wie oben: Wenn wir die Least-Squares-Lösung finden, ist <span class="math inline">\(\beta_{1}\)</span> gleich der Mittelwert aller <span class="math inline">\(y_i\)</span>-Werte.</p>
+<p><img src="pics/smith_a_fig1_1.jpg" width="1560" /></p>
+<p>Die Ergebnisse stimmen mit denen des Mittelns überein, aber sind ein wenig nervig zu ermitteln: Bei kategorischen Faktoren über mehrere Stufen müssen wir mehrere Modelle fitten, hier zwei: Eins für <em>a</em>-Trials, eins für <em>an</em>-Trials.</p>
+</div>
+<div id="multiple-erps-via-dummy-coding" class="section level3">
+<h3><span class="header-section-number">2.3.3</span> Multiple ERPs via Dummy-Coding</h3>
+<p>Anstatt mehrere Modelle zu fitten, können wir auch beide ERPs gleichzeitig mit einem einzelnen Modell schätzen, indem wir Dummy-Coding als Trick verwenden - der Standardweg, um kategorische Daten in einem Regressionsmodell anzupacken.</p>
 <ul>
-<li>Michael Clark. <a href="https://m-clark.github.io/mixed-models-with-R/">Mixed Models in R</a></li>
-<li>Einzelne Infos auch aus einem <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5810264/">Paper</a> von <span class="citation">Frömer, Maier, &amp; Abdel Rahman (2018)</span></li>
-<li>Generelle Logik von Regressionen adaptiert aus dem <a href="https://www.ncbi.nlm.nih.gov/pubmed/25141770">Paper</a> von <span class="citation">Smith &amp; Kutas (2015)</span></li>
-</ul> 
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Siehe:</span> “This is the default method of coding categorical variables used by SAS, and is also used by default by <code>R</code> for models that do not contain an intercept term.”
+<ul>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">TO DO:</span> Modelle ohne Intercept in <code>R</code> nachschlagen und schauen, was da passiert?</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[
+x_{1 i}=\left\{\begin{array}{ll}{1,} &amp; {\text { if stimulus } i \text { is } a} \\ {0,} &amp; {\text { if stimulus } i \text { is an }}\end{array} \quad x_{2 i}=\left\{\begin{array}{ll}{0,} &amp; {\text { if stimulus } i \text { is } a} \\ {1,} &amp; {\text { if stimulus } i \text { is an }}\end{array}\right.\right.
+\]</span></p>
+<p><span style=" font-weight: bold;    color: #E8793A !important;">Note:</span> Es stand dort <span class="math inline">\(x_{1i}\)</span> für die zweite Klammer, aber das scheint ein Fehler zu sein?</p>
+<p>Wenn wir das in die Regressionsgleichung packen …</p>
+<p><span class="math display">\[
+y_{i}=\beta_{1} x_{1 i}+\beta_{2} x_{2 i}+\textrm{noise}_{i}
+\]</span></p>
+<p>dann wird Least-Squares-Fitting dafür sorgen, dass <span class="math inline">\(\beta_{1}\)</span> dem Mittel aller <em>a</em>-Trials entspricht, und <span class="math inline">\(\beta_{2}\)</span> dem Mittel aller <em>an</em>-Trials.</p>
+<p><img src="pics/smith_a_fig1_2.jpg" width="1560" /></p>
+<p>Denn: Wenn wir in einem Trial <em>i</em> das Wort <em>a</em> präsentiert haben, ist <span class="math inline">\(x_{1i} =\)</span> 1 und <span class="math inline">\(x_{2i} =\)</span> 0, was bedeutet:</p>
+<p><span class="math display">\[
+y_{i}=\beta_{1} \times 1+\beta_{2} \times 0+\textrm{noise}_{i}=\beta_{1}+\textrm{noise}_{i}
+\]</span></p>
+<p>Und wenn wir in einem Trial <em>i</em> das Wort <em>an</em> gezeigt haben, ist <span class="math inline">\(x_{1i} =\)</span> 0 und <span class="math inline">\(x_{2i} =\)</span> 1, was bedeutet:</p>
+<p><span class="math display">\[
+y_{i}=\beta_{1} \times 0+\beta_{2} \times 1+\textrm{noise}_{i}=\beta_{2}+\textrm{noise}_{i}
+\]</span></p>
+<p>Letztendlich <span style=" font-weight: bold;    color: #6BBFA6 !important;">fitten wir also zwei Versionen unseres Intercept-Only-Models</span> auf verschiedene Subsets der Daten. Der einzige Unterschied ist, dass wir vorher die Daten explizit aufgeteilt haben; jetzt definieren wir unsere <span class="math inline">\(x\)</span>e und der Split der Daten passiert automatisch als Ergebnis des Least-Squares-Fitting-Prozesses. Eine allgemeine Variante des “Zero-Tricks” kann genutzt werden, um arbiträre Regressionsmodelle in einen einzigen Fit zu kombinieren, was für verschiedene Zwecke nützlich sein kann.</p>
 </div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="uberblick.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="von-averaging-zur-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="random-intercept-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Mixed Models</title>
-  <meta name="description" content="Mixed Models" />
+  <title>2.2 Von Averaging zur Regression | Mixed Models</title>
+  <meta name="description" content="2.2 Von Averaging zur Regression | Mixed Models" />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Mixed Models" />
+  <meta property="og:title" content="2.2 Von Averaging zur Regression | Mixed Models" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Mixed Models" />
+  <meta name="twitter:title" content="2.2 Von Averaging zur Regression | Mixed Models" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="uberblick.html">
+<link rel="prev" href="averaging-ist-eine-least-squares-regression.html">
+<link rel="next" href="pradiktoren-definieren.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -188,26 +188,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Mixed Models</h1>
-</div>
-<div id="first-things-first" class="section level1">
-<h1><span class="header-section-number">1</span> First Things First</h1>
-<p><span style=" font-weight: bold;    color: #E8793A !important;">wichtiges Highlight</span> – <span style=" font-weight: bold;    color: #6BBFA6 !important;">nicht ganz so wichtiges Highlight</span> – <span style=" font-weight: bold;    color: #397367 !important;">Link</span></p>
-<p>Quellen:</p>
+<div id="von-averaging-zur-regression" class="section level2">
+<h2><span class="header-section-number">2.2</span> Von Averaging zur Regression</h2>
+<p>Auf der anderen Seite ist diese Formel …</p>
+<p><span class="math display">\[
+y_i =\beta + \textrm{noise}_i
+\]</span></p>
+<p>… lediglich ein einfaches Beispiel der allgemeinen Least-Squares-Regressionsgleichung:</p>
+<p><span class="math display">\[
+y_{i}=\beta_{1} x_{1}+\beta_{2} x_{2}+\cdots+\textrm{ noise}_{i}
+\]</span></p>
+<p>Wir schauen also was passiert wenn wir ERPs mit der vollständigen Regressionsgleichung schätzen wollen anstatt mit der vereinfachten. Wieder sind die Werte für <span class="math inline">\(y_i\)</span> hierbei das Skalppotenzial an einer einzelnen Elektrode zu einem einzelnen Messzeitpunkt, über verschiedene Trials hinweg. Die Werte für <span class="math inline">\(x_{ji}\)</span> sind die <span style=" font-weight: bold;    color: #6BBFA6 !important;">Prädiktoren</span> und stehen für verschiedene Stimuluseigenschaften, die im Trial <span class="math inline">\(i\)</span> vorhanden sind, numerisch kodiert.</p>
 <ul>
-<li>Michael Clark. <a href="https://m-clark.github.io/mixed-models-with-R/">Mixed Models in R</a></li>
-<li>Einzelne Infos auch aus einem <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5810264/">Paper</a> von <span class="citation">Frömer, Maier, &amp; Abdel Rahman (2018)</span></li>
-<li>Generelle Logik von Regressionen adaptiert aus dem <a href="https://www.ncbi.nlm.nih.gov/pubmed/25141770">Paper</a> von <span class="citation">Smith &amp; Kutas (2015)</span></li>
-</ul> 
+<li><p>DIe ERP-Gleichung von oben hatte nur einen einzigen Prädiktor, <span class="math inline">\(x_{1i}\)</span>, dessen Wert immer 1 war. Wir können uns das als sehr vage Eigenschaft vorstellen, die einfach nur anzeigt, ob ein Event stattgefunden hat oder nicht.</p></li>
+<li><p>Wir messen die Werte für <span class="math inline">\(y_i\)</span>, spezifizieren die Werte für <span class="math inline">\(x_{ji}\)</span> und nutzen dann wieder das Prinzip der Least Squares, um die Werte für <span class="math inline">\(\beta_1, \beta_2, ...\)</span> zu finden, die zusammen das total squared Noise minimieren.</p>
+<ul>
+<li>Jeder <span class="math inline">\(\beta\)</span>-Wert repräsentiert einen Anteil des ERPs an dieser Elektrode zu diesem Messzeitpunkt.</li>
+<li>Man kann auch für einen Stimulus <span class="math inline">\(i\)</span> die Summe <span class="math inline">\(\beta_{1x_{1i}} + \beta_{2x_{2i}} + …\)</span> berechnen, was der Schätzung des ERPs für einen Stimulus mit diesen Eigenschaften zu diesem Messzeitpunkt an dieser Elektrode entspricht.</li>
+</ul></li>
+<li><p>Alle <span class="math inline">\(\beta\)</span>-Werte zu finden, die das Least-Squares-Prinzip erfüllen ist etwas komplizierter als einfach zu mitteln, aber nicht sehr.</p>
+<ul>
+<li>Computer kriegen das mit Standardtechniken fix und zuverlässig hin.</li>
+</ul></li>
+<li><p>Wir <span style=" font-weight: bold;    color: #6BBFA6 !important;">wiederholen diese Berechnungen</span> dann sehr oft, jeweils für <span style=" font-weight: bold;    color: #6BBFA6 !important;">jede Elektrode und jeden Messzeitpunkt</span>.</p></li>
+<li><p>Dann sammeln wir alle berechneten <span class="math inline">\(\beta_1\)</span>-Werte, um eine EEG-Welle zu bauen, alle <span class="math inline">\(\beta_2\)</span>- Werte für eine zweite Welle und so weiter, für alle <span class="math inline">\(\beta\)</span>s.</p>
+<ul>
+<li>Die resultierende Welle kann behandelt werden wie eine Welle, die durch Averaging zu Stande gekommen ist.</li>
+</ul></li>
+<li><p>Auch die kombinierten <span class="math inline">\(\beta\)</span>s, die die Welle für einen spezifischen Stimulus ergeben, können wir ERP-Schätzungen behandelt werden, die durch Averaging ermittelt wurden.</p></li>
+<li><p>Um auf die Schätzung der ERPs durch Regressionen hinzuweisen, nennen wir sie rERPs.</p></li>
+</ul>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="uberblick.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="averaging-ist-eine-least-squares-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pradiktoren-definieren.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
