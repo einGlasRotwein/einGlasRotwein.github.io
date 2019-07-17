@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.1 Generelle Logik | Mixed Models</title>
-  <meta name="description" content="3.1 Generelle Logik | Mixed Models" />
+  <title>2.4 Variablenkodierung in R | Mixed Models</title>
+  <meta name="description" content="2.4 Variablenkodierung in R | Mixed Models" />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.1 Generelle Logik | Mixed Models" />
+  <meta property="og:title" content="2.4 Variablenkodierung in R | Mixed Models" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.1 Generelle Logik | Mixed Models" />
+  <meta name="twitter:title" content="2.4 Variablenkodierung in R | Mixed Models" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="random-intercept-models.html">
-<link rel="next" href="in-r.html">
+<link rel="prev" href="pradiktoren-definieren.html">
+<link rel="next" href="random-intercept-models.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -162,74 +162,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="generelle-logik" class="section level2">
-<h2><span class="header-section-number">3.1</span> Generelle Logik</h2>
-<p>Studenten werden an verschiedenen Zeitpunkten (occasions) getestet (GPA). Zeitpunkte sind ein Haupteffekt. Individuelle Effekte der Studenten werden Modell hinzugefügt:</p>
-<p><span class="math display">\[
-\mathrm{gpa}=b_{\mathrm{intercept}}+b_{\mathrm{occ}} \cdot \text { occasion }+\left(\text {effect }_{\mathrm{student}}+\epsilon\right)
-\]</span></p>
-<ul>
-<li>Der einzige Unterschied zwischen einem mixed model und einer standardmäßigen Regression: <span style=" font-weight: bold;    color: #6BBFA6 !important;">random student effect</span>
-<ul>
-<li>Normalverteilt mit <span class="math inline">\(M = 0\)</span> und irgendeiner geschätzten Standardabweichung <span class="math inline">\(\tau\)</span></li>
-<li>Im Mittel kein Effekt, aber variiert von Student zu Student im Mittel um <span class="math inline">\(\tau\)</span></li>
-</ul></li>
-</ul>
-<p><span class="math display">\[
-\text{effect}_\text{student} \sim \mathscr { N } ( 0 , \tau )
-\]</span></p>
-<p>Jeder Student hat seinen eigenen Effekt, der zum allgemeinen intercept hinzugefügt wird. Das heißt, jeder Student hat sein eigenes intercept, mit anderen “Worten”:</p>
-<p><span class="math display">\[
-\mathrm{gpa}=b_{\mathrm{int} \text { student }}+b_{\mathrm{occ}} \cdot \text { occasion }+\epsilon
-\]</span>
-Das heißt: <span style=" font-weight: bold;    color: #E8793A !important;">Intercepts</span> sind jetzt normalverteilt. Das overall Intercept als Mittelwert mit irgendeiner SD <span class="math inline">\(\tau\)</span>.</p>
-<p><span class="math display">\[
-b_{\text { int } \text { student }} \sim \mathscr{N}\left(b_{\text { intercept }}, \tau\right)
-\]</span></p>
-<p>Wenn man die einzelnen Studenten plottet, sieht man gut, wieso es eine gute Idee ist, die Individualität pro Student zu berücksichtigen: Die Variablität in den Startpunkten und die Entwicklung über die Zeit ist ist hoch.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&quot;data/gpa.RData&quot;</span>)
-
-<span class="co"># Random 10 Einzellinien highlighten</span>
-gpa &lt;-<span class="st"> </span>gpa <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">highlight =</span> <span class="kw">ifelse</span>(student <span class="op">%in%</span><span class="st"> </span><span class="kw">sample</span>(<span class="kw">unique</span>(student), <span class="dv">10</span>), <span class="ot">TRUE</span>, <span class="ot">FALSE</span>))</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">gpa <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> occasion, <span class="dt">y =</span> gpa)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">group =</span> student, <span class="dt">colour =</span> highlight, <span class="dt">alpha =</span> highlight, 
-                <span class="dt">size =</span> highlight)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">colour =</span> farbschema[<span class="dv">1</span>], <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_alpha_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(.<span class="dv">1</span>, <span class="dv">1</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_size_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(.<span class="dv">5</span>, <span class="dv">1</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_colour_manual</span>(<span class="dt">values =</span> <span class="kw">pick_colour</span>(<span class="dv">2</span>, <span class="st">&quot;mono_green&quot;</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Rohdaten&quot;</span>) <span class="op">+</span>
-<span class="st">  </span>julis_theme <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</code></pre>
-<p><img src="01_1_first_things_first_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<p><span class="math inline">\(\to\)</span> Siehe Skript uebungen.R – Übung #1 für einfache Regression.</p>
-<div id="problem-einfache-regression" class="section level3">
-<h3><span class="header-section-number">3.1.1</span> Problem einfache Regression</h3>
-<ul>
-<li>Clustering wird ignoriert.
-<ul>
-<li>Man verpasst die (interessanten) Studenten-Effekte.</li>
-<li>Die Standardfehler sind biased <span class="math inline">\(\to\)</span> Aussagen über statistische Signifikanz werden hinfällig</li>
-</ul></li>
-<li>Eine Regression pro Student
-<ul>
-<li>hätte zu wenig Daten.</li>
-<li>“over-contextualised” <span class="math inline">\(\to\)</span> ignoriert, was die Studenten gemeinsam haben</li>
-</ul></li>
-</ul>
+<div id="codinginr" class="section level2">
+<h2><span class="header-section-number">2.4</span> Variablenkodierung in R</h2>
+<p>Illustriert an den Daten meiner Masterarbeit: Was passiert, wenn man die Daten in <code>R</code> unterschiedlich kodiert und dann eine Regression drüberlaufen lässt? Hier drei Tabellen:</p>
+<p><img src="pics/ma_tab.jpg" width="925" /></p>
+<div id="intercept-und-effekt-der-kodierten-kategorialen-variable" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Intercept und Effekt der kodierten kategorialen Variable</h3>
+<p>Abhängige Variable ist die wahrgenommene Potency of Science. Kodiert wurde die experimentelle Manipulation Diskursstil.</p>
+<p>In Beispiel a) zunächst mit neutral = -1 und heated = 1. Das <span style=" font-weight: bold;    color: #db0000 !important;">Intercept</span> ist hierbei der mittlere Punktwert, der beim Item für wahrgenommene Potency über alle Teilnehmer hinweg (egal in welcher Bedingung) angegeben wurde. Der Effekt für <span style=" font-weight: bold;    color: #0037b4 !important;">condition</span> gibt hier wieder, wie viel Abweichung von diesem Mittelwert die experimentellen Bedingungen jeweils verursachen: In der Bedingung “neutral” liegt der Mittelwert um .17 höher, in der Bedingung “heated” liegt der Mittelwert um .17 niedriger.</p>
+<p>In Beispiel b) wird die experimentelle Bedingung mit neutral = 0 und heated = 1 kodiert, was bedeutet: Die Interpretation gilt für die Bedingung neutral. Das <span style=" font-weight: bold;    color: #06cb00 !important;">Intercept</span> ist also der Mittelwert für die Bedingung neutral, und wir sehen, dass es tatsächlich .17 Punkte höher liegt, als das <span style=" font-weight: bold;    color: #db0000 !important;">mittlere Intercept insgesamt</span>! Der Effekt für <span style=" font-weight: bold;    color: #db00db !important;">condition</span> heißt diesmal: Der Unterschied im Mittelwert zwischen neutral und heated. Und in der Tat:</p>
+<p>Das <span style=" font-weight: bold;    color: #da7d00 !important;">Intercept in Beispiel c)</span>, das durch die Kodierung neutral = 1 und heated = 0 für die Bedingung heated gilt, stellt den Mittelwert für heated dar - und es ist, wie wir im Effekt von <span style=" font-weight: bold;    color: #db00db !important;">condition für die Gruppe neutral</span> schon ablesen konnten, .34 Punkte höher als der <span style=" font-weight: bold;    color: #06cb00 !important;">Mittelwert der Bedingung neutral</span>. Entsprechend sagt uns der Effekt für <span style=" font-weight: bold;    color: #00aec0 !important;">condition</span> für die Bedingung heated umgekehrt, dass der <span style=" font-weight: bold;    color: #da7d00 !important;">Mittelwert für heated</span> um .34 kleiner ist als der <span style=" font-weight: bold;    color: #06cb00 !important;">Mittelwert für neutral</span>.</p>
+<p>Siehe auch dieser sehr hilfreiche Post auf <a href="https://stats.stackexchange.com/questions/59578/dummy-coding-for-contrasts-0-1-vs-1-1">Stackexchange</a>.</p>
 </div>
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="random-intercept-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pradiktoren-definieren.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="random-intercept-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
