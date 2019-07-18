@@ -143,6 +143,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="smith-and-kutas-2015a.html"><a href="smith-and-kutas-2015a.html"><i class="fa fa-check"></i><b>3</b> Smith and Kutas 2015a</a><ul>
 <li class="chapter" data-level="3.1" data-path="smith-and-kutas-2015a.html"><a href="smith-and-kutas-2015a.html#a-regression-based-framework-for-estimating-erps-rerp"><i class="fa fa-check"></i><b>3.1</b> A Regression-Based Framework for Estimating ERPs (rERP)</a></li>
 <li class="chapter" data-level="3.2" data-path="smith-and-kutas-2015a.html"><a href="smith-and-kutas-2015a.html#defining-predictors-for-rerp-analysis"><i class="fa fa-check"></i><b>3.2</b> Defining Predictors for rERP Analysis</a></li>
+<li class="chapter" data-level="3.3" data-path="smith-and-kutas-2015a.html"><a href="smith-and-kutas-2015a.html#collinearity"><i class="fa fa-check"></i><b>3.3</b> Collinearity</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="smith-and-kutas-2015b.html"><a href="smith-and-kutas-2015b.html"><i class="fa fa-check"></i><b>4</b> Smith and Kutas 2015b</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -172,7 +173,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Data and Scripts can be found <a href="https://osf.io/hdxvb/">here</a>.</p>
 <div id="example-task" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> Example Task</h3>
-<p><img src="pics/froemer_fig2.jpg" width="100%" /></p>
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="pics/froemer_fig2.jpg" alt="Example task design." width="100%" />
+<p class="caption">
+Figure 2.1: Example task design.
+</p>
+</div>
 <ul>
 <li>Visual detection task</li>
 <li>Identify position (left or right) of deviating object (top and bottom row excluded from analysis)</li>
@@ -194,7 +200,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>single-trial based LMM analyses using the lme4 package for R</li>
 </ol></li>
 </ul>
-<p><img src="pics/froemer_fig1.jpg" width="100%" /></p>
+<div class="figure"><span id="fig:unnamed-chunk-5"></span>
+<img src="pics/froemer_fig1.jpg" alt="Analysis pipeline." width="100%" />
+<p class="caption">
+Figure 2.2: Analysis pipeline.
+</p>
+</div>
 <ul>
 <li>Preprocessing in <code>F01_preprocessing.m</code>.</li>
 <li>All trials of all participants were combined in a 3D matrix (channels, time points, trials by participants), which forms the basis for all further ERP analyses (<code>F02_epoching_structuring.m</code>).
@@ -236,7 +247,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div id="froemerforbraindata" class="section level4">
 <h4><span class="header-section-number">2.1.3.1</span> For brain data</h4>
-<p><img src="pics/froemer_fig4.jpg" width="100%" /></p>
+<div class="figure"><span id="fig:unnamed-chunk-6"></span>
+<img src="pics/froemer_fig4.jpg" alt="Main effect perceptual certainty across time." width="100%" />
+<p class="caption">
+Figure 2.3: Main effect perceptual certainty across time.
+</p>
+</div>
 <ul>
 <li><span style=" font-weight: bold;    color: #6BBFA6 !important;">CBPTs comparing mean amplitudes</span> over the epoch 0 – 800 ms for blurred vs. intact stimulus conditions
 <ul>

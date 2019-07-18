@@ -143,6 +143,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="smith-and-kutas-2015a.html"><a href="smith-and-kutas-2015a.html"><i class="fa fa-check"></i><b>3</b> Smith and Kutas 2015a</a><ul>
 <li class="chapter" data-level="3.1" data-path="smith-and-kutas-2015a.html"><a href="smith-and-kutas-2015a.html#a-regression-based-framework-for-estimating-erps-rerp"><i class="fa fa-check"></i><b>3.1</b> A Regression-Based Framework for Estimating ERPs (rERP)</a></li>
 <li class="chapter" data-level="3.2" data-path="smith-and-kutas-2015a.html"><a href="smith-and-kutas-2015a.html#defining-predictors-for-rerp-analysis"><i class="fa fa-check"></i><b>3.2</b> Defining Predictors for rERP Analysis</a></li>
+<li class="chapter" data-level="3.3" data-path="smith-and-kutas-2015a.html"><a href="smith-and-kutas-2015a.html#collinearity"><i class="fa fa-check"></i><b>3.3</b> Collinearity</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="smith-and-kutas-2015b.html"><a href="smith-and-kutas-2015b.html"><i class="fa fa-check"></i><b>4</b> Smith and Kutas 2015b</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -258,7 +259,12 @@ y_{i}=\beta_{1} x_{1}+\beta_{2} x_{2}+\cdots+\textrm{ noise }_{i}
 y_{i}=\beta_{1} x_{1 i}+\textrm{ noise }_{i}=\beta_{1}+\textrm{ noise }_{i}
 \]</span></p>
 <p>As above: When we find the least-squares solution, <span class="math inline">\(\beta_{1}\)</span> will end up equal to the mean of the <span class="math inline">\(y_i\)</span> values.</p>
-<p><img src="pics/smith_a_fig1_1.jpg" width="1560" /></p>
+<div class="figure"><span id="fig:unnamed-chunk-15"></span>
+<img src="pics/smith_a_fig1_1.jpg" alt="Separate analysis for a and an trials." width="1560" />
+<p class="caption">
+Figure 3.1: Separate analysis for a and an trials.
+</p>
+</div>
 <p>Results are identical to the averaging technique, but somewhat cumbersome to use, because if we have categorical factors with multiple levels, then it requires us to fit two different models – one on the <em>a</em> trials, and another on the <em>an</em> trials.</p>
 </div>
 <div id="multiple-erps-via-dummy-coding" class="section level3">
@@ -279,7 +285,12 @@ x_{1 i}=\left\{\begin{array}{ll}{1,} &amp; {\text { if stimulus } i \text { is a
 y_{i}=\beta_{1} x_{1 i}+\beta_{2} x_{2 i}+\textrm{noise}_{i}
 \]</span></p>
 <p>then least-squares fitting will set <span class="math inline">\(\beta_{1}\)</span> to the average of the <em>a</em> trials, and <span class="math inline">\(\beta_{2}\)</span> to the average of the <em>an</em> trials.</p>
-<p><img src="pics/smith_a_fig1_2.jpg" width="1560" /></p>
+<div class="figure"><span id="fig:unnamed-chunk-16"></span>
+<img src="pics/smith_a_fig1_2.jpg" alt="Dummy coding to combine both models for a and an trials into a single model." width="1560" />
+<p class="caption">
+Figure 3.2: Dummy coding to combine both models for a and an trials into a single model.
+</p>
+</div>
 <p>It’s easy to see why this happens. If on trial <em>i</em> we displayed the word <em>a</em>, then <span class="math inline">\(x_{1i}\)</span> is 1 and <span class="math inline">\(x_{2i}\)</span> is 0, so we have</p>
 <p><span class="math display">\[
 y_{i}=\beta_{1} \times 1+\beta_{2} \times 0+\textrm{noise}_{i}=\beta_{1}+\textrm{noise}_{i}
@@ -304,9 +315,14 @@ x_{1 i}=1, \quad x_{2 i}=\left\{\begin{array}{ll}{0,} &amp; {\text { if stimulus
 <li><span style=" font-weight: bold;    color: #E8793A !important;">Data coding in R:</span> <strong>This</strong> is the reason why coding e.g. condition a = 1 and condition b = 0 will model the intercept for condition b and <span class="math inline">\(\beta\)</span> will be how much condition b differs from the intercept of condition a. And coding it as a = -1 and b = 1 will result in the average intercept for both conditions and <span class="math inline">\(\beta\)</span> will be how much both conditions differ from the average (overall) intercept.</li>
 </ul></li>
 </ul>
-<p><img src="pics/smith_a_fig1_3.jpg" width="1560" /></p>
+<div class="figure"><span id="fig:unnamed-chunk-17"></span>
+<img src="pics/smith_a_fig1_3.jpg" alt="Treatment coding to combine both models for a and an trials into a single model." width="1560" />
+<p class="caption">
+Figure 3.3: Treatment coding to combine both models for a and an trials into a single model.
+</p>
+</div>
 <p>This is why it’s called <span style=" font-weight: bold;    color: #E8793A !important;">treatment coding</span>: If the control condition is the reference level and you apply various “treatments” on top of it, then the resulting <span class="math inline">\(\beta\)</span> show you how these “treatments” change the ERP response versus the control.</p>
-<p><span style=" font-weight: bold;    color: #E8793A !important;">Important:</span> The fitted value of <span class="math inline">\(\beta_j\)</span> does not only depend on how the <span class="math inline">\(j\)</span>th predictor is defined, but on how <span style=" font-weight: bold;    color: #6BBFA6 !important;">all</span> the predictors <span class="math inline">\(x_{1i}, ..., x_{ni}\)</span> are defined. From example b) to example c), we only changed the definition of <span class="math inline">\(x_{1i}\)</span>, but it was the interpretation of <span class="math inline">\(\beta_2\)</span> that changed.</p>
+<p><span style=" font-weight: bold;    color: #E8793A !important;">Important:</span> The fitted value of <span class="math inline">\(\beta_j\)</span> does not only depend on how the <span class="math inline">\(j\)</span>th predictor is defined, but on how <span style=" font-weight: bold;    color: #6BBFA6 !important;">all</span> the predictors <span class="math inline">\(x_{1i}, ..., x_{ni}\)</span> are defined. From Fig. 3.2 to Fig. 3.3, we only changed the definition of <span class="math inline">\(x_{1i}\)</span>, but it was the interpretation of <span class="math inline">\(\beta_2\)</span> that changed.</p>
 <p>“The least-squares fitting process does not care about the <span class="math inline">\(\beta\)</span> values directly. It only cares about the predicted values (the rightmost column in the Figures). It will pick whichever <span class="math inline">\(\beta\)</span> values make these predictions match the data as closely as possible. Since the predictions are created by combining multiple <span class="math inline">\(\beta\)</span> values together, this means that the chosen <span class="math inline">\(\beta\)</span> values are not the ones that individually match the data best, but the ones that are most effective at working together. In the treatment coding case, <span class="math inline">\(\beta_1\)</span> must work alone to match the a stimuli, while for the an stimuli, <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\beta_2\)</span> work together; so the most effective teamwork is achieved when <span class="math inline">\(\beta_1\)</span> focuses on matching the a stimuli while <span class="math inline">\(\beta_2\)</span> focuses on correcting <span class="math inline">\(\beta_1\)</span> so that their combination will match the an stimuli.”</p>
 <p>But it also creates a <span style=" font-weight: bold;    color: #6BBFA6 !important;">potential problem</span> for some coding schemes that might otherwise seem reasonable: those in which <span style=" font-weight: bold;    color: #6BBFA6 !important;">several predictors are perfectly collinear</span>, i.e., redundant.
 - If you accidentally enter the same predictor twice.
@@ -327,7 +343,238 @@ x_{1 i}=1 \quad x_{2 i}=\left\{\begin{array}{ll}{0,} &amp; {\text { if stimulus 
 x_{3 i}=\left\{\begin{array}{ll}{0,} &amp; {\text { if stimulus } i \text { is lowercase }} \\ {1,} &amp; {\text { if stimulus } i \text { is UPPERCASE }}\end{array} \quad x_{4 i}=\left\{\begin{array}{ll}{0,} &amp; {\text { if stimulus } i \text { is either lowercase or a }} \\ {1,} &amp; {\text { if stimulus } i \text { is an UPPERCASE an }}\end{array}\right.\right.
 \]</span></p>
 <p>If included, <span class="math inline">\(x_{4i} = x_{2i} \times x_{3i}\)</span> - the interaction. Here <span class="math inline">\(\beta_1\)</span> will estimate the ERP for lowercase a, <span class="math inline">\(\beta_2\)</span> the difference between <strong>lowercase</strong> <em>a</em> and <strong>lowercase</strong> <em>an</em>, <span class="math inline">\(\beta_3\)</span> the difference between <strong>lowercase</strong> <em>a</em> and <strong>uppercase</strong> <em>A</em>, and <span class="math inline">\(\beta_4\)</span> will be a <span style=" font-weight: bold;    color: #E8793A !important;">difference-of-differences</span> ERP: if we first calculated the difference ERP between <strong>uppercase</strong> <em>AN</em> and <strong>uppercase</strong> <em>A</em>, and then calculated the difference ERP between <strong>lowercase</strong> <em>an</em> and <strong>lowercase</strong> <em>a</em>, then <span class="math inline">\(\beta_4\)</span> will be the difference between these two difference ERPs. Notice that this means <span class="math inline">\(\beta_4\)</span> will be significantly different from zero exactly when there is a <span style=" font-weight: bold;    color: #6BBFA6 !important;">non-additive interaction</span> between our two factors.</p>
-<p>In general there are many <span style=" font-weight: bold;    color: #E8793A !important;">different but equivalent ways</span> to represent any given linear model; a simple example is shown in Fig. b) versus Fig. c). <span style=" font-weight: bold;    color: #E8793A !important;">Non-redundant codings</span> give us the power to choose the representation we find most interpretable.</p>
+<p>In general there are many <span style=" font-weight: bold;    color: #E8793A !important;">different but equivalent ways</span> to represent any given linear model; a simple example is shown in Fig. 3.2 versus Fig. 3.3. <span style=" font-weight: bold;    color: #E8793A !important;">Non-redundant codings</span> give us the power to choose the representation we find most interpretable.</p>
+</div>
+<div id="slope-erps-from-numeric-predictors" class="section level3">
+<h3><span class="header-section-number">3.2.5</span> Slope ERPs from numeric predictors</h3>
+<ul>
+<li>So far: Everything could have also been done with averaging/computation of differences.</li>
+<li>Now, we include <span style=" font-weight: bold;    color: #E8793A !important;">continuous covariates</span>
+<ul>
+<li>Here: <span style=" font-weight: bold;    color: #E8793A !important;">Word expectancy</span> from 0 - 1.</li>
+<li>Expactancy for each word defined in normation task before (<a href="https://en.wikipedia.org/wiki/Cloze_test">cloze test</a>).</li>
+</ul></li>
+<li>“In practice, we’ll always include an intercept term as well.”
+<ul>
+<li>First: Note how they assumed that it was clear we talked about something different than an intercept here.</li>
+<li>Usually necessary because otherwise, we’d assume that our outcome is zero when our predictor is zero, which is unreasonable most of the times.</li>
+</ul></li>
+</ul>
+<p>Definition of predictors for the word expectancy effect:</p>
+<p><span class="math display">\[
+\boldsymbol{x}_{1 i}=\mathbf{1}, \quad x_{2 i}=\textrm{ word expectancy on trial } i
+\]</span></p>
+<ul>
+<li>Now <span class="math inline">\(\beta_1\)</span> will give a kind of <span style=" font-weight: bold;    color: #E8793A !important;">baseline</span> ERP — the brain signal we expect to see in reaction to items with <span class="math inline">\(x_{2i} = 0\)</span>, i.e., items which were never guessed in the norming task.</li>
+<li><span class="math inline">\(\beta_2\)</span> estimates how much this ERP <span style=" font-weight: bold;    color: #6BBFA6 !important;">changes with each unit change</span> in expectancy.
+<ul>
+<li>Going from expectancy 0 to expectancy 0.5 will produce a change of <span class="math inline">\(0.5 \times \beta_2\)</span> in the predicted ERP.</li>
+<li><span class="math inline">\(\beta_2\)</span> is the <span style=" font-weight: bold;    color: #E8793A !important;">slope of the regression line</span> that relates <span class="math inline">\(x_{2i}\)</span> and <span class="math inline">\(y_i\)</span>, so we refer to this as a slope rERP.</li>
+</ul></li>
+</ul>
+<div class="figure"><span id="fig:unnamed-chunk-18"></span>
+<img src="pics/smith_a_fig2.jpg" alt="Coding of a continuous predictor." width="1522" />
+<p class="caption">
+Figure 3.4: Coding of a continuous predictor.
+</p>
+</div>
+<ul>
+<li><p>Notice the <span style=" font-weight: bold;    color: #E8793A !important;">positive hump</span> in the <span class="math inline">\(\beta_2\)</span> waveform peaking at 300 ms.</p>
+<ul>
+<li>This indicates an increased positivity for high-expectancy words …</li>
+<li>… which is the same as a negativity to low-expectancy words.</li>
+</ul></li>
+<li><p>This is effect is reflected in the predicted ERPs: It is <span style=" font-weight: bold;    color: #6BBFA6 !important;">more positive for expected words</span> (<span class="math inline">\(x_{2i} = 1\)</span>) <span style=" font-weight: bold;    color: #375B42 !important;">than for unexpected</span> words (<span class="math inline">\(x_{2i} = 0\)</span>).</p></li>
+<li><p>These predictors are pretty similar to the ones we used for treatment coding before:</p>
+<ul>
+<li>We have an <span style=" font-weight: bold;    color: #6BBFA6 !important;">intercept term</span> <span class="math inline">\(x_{1i}\)</span> whose corresponding parameter <span class="math inline">\(\beta_1\)</span> gives us a kind of <span style=" font-weight: bold;    color: #6BBFA6 !important;">baseline</span>.</li>
+<li>We have an additional term <span class="math inline">\(x_{2i}\)</span> which codes for <span style=" font-weight: bold;    color: #6BBFA6 !important;">deviations from this baseline</span>.</li>
+</ul></li>
+<li><p>The difference here is:</p>
+<ul>
+<li>In the treatment coding before, the second parameter <span class="math inline">\(\beta_2\)</span> measures the difference in scalp voltage <span style=" font-weight: bold;    color: #6BBFA6 !important;">between <em>a</em> and <em>an</em> stimuli</span>, and has units of <span class="math inline">\(\mu V\)</span>.</li>
+<li>Here, <span class="math inline">\(\beta_2\)</span> measures the difference in scalp voltage <span style=" font-weight: bold;    color: #6BBFA6 !important;">corresponding to any one unit change in expectancy</span>, and has units of <span class="math inline">\(\mu V\)</span> per unit change in expectancy.</li>
+</ul></li>
+<li><p>So it’s pretty much the same as the difference ERP before, only that we allow stimuli to fall in between the two extremes.</p></li>
+</ul>
+</div>
+<div id="combining-categorical-and-continuous-predictors" class="section level3">
+<h3><span class="header-section-number">3.2.6</span> Combining categorical and continuous predictors</h3>
+<p>We combine the categorical and continuous predictors from before:</p>
+<p><span class="math display">\[
+\boldsymbol{x}_{1 i}=\mathbf{1} \quad \boldsymbol{x}_{2 i}=\left\{\begin{array}{ll}{\mathbf{0},} &amp; {\text { if stimulus } i \text { is a}} \\ {\mathbf{1},} &amp; {\text { if stimulus } \boldsymbol{i} \text { is an }}\end{array} \quad \boldsymbol{x}_{3 i}=\text { word expectancy on trial } i\right.
+\]</span></p>
+<div class="figure"><span id="fig:unnamed-chunk-19"></span>
+<img src="pics/smith_a_fig3_full.jpg" alt="Coding of a continuous and a categorical predictor combined." width="100%" />
+<p class="caption">
+Figure 3.5: Coding of a continuous and a categorical predictor combined.
+</p>
+</div>
+<p>The resulting <span class="math inline">\(\beta\)</span>s have the same interpretation as they did in the previous examples:</p>
+<ul>
+<li><span class="math inline">\(\beta_1\)</span> gives the predicted ERP for <em>a</em> trials with <span style=" font-weight: bold;    color: #6BBFA6 !important;">zero measured expectancy</span>.</li>
+<li><span class="math inline">\(\beta_2\)</span> gives the difference between <em>an</em> trials and <em>a</em> trials.
+<ul>
+<li>This model assumes that this is the same for all expectancies.</li>
+</ul></li>
+<li><span class="math inline">\(\beta_3\)</span> gives the change in the predicted ERP for each unit change in expectancy.</li>
+</ul>
+<div id="with-an-interaction" class="section level4">
+<h4><span class="header-section-number">3.2.6.1</span> With an interaction</h4>
+<p>For that, we would include <span class="math inline">\(x_{4i} = x_{2i} \times x_{3i}\)</span>, and if in that case …</p>
+<ul>
+<li><span class="math inline">\(\beta_3\)</span> denotes the expectancy effect for <em>a</em> stimuli.</li>
+<li><span class="math inline">\(\beta_4\)</span> denotes the <span style=" font-weight: bold;    color: #6BBFA6 !important;">difference between</span> the expectancy effect for <em>a</em> stimuli and the expectancy effect for <em>an</em> stimuli.</li>
+</ul>
+</div>
+<div id="more-complex-cases" class="section level4">
+<h4><span class="header-section-number">3.2.6.2</span> More complex cases</h4>
+<ul>
+<li>Maybe some events have <span style=" font-weight: bold;    color: #6BBFA6 !important;">more or different predictors</span> associated with them than others
+– E.g., in a go/no-go paradigm, go trials will have an associated response time, while no-go trials will not.</li>
+<li>Two options:
+<ul>
+<li><ol style="list-style-type: lower-alpha">
+<li>Divide trials into two separate bins and perform separate analyses on each bin.</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-alpha">
+<li>Use the “zero trick” again: Simply <span style=" font-weight: bold;    color: #6BBFA6 !important;">include both sets of predictors into a single model</span>, with the rule that <span style=" font-weight: bold;    color: #6BBFA6 !important;">whenever we have a trial where a predictor doesn’t apply then we set it to zero</span>:</li>
+</ol></li>
+</ul></li>
+</ul>
+<p><span class="math display">\[
+x_{1 i}=\left\{\begin{array}{ll}{1,} &amp; {\text { on } \mathrm{no}-\mathrm{go} \text { trials }} \\ {0,} &amp; {\text { on go trials }}\end{array}\right.
+\]</span></p>
+<p><span class="math display">\[
+x_{2 i}=\left\{\begin{array}{ll}{0,} &amp; {\text { on } \mathrm{no}-\mathrm{go} \text { trials }} \\ {1,} &amp; {\text { on go trials }}\end{array}\right.
+\]</span></p>
+<p><span class="math display">\[
+x_{3 i}=\left\{\begin{array}{cc}{0,} &amp; {\text { on no-go trials }} \\ {\mathrm{RT}_{i},} &amp; {\text { on go trials }}\end{array}\right.
+\]</span></p>
+<p>This way, the predictor’s (<span class="math inline">\(x_{3i}\)</span>) <span class="math inline">\(\beta\)</span> value will have no effect on our model’s prediction for no-go trials.</p>
+</div>
+</div>
+</div>
+<div id="collinearity" class="section level2">
+<h2><span class="header-section-number">3.3</span> Collinearity</h2>
+<ul>
+<li>Problem for models with <span style=" font-weight: bold;    color: #6BBFA6 !important;">large numbers of predictors</span> and/or those with <span style=" font-weight: bold;    color: #6BBFA6 !important;">partially confounded covariates</span>.</li>
+</ul>
+<div id="definition" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> Definition</h3>
+<ul>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Collinearity</span> is typically used to refer to <span style=" font-weight: bold;    color: #6BBFA6 !important;">two very distinct phenomena</span>.
+<ul>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Perfect collinearity</span> is when predictors are <span style=" font-weight: bold;    color: #6BBFA6 !important;">perfectly redundant</span> with each other.
+– They make exactly the <span style=" font-weight: bold;    color: #6BBFA6 !important;">same predictions in different ways</span>.
+– Discussed above as a motivation for treatment coding.
+<ul>
+<li>Straightforward effects, straightforward to avoid.</li>
+</ul></li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Partial collinearity</span> (aka <span style=" font-weight: bold;    color: #6BBFA6 !important;">partial confounding</span> or <span style=" font-weight: bold;    color: #6BBFA6 !important;">non-orthogonality</span>) refers to the situation where some predictors are <span style=" font-weight: bold;    color: #6BBFA6 !important;">correlated, but not identical</span>.
+<ul>
+<li>Sometimes the word collinearity is reserved for “severe” cases, where the degree of correlation among predictors exceeds some threshold.</li>
+<li>Since such thresholds are arbitrary; the discussion applies equally to both mild and severe cases.</li>
+</ul></li>
+</ul></li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Partial collinearity</span> does not violate any assumptions of the least-squares regression.
+<ul>
+<li>However: There two things we need to watch out for: whether we have <span style=" font-weight: bold;    color: #6BBFA6 !important;">enough predictors</span>, and whether we have <span style=" font-weight: bold;    color: #6BBFA6 !important;">enough data</span>.</li>
+</ul></li>
+</ul>
+</div>
+<div id="enough-predictors" class="section level3">
+<h3><span class="header-section-number">3.3.2</span> Enough predictors</h3>
+<ul>
+<li>Problems can arise from leaving out relevant predictors:</li>
+<li>Figs. 3.4 and 3.5 both show estimates of the slope rERP <span class="math inline">\(\beta\)</span> for expectancy.
+<ul>
+<li>Fig. 3.5 includes the <em>a</em>/<em>an</em> predictor.</li>
+<li>Fig. 3.4 leaves out the <em>a</em>/<em>an</em> predictor.</li>
+</ul></li>
+<li>In this case, the estimates are nearly identical.
+<ul>
+<li>Typical of <span style=" font-weight: bold;    color: #6BBFA6 !important;">(near-)orthogonal</span> experiments: This one was carefully designed to ensure that the <em>a</em> stimuli and <em>an</em> stimuli were <span style=" font-weight: bold;    color: #6BBFA6 !important;">balanced</span> with respect to expectancy.</li>
+<li>In orthogonal designs, leaving out a covariate doesn’t change our estimates for the remaining covariates.</li>
+</ul></li>
+<li>Imagine a version of this experiment where the <em>an</em> stimuli had, on average, a lower expectancy than the <em>a</em> stimuli.
+<ul>
+<li>Then the best way for the <span style=" font-weight: bold;    color: #6BBFA6 !important;">expectancy-only</span> model to capture the patterns in the data would be for it to attribute some of the categorical <em>an</em> effect to expectancy.</li>
+<li>The analysis becomes <span style=" font-weight: bold;    color: #6BBFA6 !important;">inconsistent</span>: It doesn’t matter <span style=" font-weight: bold;    color: #6BBFA6 !important;">how much data we have</span>, the results will always be misleading.</li>
+</ul></li>
+<li>But in the <span style=" font-weight: bold;    color: #E8793A !important;">combined model</span>, any patterns associated with the word <em>an</em> can be attributed to it directly.
+<ul>
+<li>“Because the least-squares fitting process selects whichever <span class="math inline">\(\beta\)</span> coefficients are best at working together to explain the patterns in the data, and ultimately, the covariates that are actually responsible for a pattern are always the best way to explain it. As long as we include those covariates in our model, and have enough data, then regression will work out the correct waveforms even if our predictors are confounded.”</li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Caution:</span> I doubt that this is true in any case and this almost sounds like a regression can uncover causal effects, which it can’t?</li>
+</ul></li>
+</ul>
+</div>
+<div id="enough-data" class="section level3">
+<h3><span class="header-section-number">3.3.3</span> Enough data</h3>
+<ul>
+<li>Collinearity also affects the <span style=" font-weight: bold;    color: #6BBFA6 !important;">noise in our estimates</span> and <span style=" font-weight: bold;    color: #6BBFA6 !important;">how much data we need</span>.</li>
+<li>The key to understanding this is to examine <span style=" font-weight: bold;    color: #E8793A !important;">variance inflation factors</span> (VIFs).
+<ul>
+<li>Each VIF measures <span style=" font-weight: bold;    color: #6BBFA6 !important;">how the sampling variance of one estimated</span> <span class="math inline">\(\beta\)</span> <span style=" font-weight: bold;    color: #6BBFA6 !important;">coefficient is affected by the presence of collinearity</span>, and is equal to <span class="math inline">\(1/(1 − R^2)\)</span>.</li>
+<li>The <span class="math inline">\(R^2\)</span> here is not taken from the model we actually want to fit, but instead measures how much of the <span style=" font-weight: bold;    color: #6BBFA6 !important;">variance in this predictor</span> can be explained by the <span style=" font-weight: bold;    color: #6BBFA6 !important;">other predictors</span> in our model.
+<ul>
+<li>Example: If we have a model with just two predictors, and the correlation between these two predictors is <span class="math inline">\(r = 0.5\)</span>, then the VIFs will be <span class="math inline">\(1/(1 − 0.5^2) \approx 1.33\)</span>.</li>
+<li>That means: If we know that normally we would need 60 trials to get an acceptably accurate estimate of the rERP for a single predictor in an orthogonal design, then we need 60 <span class="math inline">\(\times\)</span> 1.33 = 80 trials to get equally accurate estimates of the rERPs to these two predictors <span class="citation">(O’brien, 2007)</span>.</li>
+<li>Put another way: each trial in this design is worth three-quarters of a trial in a fully orthogonal design, at least with respect to these predictors.</li>
+<li>It is generally wise to compute the VIF while planning an experiment rather than waiting until the analysis stage.</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Implications from the VIF formula:</p>
+<ul>
+<li>If we add <span style=" font-weight: bold;    color: #6BBFA6 !important;">additional uncorrelated predictors</span> to our model, then this has absolutely <span style=" font-weight: bold;    color: #6BBFA6 !important;">no effect on the noisiness</span> of our estimates.
+<ul>
+<li>Any predictor in an orthogonal design has a VIF of 1, which means that so long as our covariates are uncorrelated, we can estimate a dozen parameters just as well as we can estimate one of them, from the same amount of data – though in practice we may be hard-pressed to find a dozen uncorrelated predictors.</li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Collinearity is not contagious:</span> If we have two predictors which are correlated with each other but both are uncorrelated with a third, then we will need more data to estimate the effect of the first two predictors, but their presence in the model will not affect estimates for the third predictor.</li>
+</ul></li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">VIFs &gt; 1 travel in packs:</span> Correlation always goes (at least) two ways.
+<ul>
+<li>Whenever one predictor has a VIF &gt; 1, others will as well.</li>
+</ul></li>
+</ul>
+<p>"This is closely related to the underlying cause of variance inflation. Recall how when we had two <span style=" font-weight: bold;    color: #6BBFA6 !important;">identical predictors</span>, the model might know that to match the data it needed <span class="math inline">\(\beta_1 + \beta_2 = 1\)</span>, but could not distinguish between an option like <span class="math inline">\(\beta_1 = 0, \beta_2 = 1\)</span> and one like <span class="math inline">\(\beta_1 = 100, \beta_2 = -99\)</span>. When our predictors are not identical, but <span style=" font-weight: bold;    color: #6BBFA6 !important;">merely similar</span>, then our model can distinguish these cases in principle – but given <span style=" font-weight: bold;    color: #6BBFA6 !important;">finite data</span>, it may struggle; these two options will make very similar predictions, and depending on the noise, setting <span class="math inline">\(\beta_1 = 100, \beta_2 = -99\)</span> may seem unreasonably attractive.</p>
+<p>Technically, this struggle manifests as an <span style=" font-weight: bold;    color: #6BBFA6 !important;">increased sampling variance</span> for all the involved <span class="math inline">\(\beta\)</span>s. This is the extra sampling variance measured by the VIFs, and it manifests in a distinctive way. In orthogonal designs, the background noise corrupts our estimates for each <span class="math inline">\(\beta\)</span> independently: <span class="math inline">\(\beta_1\)</span> might be erroneously high while <span class="math inline">\(\beta_2\)</span> is erroneously low, or vice-versa, or both might be erroneously high or both might be erroneously low – there’s no correlation between the noise in <span class="math inline">\(\beta_1\)</span> and the noise in <span class="math inline">\(\beta_2\)</span>.</p>
+<p>Designs containing collinearity are different: the same noise affects multiple <span class="math inline">\(\beta\)</span> values simultaneously, and can produce <span style=" font-weight: bold;    color: #6BBFA6 !important;">strange, structured behaviour</span>, where – for example, in the most common manifestation – every time <span class="math inline">\(\beta_1\)</span> is estimated erroneously high, <span class="math inline">\(\beta_2\)</span> will be estimated erroneously low, and vice-versa. And, because <span style=" font-weight: bold;    color: #6BBFA6 !important;">collinearity effectively increases the amount of noise in our estimates</span>, if we don’t have enough data then we should expect to sometimes see <span class="math inline">\(\beta_1\)</span> estimated <em>very</em> high (<span class="math inline">\(\beta_1 = 100\)</span>), while <span class="math inline">\(\beta_2\)</span> is estimated very low (<span class="math inline">\(\beta_2 = -99\)</span>). This is <span style=" font-weight: bold;    color: #E8793A !important;">fully expected within the theory of linear regression</span>, and accounted for in ordinary statistical tests. If one participant’s estimates have <span class="math inline">\(\beta_1 = 100\)</span>, <span class="math inline">\(\beta_2 = -99\)</span>, then the next will have <span class="math inline">\(\beta_1 = -99\)</span>, <span class="math inline">\(\beta_2 = 100\)</span>, and our statistics will correctly conclude that these estimates are too noisy to indicate anything real. But it’s important to know about this behavior in order to understand what’s happening when we see it.</p>
+</div>
+<div id="simplified-models-as-solution" class="section level3">
+<h3><span class="header-section-number">3.3.4</span> Simplified models as solution?</h3>
+<p>When collinearity is too high, and we cannot gather enough data to achieve tight estimates of our <span class="math inline">\(\beta\)</span> parameters, is it a good idea to toss out some predictors and simplify our model? Spoiler: no.</p>
+<div id="collinearcontrols" class="section level4">
+<h4><span class="header-section-number">3.3.4.1</span> Case of collinear controls</h4>
+<p>If the predictors with high VIFs are included as <span style=" font-weight: bold;    color: #E8793A !important;">controls</span> in our model, but are not actually the target of our scientific questions (i.e. we are not going to interpret them anyway), then these control factors will be very noisy, but <span style=" font-weight: bold;    color: #6BBFA6 !important;">collinearity is not a problem</span>.</p>
+<ul>
+<li>If our controls are strongly correlated with each other, but only weakly correlated with the predictors that are the actual targets of our analysis, then we can leave in all our control predictors without worrying that their instability will infect our other <span class="math inline">\(\beta\)</span>s.</li>
+<li>While the <span class="math inline">\(\beta\)</span>s estimated for these predictors will be noisy and uninterpretable, their presence will provide a <span style=" font-weight: bold;    color: #6BBFA6 !important;">valuable control</span> on the <span class="math inline">\(\beta\)</span>s we do care about, reducing the chance of finding inconsistent, spurious results due to confounding.</li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">NOTE:</span> Controlling for a predictor is not always advisable, though. <span style=" font-weight: bold;    color: #E8793A !important;">TO DO:</span> Again, have a look at the difference between <span style=" font-weight: bold;    color: #E8793A !important;">controlling for</span> and <span style=" font-weight: bold;    color: #E8793A !important;">conditioning on</span>, what a regression is doing in that context and what to watch out for.</li>
+</ul>
+</div>
+<div id="case-of-collinear-targets" class="section level4">
+<h4><span class="header-section-number">3.3.4.2</span> Case of collinear targets</h4>
+<p>When the <span style=" font-weight: bold;    color: #E8793A !important;">target predictors</span> have high VIFs, removing controls collinear to our targets would give us more statistical power, i.e., our VIFs would go down and our effective data set size would increase.</p>
+<ul>
+<li>But: If we remove the wrong predictors, then even an infinite amount of power will only let us more precisely produce the wrong answer.</li>
+<li>We lose the ability to distinguish between the controls and the covariates we care about.</li>
+</ul>
+<p><span style=" font-weight: bold;    color: #E8793A !important;">Discuss, though:</span> “When we remove a control variable, what we’re assuming is that we know a priori that it has no effect; but if we know that, then we why did we include it in the first place?”
+- It’s slightly more complicated, isn’t it? Because other variables could have taken care of it, controlling for that variable might introduce bias due to other variables …
+- <span style=" font-weight: bold;    color: #E8793A !important;">TO DO:</span> Go through conditons when to control for a variable or not; probably with <a href="https://www.amazon.de/Book-Why-Science-Cause-Effect/dp/046509760X">Pearl’s book</a>.</p>
+<ul>
+<li>Suppose we have two correlated variables and want to interpete their effects. If both come out significant when entered alone, but neither is significant when entered together, then it means that <span style=" font-weight: bold;    color: #6BBFA6 !important;">at least one of these predictors matters</span>, but more data are needed to distinguish their effects.
+<ul>
+<li>E.g. stepwise regression will pick one of the predictors at random, without a warning <span class="math inline">\(\to\)</span> This does not provide any reliable evidence that the predictor chosen is more important than the other</li>
+<li>Useful for e.g. developing medical screening models where the goal is to achieve high predictive accuracy while measuring an economical set of variables, and it doesn’t matter whether the items that end up being measured are the most direct reflections of the underlying process - but it makes them inappropriate for scientific research.</li>
+<li>You could average redundant measures of the same construct together to reduce noise, but for e.g. the <a href="smith-and-kutas-2015a.html#collinearcontrols">case of collinear controls</a>, the authors rather strongly advised against that.</li>
+</ul></li>
+<li>Different kinds of coding may reduce noise (e.g. treatment coding will give difference predictions that are less noisy), but this does not alter the overall model fit or the model’s predictions.</li>
+<li>“One kind of recoding that in particular is <span style=" font-weight: bold;    color: #6BBFA6 !important;">hard to justify is the use of PCA</span> for the sole purpose of orthogonalizing predictors before entering them into regression. Like other kinds of recoding, this has no effect on model fit overall; the only motivation for doing it is if we want to interpret our individual <span class="math inline">\(\beta\)</span>s, but are prevented by collinearity. Orthogonalization replaces our original <span class="math inline">\(\beta\)</span>s with a new set that have reduced VIFs and thus are less noisy; but in the process it always makes individual <span class="math inline">\(\beta\)</span>s less interpretable, by replacing them with strange and arbitrary linear combinations of our original <span class="math inline">\(\beta\)</span>s. The procedure is therefore self-defeating.”</li>
+</ul>
+<p><span style=" font-weight: bold;    color: #E8793A !important;">I profoundly disagree:</span> “The best rule of thumb seems to be, enter all the predictors that may be relevant, report the full list of predictors that were entered along with details of any transformations and coding schemes, and then test and report whichever waveforms and contrasts are of scientific interest.”</p>
+</div>
 </div>
 </div>
 </div>
