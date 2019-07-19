@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2.4 Kollinearität | Mixed Models</title>
+  <meta name="description" content="2.4 Kollinearität | Mixed Models" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2.4 Kollinearität | Mixed Models" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2.4 Kollinearität | Mixed Models" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="pradiktoren-definieren.html">
+<link rel="next" href="codinginr.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="first-things-first.html"><a href="first-things-first.html"><i class="fa fa-check"></i><b>1</b> First Things First</a><ul>
+<li class="chapter" data-level="1.1" data-path="uberblick.html"><a href="uberblick.html"><i class="fa fa-check"></i><b>1.1</b> Überblick</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="exkurs-regressionen.html"><a href="exkurs-regressionen.html"><i class="fa fa-check"></i><b>2</b> Exkurs Regressionen</a><ul>
+<li class="chapter" data-level="2.1" data-path="averaging-ist-eine-least-squares-regression.html"><a href="averaging-ist-eine-least-squares-regression.html"><i class="fa fa-check"></i><b>2.1</b> Averaging ist eine Least-Squares Regression</a></li>
+<li class="chapter" data-level="2.2" data-path="von-averaging-zur-regression.html"><a href="von-averaging-zur-regression.html"><i class="fa fa-check"></i><b>2.2</b> Von Averaging zur Regression</a></li>
+<li class="chapter" data-level="2.3" data-path="pradiktoren-definieren.html"><a href="pradiktoren-definieren.html"><i class="fa fa-check"></i><b>2.3</b> Prädiktoren definieren</a></li>
+<li class="chapter" data-level="2.4" data-path="kollinearitat.html"><a href="kollinearitat.html"><i class="fa fa-check"></i><b>2.4</b> Kollinearität</a></li>
+<li class="chapter" data-level="2.5" data-path="codinginr.html"><a href="codinginr.html"><i class="fa fa-check"></i><b>2.5</b> Variablenkodierung in R</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="random-intercept-models.html"><a href="random-intercept-models.html"><i class="fa fa-check"></i><b>3</b> Random intercept models</a><ul>
+<li class="chapter" data-level="3.1" data-path="generelle-logik.html"><a href="generelle-logik.html"><i class="fa fa-check"></i><b>3.1</b> Generelle Logik</a></li>
+<li class="chapter" data-level="3.2" data-path="in-r.html"><a href="in-r.html"><i class="fa fa-check"></i><b>3.2</b> in R</a></li>
+<li class="chapter" data-level="3.3" data-path="simulationen.html"><a href="simulationen.html"><i class="fa fa-check"></i><b>3.3</b> Simulationen</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="randomslopes.html"><a href="randomslopes.html"><i class="fa fa-check"></i><b>4</b> Random slope models</a><ul>
+<li class="chapter" data-level="4.1" data-path="mixed-models-vs-einzelne-regressionen.html"><a href="mixed-models-vs-einzelne-regressionen.html"><i class="fa fa-check"></i><b>4.1</b> Mixed Models vs. einzelne Regressionen</a></li>
+<li class="chapter" data-level="4.2" data-path="simulationen-1.html"><a href="simulationen-1.html"><i class="fa fa-check"></i><b>4.2</b> Simulationen</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="referenzen.html"><a href="referenzen.html"><i class="fa fa-check"></i>Referenzen</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Mixed Models</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="kollinearitat" class="section level2">
+<h2><span class="header-section-number">2.4</span> Kollinearität</h2>
+<ul>
+<li>Stellt ein Problem dar für Modelle mit <span style=" font-weight: bold;    color: #6BBFA6 !important;">sehr vielen Prädiktoren</span> und/oder <span style=" font-weight: bold;    color: #6BBFA6 !important;">partiell konfundierten Kovariaten</span>.</li>
+</ul>
+<div id="definition" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Definition</h3>
+<ul>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Kollinearität</span> wird in der Regel verwendet, um <span style=" font-weight: bold;    color: #6BBFA6 !important;">zwei sehr verschiedene Phänomene</span> zu beschreiben.
+<ul>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Perfekte Kollinearität</span> liegt vor, wenn die Prädiktoren <span style=" font-weight: bold;    color: #6BBFA6 !important;">vollkommen redundant</span> miteinander sind.
+– Sie machen genau <span style=" font-weight: bold;    color: #6BBFA6 !important;">dieselben Vorhersagen auf unterschiedliche Weise</span>.
+– Siehe oben: Das ist die Grundlage von <a href="pradiktoren-definieren.html#treatmentcoding">Treatment-Coding</a>.
+<ul>
+<li>Die Effekte sind leicht nachvollziehbar und ebenso leicht zu vermeiden.</li>
+</ul></li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Partielle Kollinearität</span> (aka <span style=" font-weight: bold;    color: #6BBFA6 !important;">partial confounding</span> oder <span style=" font-weight: bold;    color: #6BBFA6 !important;">Non-Orthogonalität</span>) beschreibt den Fall, in dem einige Prädiktoren <span style=" font-weight: bold;    color: #6BBFA6 !important;">korreliert, aber nicht identisch</span> sind.
+<ul>
+<li>Manchmal wird der Begriff “Kollinearität” nur für besonders “schwere” Fälle verwendet, in denen die Korrelation zwischen Prädiktoren eine gewisse Schwelle überschreitet.</li>
+<li>Da solche Schwellen aber arbiträr sind, bezieht sich die grundlegende Diskussion sowohl auf leichte wie auch schwere Fälle.</li>
+</ul></li>
+</ul></li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Partielle Kollinearität</span> verletzt keine Annahmen der Least-Squares-Regression.
+<ul>
+<li>Allerdings muss man auf zwei Dinge achten: Ob man <span style=" font-weight: bold;    color: #6BBFA6 !important;">genügend Prädiktoren</span> und <span style=" font-weight: bold;    color: #6BBFA6 !important;">ausreichende Daten</span> hat.</li>
+</ul></li>
+</ul>
+</div>
+<div id="genugend-pradiktoren" class="section level3">
+<h3><span class="header-section-number">2.4.2</span> Genügend Prädiktoren</h3>
+<ul>
+<li>Relevante Prädiktoren auszulassen, kann zu Problemen führen:</li>
+<li>Figs. 2.4 und 2.5 zeigen beide die Schätzungen für den Slope für Expectancy.
+<ul>
+<li>Fig. 2.5 schließt einen Prädiktor für <em>a</em>/<em>an</em> mit ein.</li>
+<li>Fig. 2.4 lässt den Prädiktor für <em>a</em>/<em>an</em> aus.</li>
+</ul></li>
+<li>In unserem Fall sind die Schätzungen nahezu identisch.
+<ul>
+<li>Das ist typisch für <span style=" font-weight: bold;    color: #6BBFA6 !important;">(beinahe) orthogonale</span> Experimente: Das vorliegende war so designed, dass die <em>a</em>- und <em>an</em>-Stimuli hinsichtlich der Expectancy <span style=" font-weight: bold;    color: #6BBFA6 !important;">balanced</span> waren.</li>
+<li>In orthogonalen Designs ändern sich die Schätzungen für die verbleibenden Kovariaten nicht, wenn Kovariaten ausgelassen werden.</li>
+</ul></li>
+<li>Nehmen wir eine Version des Beispielexperiments an, wo die <em>an</em>-Stimuli im Mittel eine niedrigere Expectancy als die <em>a</em>-Stimuli haben.
+<ul>
+<li>Dann ist die beste Lösung für das <span style=" font-weight: bold;    color: #6BBFA6 !important;">Expectancy-only-Modell</span>, um das Datenmuster zu erklären: Einen Teil des kategorialen <em>an</em>-Effekts dem Expectancy-Effekt zuordnen.</li>
+<li>Die Analyse wird <span style=" font-weight: bold;    color: #6BBFA6 !important;">inkonsistent</span>: Es spielt keine Rolle, <span style=" font-weight: bold;    color: #6BBFA6 !important;">wie viele Daten wir sammeln</span>; das Ergebnis wird immer irreführend sein.</li>
+</ul></li>
+<li>Aber im <span style=" font-weight: bold;    color: #E8793A !important;">kombinierten Modell</span> kann jedes Muster, das mit dem Wort <em>an</em> assoziiert ist, diesem direkt zugeschrieben werden.
+<ul>
+<li>“Because the least-squares fitting process selects whichever <span class="math inline">\(\beta\)</span> coefficients are best at working together to explain the patterns in the data, and ultimately, the covariates that are actually responsible for a pattern are always the best way to explain it. As long as we include those covariates in our model, and have enough data, then regression will work out the correct waveforms even if our predictors are confounded.”</li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Vorsicht:</span> Ich bezweifle, dass das in jedem Fall zutrifft; das klingt so, als könnten Regressionen kausale Effekte aufdecken, was nicht der Fall ist.</li>
+</ul></li>
+</ul>
+</div>
+<div id="ausreichend-daten" class="section level3">
+<h3><span class="header-section-number">2.4.3</span> Ausreichend Daten</h3>
+<ul>
+<li>Kollinearität beeinflusst auch <span style=" font-weight: bold;    color: #6BBFA6 !important;">das Noise unserer Schätzungen</span> und <span style=" font-weight: bold;    color: #6BBFA6 !important;">wie viele Datenpunkte wir benötigen</span>.</li>
+<li>Das lässt sich nachvollziehen, wenn man sich <span style=" font-weight: bold;    color: #E8793A !important;">Variance Inflation Factors</span> (VIFs) ansieht.
+<ul>
+<li>Jeder VIF misst <span style=" font-weight: bold;    color: #6BBFA6 !important;">inwiefern die Sampling-Varianz eines geschätzten</span> <span class="math inline">\(\beta\)</span>-<span style=" font-weight: bold;    color: #6BBFA6 !important;">Koeffizienten durch vorhandene Kollinearität beeinflusst wird</span> und entspricht <span class="math inline">\(1/(1 − R^2)\)</span>.</li>
+<li><span class="math inline">\(R^2\)</span> hat hier nichts mit dem gesamten Modell zu tun, sondern misst wie viel der <span style=" font-weight: bold;    color: #6BBFA6 !important;">Varianz in diesem Prädiktor</span> durch <span style=" font-weight: bold;    color: #6BBFA6 !important;">die anderen Prädiktoren</span> im Modell erklärt werden kann.
+<ul>
+<li>Beispiel: Wenn wir ein Modell mit nur zwei Prädiktoren haben und deren Korrelation <span class="math inline">\(r = 0.5\)</span> beträgt, dann sind die VIFs <span class="math inline">\(1/(1 − 0.5^2) \approx 1.33\)</span>.</li>
+<li>Das bedeutet: Wenn wir wissen, dass wir normalerweise 60 Trials benötigen, um eine akzeptable Schätzung für einen einzigen Prädiktor in einem orthogonalen Design zu erhalten, dann brauchen wir nun 60 <span class="math inline">\(\times\)</span> 1.33 = 80 Trials, um eine ebenso akkurate Schätzung zu erhalten <span class="citation">(O’brien, 2007)</span>.</li>
+<li>Anders gesagt: Jeder Trial in diesem Design ist das Drittel eines Trials in einem orthogonalen Design wert, zumindest im Bezug auf die genannten Prädiktoren.</li>
+<li>Generell ist es daher clever, die VIFs in der Planungsphase eines Experiments zu berechnen (wenn möglich) anstatt bis zur Analyse zu warten.</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Implikationen der VIF-Formel:</p>
+<ul>
+<li>Wenn wir <span style=" font-weight: bold;    color: #6BBFA6 !important;">weitere unkorrelierte Prädiktoren</span> zu unserem Modell hinzufügen, hat das absolut <span style=" font-weight: bold;    color: #6BBFA6 !important;">keinen Effekt auf die Noisiness</span> unserer Schätzungen.
+<ul>
+<li>Jeder Prädiktor in einem orthogonalen Design hat einen VIF von 1, was bedeutet: Solange unsere Kovariaten unkorreliert sind, können wir mit derselben Menge Daten ein Dutzend Parameter genau so gut schätzen wie einen einzigen. Wobei es allerdings schwierig werden dürfte, ein Dutzend unkorrlierter Prädiktoren zu finden.</li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Kollinearität ist nicht ansteckend:</span> Wenn wir zwei Prädiktoren haben, die miteinander korrelieren, aber nicht mit einem driten, dann brauchen wir mehr Datenpunkte, um den Effekt der ersten beiden Prädiktoren schätzen zu können, aber ihre Anwesenheit im Modell wird die Schätzung des dritten Prädiktors nicht beeinflussen.</li>
+</ul></li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">VIFs &gt; 1 travel in packs:</span> Korrelation verläuft immer in (mindestens) zwei Richtungen.
+<ul>
+<li>Sobald ein Prädiktor ein VIF &gt; 1 hat, sind andere auch betroffen.</li>
+</ul></li>
+</ul>
+<p>Das hängt eng mit dem Grund für die Varianzinflation zusammen. Oben haben wir festgestellt, dass das Modell im Fall von zwei <span style=" font-weight: bold;    color: #6BBFA6 !important;">identischen Prädiktoren</span> zwar wusste, dass es <span class="math inline">\(\beta_1 + \beta_2 = 1\)</span> braucht, um eine Passung zu den Daten herzustellen. Aber es konnte nicht unterscheiden zwischen Optionen wie <span class="math inline">\(\beta_1 = 0, \beta_2 = 1\)</span> und <span class="math inline">\(\beta_1 = 100, \beta_2 = -99\)</span>. Wenn unsere Prädiktoren nicht identisch, sondern <span style=" font-weight: bold;    color: #6BBFA6 !important;">bloß ähnlich</span> sind, kann usner Modell diese Fälle prinzipiell unterscheiden - aber angesichts <span style=" font-weight: bold;    color: #6BBFA6 !important;">endlicher Daten</span> hat es womöglich Probleme: Die beiden Beispieloptionen ergeben sehr ähnliche Predictions und je nachdem, wie das Rauschen aussieht, mag es ungerechtfertigterweise viel attraktiver erscheinen, <span class="math inline">\(\beta_1 = 100, \beta_2 = -99\)</span> zu setzen.</p>
+<p>Dieses Problem manifestiert sich als <span style=" font-weight: bold;    color: #6BBFA6 !important;">erhöhte Sampling-Varianz</span> für alle beteiligten <span class="math inline">\(\beta\)</span>s. Das ist genau die zusätzliche Sampling-Varianz, die VIFs messen; und sie schlägt sich auf charakteristische Weise nieder: In orthogonalen Designs verzerrt das Rauschen die Schätzungen für jedes <span class="math inline">\(\beta\)</span> unabhängig von denen der anderen: <span class="math inline">\(\beta_1\)</span> kann fälschlicherweise hoch und <span class="math inline">\(\beta_2\)</span> fälschlicherweise niedrig liegen, oder umgekehrt. Oder beide könnten fälschlicherweise hoch bzw. fäschlicherweise niedrig sein. Es gibt keine Korrelation zwischen dem Rauschen in <span class="math inline">\(\beta_1\)</span> und dem in <span class="math inline">\(\beta_2\)</span>.</p>
+<p>Wenn Kollinearität auftritt, sieht das anders aus: Dasselbe Rauschen beeinflusst mehrere <span class="math inline">\(\beta\)</span>-Werte zugleich und hat <span style=" font-weight: bold;    color: #6BBFA6 !important;">merkwürdiges, strukturiertes Verhalten</span> zur Folge. Zum Beispiel wird <span class="math inline">\(\beta_2\)</span> immer dann fälschlicherweise besonders niedrig geschätzt, wenn <span class="math inline">\(\beta_1\)</span> fälschlicherweise besonders hoch geschätzt wird - und umgekehrt. Und weil <span style=" font-weight: bold;    color: #6BBFA6 !important;">Kollinearität das Rauschen unserer Schätzungen verstärkt</span>, wird die Schätzung für <span class="math inline">\(\beta_1\)</span> manchmal <em>sehr</em> hoch liegen (<span class="math inline">\(\beta_1 = 100\)</span>), während die für <span class="math inline">\(\beta_2\)</span> <em>sehr</em> niedrig liegt (<span class="math inline">\(\beta_2 = -99\)</span>). Das ist in der <span style=" font-weight: bold;    color: #E8793A !important;">Theorie der linearen Regression vollkommen erwartet</span> und wird in herkömmlichen statistischen Tests berücksichtigt. Wenn für einen Teilnehmer <span class="math inline">\(\beta_1 = 100\)</span>, <span class="math inline">\(\beta_2 = -99\)</span> geschätzt wird, wird für den nächsten <span class="math inline">\(\beta_1 = -99\)</span>, <span class="math inline">\(\beta_2 = 100\)</span> geschätzt und unsere statistischen Tests werden folgern, dass unsere Schätzungen zu verrauscht sind, um irgendetwas auszusagen.</p>
+</div>
+<div id="vereinfachte-modelle-als-losung" class="section level3">
+<h3><span class="header-section-number">2.4.4</span> Vereinfachte Modelle als Lösung?</h3>
+<p>Wenn Kollinearität zu hoch liegt und wir nicht genügend Daten sammeln können, um verlässliche Schätzungen unserer <span class="math inline">\(\beta\)</span>-Parameters zu erhalten, könnte man denken, dass es eine gute Idee ist, einige Prädiktoren rauszuwerfen und das Modell zu vereinfachen. Ist es aber nicht.</p>
+<div id="collinearcontrols" class="section level4">
+<h4><span class="header-section-number">2.4.4.1</span> Im Fall von kollinearen Kontrollvariablen</h4>
+<p>Wenn Prädiktoren mit hohen VIFs als <span style=" font-weight: bold;    color: #E8793A !important;">Kontrollvariablen</span> enthalten sind, die nicht das eigentliche Ziel unserer Fragestellung sind (d.h. wir sie nicht interpretieren), dann werden die Schätzungen dieser Kontrollvariablen sehr verrauscht sein, aber <span style=" font-weight: bold;    color: #6BBFA6 !important;">Kollinearität ist kein Problem</span>.</p>
+<ul>
+<li>Wenn unsere Kontrollvariablen stark miteinander korreliert sind, aber nur schwach mit den Prädiktoren, die das eigentliche Ziel unserer Analyse snd, können wir die Kontrollvariablen im Modell belassen ohne befürchten zu müssen, dass ihre Instabilität die anderen <span class="math inline">\(\beta\)</span>s beeinflussen wird.</li>
+<li>Zwar werden unsere geschätzten <span class="math inline">\(\beta\)</span>s für die Kontrollvariablen verrauscht und nicht interpretiertbar sein, aber sie stellen dennoch eine <span style=" font-weight: bold;    color: #6BBFA6 !important;">gute Kontrolle</span> für die <span class="math inline">\(\beta\)</span>s dar, die uns interessieren, und reduzieren die Chance, durch Konfundierung zu inkonsistenten und irreführenden Ergebnissen zu gelangen.
+<ul>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">NOTE:</span> Für eine Kovariate zu kontrollieren ist allerdings nicht immer eine gute Idee. Siehe <span class="citation">Cole et al. (2009)</span>: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2846442/">Conditioning on a collider</a>. <span style=" font-weight: bold;    color: #E8793A !important;">TO DO:</span> Nochmal den Unterschied zwischen <span style=" font-weight: bold;    color: #E8793A !important;">controlling for</span> und <span style=" font-weight: bold;    color: #E8793A !important;">conditioning on</span> klar kriegen, was eine Regression in diesem Kontext tut und worauf man achten muss.</li>
+</ul></li>
+</ul>
+</div>
+<div id="im-fall-von-kollinearen-targets" class="section level4">
+<h4><span class="header-section-number">2.4.4.2</span> Im Fall von kollinearen Targets</h4>
+<p>Wenn die <span style=" font-weight: bold;    color: #E8793A !important;">Prädiktoren, die uns interessieren</span>, hohe VIFs haben, gibt uns das Auslassen von Kontrollvariablen mehr statistische Power, das heißt unsere VIFs sinken und die Effektivität unseres Datensets steigt.</p>
+<ul>
+<li>Aber: Wenn wir die falschen Prädiktoren rauswerfen, würde selbst eine unendliche Power bloß dafür sorgen, dass wir umso präziser zur falschen Antwort gelangen.</li>
+<li>Wir verlieren die Fähigkeit, zwischen Kontrollvariablen und den Kovariaten zu unterscheiden, für die wir uns interessieren.</li>
+</ul>
+<p><span style=" font-weight: bold;    color: #E8793A !important;">Allerdings:</span> “When we remove a control variable, what we’re assuming is that we know a priori that it has no effect; but if we know that, then we why did we include it in the first place?”</p>
+<ul>
+<li><p>Es ist ein wenig komplizierter, als er hier schreibt. Wenn z.B. Collider vorhanden sind, ist die Kontrolle einiger Variablen vielleicht gar nicht nötig bzw. es könnte sogar erst einen Bias verursachen, für bestimmte Variablen zu kontrollieren, siehe wieder <span class="citation">Cole et al. (2009)</span>.</p></li>
+<li><p><span style=" font-weight: bold;    color: #E8793A !important;">TO DO:</span> Nochmal die Bedigungen durchgehen, unter denen man für eine Variable kontrolliert (oder nicht); vermutlich mit dem <a href="https://www.amazon.de/Book-Why-Science-Cause-Effect/dp/046509760X">Buch von Pearl</a>.</p></li>
+<li><p>Angenommen, wir haben zwei korrelierte Variablen, aber wollen deren Effekte interpretieren. Wenn beide signifikant werden, wenn sie für sich genommen ins Modell eingehen, aber keiner davon signifikant wird, wenn beide gemeinsam einfließen, bedeutet das, dass <span style=" font-weight: bold;    color: #6BBFA6 !important;">mindestens einer dieser Prädiktoren eine Rolle spielt</span>, aber mehr Datenpunkte benötigt werden, um den Effekt schätzen zu können.</p>
+<ul>
+<li>Eine schrittweise Regression beispielsweise wird einen dieser Prädiktoren zufällig auswählen, ohne eine Warnung auszugeben <span class="math inline">\(\to\)</span> Wir haben also keine verlässliche Evidenz dafür, dass der gewählte Prädiktor wichtiger ist als der nicht gewählte.</li>
+<li>Das kann trotzdem nützlich sein, z.B. für medizinische Screening-Modelle, wo es das Ziel ist, eine gute Vorhersageleistung mit einem möglichst ökonomischen Variablenset zu erzielen, wobei es keine Rolle spielt, ob die gemessenen Items das direkteste Maß der zugrundeliegenden Prozesse darstellen. Für wissenschaftliche Untersuchungen ist das so allerdings nicht brauchbar.</li>
+<li>Man kann die redundanten Maße auch in ein einzelnes Konstrukt mitteln, um das Rauschen zu reduzieren, aber vorhin im Fall von <a href="kollinearitat.html#collinearcontrols">kollinearen Kontrollvariablen</a> haben die Autoren noch andere Autoren für genau diese Vorgehensweise geshamed.</li>
+</ul></li>
+<li><p>Verschiedene Arten der Kodierung können das Rauschen reduzieren (z.B. führt Treatment-Coding zu Schätzungen des Unterschieds (was auch eine Art Mittelwert darstellt), die weniger verrauscht sind), aber das verändert nicht den overall Model-Fit oder die Vorhersagen des Modells.</p></li>
+<li><p>“One kind of recoding that in particular is <span style=" font-weight: bold;    color: #6BBFA6 !important;">hard to justify is the use of PCA</span> for the sole purpose of orthogonalizing predictors before entering them into regression. Like other kinds of recoding, this has no effect on model fit overall; the only motivation for doing it is if we want to interpret our individual <span class="math inline">\(\beta\)</span>s, but are prevented by collinearity. Orthogonalization replaces our original <span class="math inline">\(\beta\)</span>s with a new set that have reduced VIFs and thus are less noisy; but in the process it always makes individual <span class="math inline">\(\beta\)</span>s less interpretable, by replacing them with strange and arbitrary linear combinations of our original <span class="math inline">\(\beta\)</span>s. The procedure is therefore self-defeating.”</p></li>
+</ul>
+<p><span style=" font-weight: bold;    color: #E8793A !important;">Ich widerspreche energisch:</span> “The best rule of thumb seems to be, enter all the predictors that may be relevant, report the full list of predictors that were entered along with details of any transformations and coding schemes, and then test and report whichever waveforms and contrasts are of scientific interest.”</p>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="pradiktoren-definieren.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="codinginr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": 3,
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

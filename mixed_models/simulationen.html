@@ -133,7 +133,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1" data-path="averaging-ist-eine-least-squares-regression.html"><a href="averaging-ist-eine-least-squares-regression.html"><i class="fa fa-check"></i><b>2.1</b> Averaging ist eine Least-Squares Regression</a></li>
 <li class="chapter" data-level="2.2" data-path="von-averaging-zur-regression.html"><a href="von-averaging-zur-regression.html"><i class="fa fa-check"></i><b>2.2</b> Von Averaging zur Regression</a></li>
 <li class="chapter" data-level="2.3" data-path="pradiktoren-definieren.html"><a href="pradiktoren-definieren.html"><i class="fa fa-check"></i><b>2.3</b> Prädiktoren definieren</a></li>
-<li class="chapter" data-level="2.4" data-path="codinginr.html"><a href="codinginr.html"><i class="fa fa-check"></i><b>2.4</b> Variablenkodierung in R</a></li>
+<li class="chapter" data-level="2.4" data-path="kollinearitat.html"><a href="kollinearitat.html"><i class="fa fa-check"></i><b>2.4</b> Kollinearität</a></li>
+<li class="chapter" data-level="2.5" data-path="codinginr.html"><a href="codinginr.html"><i class="fa fa-check"></i><b>2.5</b> Variablenkodierung in R</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="random-intercept-models.html"><a href="random-intercept-models.html"><i class="fa fa-check"></i><b>3</b> Random intercept models</a><ul>
 <li class="chapter" data-level="3.1" data-path="generelle-logik.html"><a href="generelle-logik.html"><i class="fa fa-check"></i><b>3.1</b> Generelle Logik</a></li>
@@ -348,7 +349,7 @@ model4 &lt;-<span class="st"> </span><span class="kw">lmer</span>(y <span class=
 </ul>
 <table class="table table-striped" style="font-size: 14px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-<span id="tab:unnamed-chunk-34">Table 2.6: </span>Simulationsübersicht
+<span id="tab:unnamed-chunk-36">Table 2.6: </span>Simulationsübersicht
 </caption>
 <thead>
 <tr>
@@ -546,7 +547,7 @@ NA
 </table>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-35">Table 2.7: </span>Intraclass Correlations
+<span id="tab:unnamed-chunk-37">Table 2.7: </span>Intraclass Correlations
 </caption>
 <thead>
 <tr>
@@ -584,16 +585,16 @@ run4
 <div id="density-plots" class="section level4">
 <h4><span class="header-section-number">3.3.5.1</span> Density Plots</h4>
 <p>Orange ist der Mittelwert, der 0 ist. Spannend aber, wie asymmetrisch die sind. Run 2: Höhere Varianz des Random Effects bedeutet mehr Unsicherheit, wo er liegt? Run 3: Weil das Residual größer ist, schätzen wir den Effekt der Gruppe aufs Intercept eher auf 0? Rund 4: Sieht eher aus wie der aus Run 2. Die größere Varianz des Random Effects hat mehr Einfluss als die größere Residual Standard Deviation?</p>
-<p><img src="01_1_first_things_first_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p><img src="01_1_first_things_first_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 </div>
 <div id="lineare-regressionen" class="section level4">
 <h4><span class="header-section-number">3.3.5.2</span> Lineare Regressionen</h4>
 <p>Problem beim Plotten: Die Daten bestehen aus 100 3er-Grüppchen. Es ist nicht so übersichtlich, den Plot danach zu gruppieren. Daher hier mal vier rausgegriffen und der Rest zusammengefasst. Jede Gruppe hat eine lineare Regressionslinie bekommen. (Blau/orange vier herausgepickte Gruppen, grün-beige die restlichen Gruppen zusammengefasst.) Interessanterweise sieht es hier so aus, als wären auch ein Random Slopes pro Gruppe angemessen.</p>
-<p><img src="01_1_first_things_first_files/figure-html/unnamed-chunk-37-1.png" width="110%" /></p>
+<p><img src="01_1_first_things_first_files/figure-html/unnamed-chunk-39-1.png" width="110%" /></p>
 </div>
 <div id="mixed-models" class="section level4">
 <h4><span class="header-section-number">3.3.5.3</span> Mixed Models</h4>
-<p><img src="01_1_first_things_first_files/figure-html/unnamed-chunk-38-1.png" width="110%" /></p>
+<p><img src="01_1_first_things_first_files/figure-html/unnamed-chunk-40-1.png" width="110%" /></p>
 <p>D.h. wenn man jede Gruppe für sich linear schätzt (was <code>geom_smooth</code> mit <code>method = "lm"</code> hier ja tut), ergibt sich ein anderes Bild als durch das mixed model. Wir wissen ja durch die Simulation, dass es keine random slopes pro Gruppe gibt (vermutlich würde auch das lineare Modell ähnliche Schätzungen liefern, wenn es nicht nur drei Datenpunkte pro Gruppe wären). Schon krass irgendwo, dass ein mixed Model viel mehr ist (sein kann?) als einfach nur ein lineares Modell pro Gruppe. Man beachte, dass die zusammengefasste Schätzung für die restlichen Gruppen einen anderen Slope hat, weil hier die unterschiedlichen Intercepts (minus die der gehighlighteten Gruppen) alle aufeinander prallen.</p>
 <p>Man bedenke auch: Der angenommene Effekt für x ändert sich ja nicht dadurch, dass ein random Intercept dazu kommt. Während ich bei den linearen Regressionsplots eine lineare Regression innerhalb jeder Gruppe rechne, verschiebe ich beim mixed Model die “mittlere” lineare Regression an der y-Achse entlang (oder?).</p>
 <p><span style=" font-weight: bold;    color: #E8793A !important;">Siehe:</span> Vergleich von mixed models mit random Slopes vs. lineare Regressionen pro Gruppe <a href="randomslopes.html#randomslopes">ein Kapitel weiter</a>.</p>
@@ -610,7 +611,7 @@ run4
 </ul>
 <table class="table table-striped" style="font-size: 14px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-<span id="tab:unnamed-chunk-40">Table 2.8: </span>Simulationsübersicht variierende Sample Sizes
+<span id="tab:unnamed-chunk-42">Table 2.8: </span>Simulationsübersicht variierende Sample Sizes
 </caption>
 <thead>
 <tr>
@@ -778,7 +779,7 @@ NA
 </table>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-41">Table 2.9: </span>Intraclass Correlations
+<span id="tab:unnamed-chunk-43">Table 2.9: </span>Intraclass Correlations
 </caption>
 <thead>
 <tr>
@@ -807,15 +808,15 @@ run6
 </tr>
 </tbody>
 </table>
-<p><img src="01_1_first_things_first_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
-<p><img src="01_1_first_things_first_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
-<p>Die vorherige Vermutung bestätigt sich: Je mehr Datenpunkte pro Gruppe es gibt, desto näher kommt die Schätzung durch lineare Regressionen pro Gruppe an die des Mixed Models dran.</p>
 <p><img src="01_1_first_things_first_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<p><img src="01_1_first_things_first_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<p>Die vorherige Vermutung bestätigt sich: Je mehr Datenpunkte pro Gruppe es gibt, desto näher kommt die Schätzung durch lineare Regressionen pro Gruppe an die des Mixed Models dran.</p>
+<p><img src="01_1_first_things_first_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
 <div id="confidence-intervals" class="section level4">
 <h4><span class="header-section-number">3.3.6.1</span> Confidence Intervals</h4>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-45">Table 2.10: </span>CIs für variierende Sample Sizes
+<span id="tab:unnamed-chunk-47">Table 2.10: </span>CIs für variierende Sample Sizes
 </caption>
 <thead>
 <tr>
