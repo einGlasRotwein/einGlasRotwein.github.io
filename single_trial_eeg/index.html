@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Single-Trial EEG Analysis</title>
+  <meta name="description" content="Single-Trial EEG Analysis" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Single-Trial EEG Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Single-Trial EEG Analysis" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="fromer-et-al-2018.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="general-stuff.html"><a href="general-stuff.html"><i class="fa fa-check"></i><b>1</b> General stuff</a><ul>
+<li class="chapter" data-level="1.1" data-path="general-stuff.html"><a href="general-stuff.html#comparison-of-methods"><i class="fa fa-check"></i><b>1.1</b> Comparison of Methods</a></li>
+<li class="chapter" data-level="1.2" data-path="general-stuff.html"><a href="general-stuff.html#determining-time-windows"><i class="fa fa-check"></i><b>1.2</b> Determining Time Windows</a></li>
+<li class="chapter" data-level="1.3" data-path="general-stuff.html"><a href="general-stuff.html#limitations"><i class="fa fa-check"></i><b>1.3</b> Limitations</a></li>
+<li class="chapter" data-level="1.4" data-path="general-stuff.html"><a href="general-stuff.html#conclusion"><i class="fa fa-check"></i><b>1.4</b> Conclusion</a></li>
+<li class="chapter" data-level="1.5" data-path="general-stuff.html"><a href="general-stuff.html#to-do"><i class="fa fa-check"></i><b>1.5</b> TO DO</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html"><i class="fa fa-check"></i><b>2</b> Frömer et al. (2018)</a><ul>
+<li class="chapter" data-level="2.1" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#cookbook"><i class="fa fa-check"></i><b>2.1</b> Cookbook</a></li>
+<li class="chapter" data-level="2.2" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#behavioural-results"><i class="fa fa-check"></i><b>2.2</b> Behavioural Results</a></li>
+<li class="chapter" data-level="2.3" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#brain-results-n2"><i class="fa fa-check"></i><b>2.3</b> Brain Results N2</a></li>
+<li class="chapter" data-level="2.4" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#brain-results-p3b"><i class="fa fa-check"></i><b>2.4</b> Brain Results P3b</a></li>
+<li class="chapter" data-level="2.5" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#results-brain-behaviour-relationship-accuracy"><i class="fa fa-check"></i><b>2.5</b> Results Brain Behaviour Relationship Accuracy</a></li>
+<li class="chapter" data-level="2.6" data-path="fromer-et-al-2018.html"><a href="fromer-et-al-2018.html#results-brain-behaviour-relationship-rt"><i class="fa fa-check"></i><b>2.6</b> Results Brain Behaviour Relationship RT</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="smith-and-kutas-2015a.html"><a href="smith-and-kutas-2015a.html"><i class="fa fa-check"></i><b>3</b> Smith and Kutas 2015a</a><ul>
+<li class="chapter" data-level="3.1" data-path="smith-and-kutas-2015a.html"><a href="smith-and-kutas-2015a.html#a-regression-based-framework-for-estimating-erps-rerp"><i class="fa fa-check"></i><b>3.1</b> A Regression-Based Framework for Estimating ERPs (rERP)</a></li>
+<li class="chapter" data-level="3.2" data-path="smith-and-kutas-2015a.html"><a href="smith-and-kutas-2015a.html#defining-predictors-for-rerp-analysis"><i class="fa fa-check"></i><b>3.2</b> Defining Predictors for rERP Analysis</a></li>
+<li class="chapter" data-level="3.3" data-path="smith-and-kutas-2015a.html"><a href="smith-and-kutas-2015a.html#collinearity"><i class="fa fa-check"></i><b>3.3</b> Collinearity</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="smith-and-kutas-2015b.html"><a href="smith-and-kutas-2015b.html"><i class="fa fa-check"></i><b>4</b> Smith and Kutas 2015b</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Single-Trial EEG Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Single-Trial EEG Analysis</h1>
+<h2 class="subtitle"><em>Mixed Models and Friends</em></h2>
+</div>
+<div id="general-stuff" class="section level1">
+<h1><span class="header-section-number">1</span> General stuff</h1>
+<ul>
+<li>Usual method for estimating ERPs: Extract time-locked epochs from the continuous EEG signal, align them, and compute their point-by-point average.
+<ul>
+<li>Detailed tracing of processing at each electrode across conditions.</li>
+<li>Many characterised components.</li>
+<li>Large body of literature to compare with.</li>
+</ul></li>
+</ul>
+<div id="comparison-of-methods" class="section level2">
+<h2><span class="header-section-number">1.1</span> Comparison of Methods</h2>
+<p><img src="pics/froemer_tab1.jpg" width="90%" /></p>
+<div id="averaging-limitations" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> Averaging limitations</h3>
+<p>Usually: ANOVA, averaging within conditions and participants</p>
+<div id="limited-by" class="section level4">
+<h4><span class="header-section-number">1.1.1.1</span> Limited by …</h4>
+<ol style="list-style-type: decimal">
+<li>Limited by the <span style=" font-weight: bold;    color: #E8793A !important;">implicit assumption</span> that every participant’s average has the <span style=" font-weight: bold;    color: #6BBFA6 !important;">same quality</span> and that the <span style=" font-weight: bold;    color: #6BBFA6 !important;">same number of observations</span> constitutes each of those averages.</li>
+</ol>
+<ul>
+<li>Differences in performance accuracy and artifact rejection <span class="math inline">\(\to\)</span> <span style=" font-weight: bold;    color: #6BBFA6 !important;">Unequal numbers of trials</span> contributing to individual averages within participants and conditions.</li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">But:</span> All these averages have the same weights in an ANOVA.</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Limited by the <span style=" font-weight: bold;    color: #E8793A !important;">implicit assumption</span> that experimental manipulations yield <span style=" font-weight: bold;    color: #6BBFA6 !important;">uniform effects</span> across all participants and items.</p></li>
+<li><p>Limited by the <span style=" font-weight: bold;    color: #E8793A !important;">dependency on discrete factor levels</span> and its resulting inability to test for parametric effects.</p></li>
+</ol>
+</div>
+<div id="limiting" class="section level4">
+<h4><span class="header-section-number">1.1.1.2</span> Limiting …</h4>
+<ol style="list-style-type: decimal">
+<li>Experimental design: Small set of discrete stimulus categories needed.</li>
+</ol>
+<ul>
+<li>It needs to be ensured that features of no interest are the same across sets.</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Problem with multiple events in close temporal proximity: ERPs will overlap in EEG and resultung ERP estimations.</li>
+</ol>
+<ul>
+<li>Which portions of final waveform attributable to which event?</li>
+</ul>
+</div>
+</div>
+<div id="some-alternatives" class="section level3">
+<h3><span class="header-section-number">1.1.2</span> Some alternatives</h3>
+<ul>
+<li>According to <span class="citation">Smith &amp; Kutas (2015a)</span> all special cases of the rERP framework, as is the averaging method (which is merely a special case of the least squares method underlying regression).</li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Multiple regression</span> to analyze the average amplitude of the EEG extracted from a window from either single trials or single-item ERPs.
+<ul>
+<li>Allows for post hoc control of multiple simultaneous discrete and continuous covariates</li>
+<li>But: Pre-specified analysis windows <span class="math inline">\(\to\)</span> cannot produce temporally detailed waveforms.</li>
+</ul></li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Separate regression model</span> at each possible latency.
+<ul>
+<li>Can handle multiple covariates while still providing information on the time course of effects.</li>
+<li>But: No provision for handling overlap correction.</li>
+</ul></li>
+</ul>
+</div>
+<div id="advantages-of-mixed-models" class="section level3">
+<h3><span class="header-section-number">1.1.3</span> Advantages of mixed models</h3>
+<ul>
+<li>Can deal with <span style=" font-weight: bold;    color: #6BBFA6 !important;">unequal numbers of observations</span> per cell and missing values.</li>
+<li>Regularised estimates: More robust, <span style=" font-weight: bold;    color: #6BBFA6 !important;">avoiding type I errors</span>.</li>
+<li>Many observations needed for averages per discrete category; but not when discrete variables can be left intact.
+<ul>
+<li>E.g. when investigating the effect of reward on feedback related potentials: At least 30 trials per reward magnitude needed in order to obtain reliable ERPs.</li>
+<li>With a regression-based approach: Same overall number of trials, but reward could be varied continuously from low to high.</li>
+<li>Linear, but also quadratic or cubic effects of reward across that range could be tested.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="determining-time-windows" class="section level2">
+<h2><span class="header-section-number">1.2</span> Determining Time Windows</h2>
+<ul>
+<li>Determining the right time-windows and regions of interest (ROIs) to test group-level effects is a challenge.
+<ul>
+<li>The problem is amplified when new effects are explored and there is no substantial previous literature to help develop direct hypotheses on the nature of those effects (e.g., time course or spatial distribution).</li>
+</ul></li>
+<li>One statistically robust way to determine suitable time windows and electrode sites are <span style=" font-weight: bold;    color: #E8793A !important;">cluster-based permutation tests (CBPT)</span> as implemented in FieldTrip.
+<ul>
+<li>In a nutshell, this approach tests the null hypothesis that observations for different conditions are drawn fromthe same distribution and are therefore <span style=" font-weight: bold;    color: #6BBFA6 !important;">exchangeable</span>.</li>
+<li>Therefore, if observing similar effects <span style=" font-weight: bold;    color: #6BBFA6 !important;">under random assignment of condition labels</span> is highly unlikely (less than 5% of the permutations show them), this hypothesis is rejected and the observed condition effect is considered significant.</li>
+<li>The cluster-based procedure further makes use of the EEG property that observations on adjacent sites and time points are often correlated, because a real effect most likely affects multiple electrodes similarly and persists across several tens to hundreds of milliseconds (or sampling points).
+<ul>
+<li>However, they only roughly stick to the time windows yielded by CBPTs (see details <a href="fromer-et-al-2018.html#froemerforbraindata">here</a>), so it still remains a rather arbitrary decision (which seems okay).</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="limitations" class="section level2">
+<h2><span class="header-section-number">1.3</span> Limitations</h2>
+<ul>
+<li>So far only been used for the analyses of <span style=" font-weight: bold;    color: #E8793A !important;">distinct time windows</span>, but data structure also allows for multiple robust regression on multiple time points to analyze the time course of effects
+<ul>
+<li>“However, bear in mind that only LMMs simultaneously account for random effects and might as well be conducted at multiple time points and electrodes. However then, robust <span style=" font-weight: bold;    color: #6BBFA6 !important;">estimates of Type I error</span> need to be assessed. Statistical significance for LMMs can also be estimated using Markov chain Monte Carlo (MCMC) sampling, which would be more appropriate for multiple comparisons.”
+<ul>
+<li>Not what we want to do, I guess.</li>
+</ul></li>
+</ul></li>
+<li>Still problematic: <span style=" font-weight: bold;    color: #E8793A !important;">component overlap</span>. Specifically, and a problem of all methods applying statistical tests of multiple variables on local ERP distributions (e.g., mean amplitude at a ROI or peak amplitudes), the statistically observed effects are not necessarily distributed the way the ERP component of interest is. Statistically reliable effects might as well stem from a <span style=" font-weight: bold;    color: #6BBFA6 !important;">spatially overlapping different ERP component</span>.
+<ul>
+<li>Proof of principle for LMM analyses: Run the final model on all electrodes and to plot the topography of the fixed effects estimates to visually examine whether they show the expected distribution. More sophisticated approaches: <span class="citation">Smith &amp; Kutas (2015b)</span>.</li>
+<li>CBPTs do not have a problem with this, but are applicable to categorical variables with few factor levels.
+<ul>
+<li>Depends on what our variables of interest are …</li>
+</ul></li>
+<li>“Further, <span style=" font-weight: bold;    color: #6BBFA6 !important;">CBPT as implemented here operates on participant averages and therefore holds the same problems as other approaches aggregating</span> within subjects and conditions first. Therefore, results from CBPT might differ from those obtained using LMMs with a better control of additional sources of variance.”</li>
+</ul></li>
+</ul>
+</div>
+<div id="conclusion" class="section level2">
+<h2><span class="header-section-number">1.4</span> Conclusion</h2>
+<ul>
+<li>Single trial based LMM analyses yield <span style=" font-weight: bold;    color: #6BBFA6 !important;">mostly comparable results to ANOVA and regression</span></li>
+<li>When results differ: <span style=" font-weight: bold;    color: #6BBFA6 !important;">LMMs are more sensitive than ANOVAs and both more sensitive and more specific than regressions</span>.</li>
+<li>Brain behavior analyses often only applicable with single trial ERPs and hence LMMs and regression.
+<ul>
+<li>Using continuous predictors, as for categorical predictors in the other analyses, LMMs outperform ordinary regression.</li>
+</ul></li>
+</ul>
+</div>
+<div id="to-do" class="section level2">
+<h2><span class="header-section-number">1.5</span> TO DO</h2>
+<ul>
+<li>Get <span class="citation">Frömer, Maier, &amp; Abdel Rahman (2018)</span> data and see if I can reproduce the analyses.
+<ul>
+<li>Maybe with preprocessing in BrainVision Analyzer instead of Matlab?</li>
+<li>Apply modified procedure to Laura’s data.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="fromer-et-al-2018.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": 2,
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
