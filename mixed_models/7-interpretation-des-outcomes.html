@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Mixed Models</title>
-  <meta name="description" content="Mixed Models" />
+  <title>7 Interpretation des Outcomes | Mixed Models</title>
+  <meta name="description" content="7 Interpretation des Outcomes | Mixed Models" />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Mixed Models" />
+  <meta property="og:title" content="7 Interpretation des Outcomes | Mixed Models" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Mixed Models" />
+  <meta name="twitter:title" content="7 Interpretation des Outcomes | Mixed Models" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="2-mixed-models.html">
+<link rel="prev" href="6-logistische-regression.html">
+<link rel="next" href="8-logistische-regression-the-bayes-way.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -175,29 +175,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Mixed Models</h1>
-<h2 class="subtitle"><em>Gemischtes zu (gemischten) Modellen</em></h2>
-</div>
-<div id="first-things-first" class="section level1">
-<h1><span class="header-section-number">1</span> First Things First</h1>
-<p><span style=" font-weight: bold;    color: #E8793A !important;">wichtiges Highlight</span> – <span style=" font-weight: bold;    color: #6BBFA6 !important;">nicht ganz so wichtiges Highlight</span> – <span style=" font-weight: bold;    color: #397367 !important;">Link</span></p>
-<p>Angefangen hat alles als Notizen zu Mixed Models, aber über die Zeit sind viel mehr grundlegende Notizen zu verschiedenen Formen von Regressionen und Modelling an sich dazu gekommen. Witzigerweise passt der Titel “Mixed Models” also immer noch, wenn auch mit einer anderen Interpretation. Dieses GitHub ist eine lebende und atmende Notizensammlung und beruht größtenteils auf Zitaten und Übersetzungen von Texten, die auch in den Referenzen angeführt sind. Es handelt sich also nicht um eigene Gedanken, sondern über weite Strecken um ein hübsch zusammengefasstes Plagiat.</p>
-<p>Quellen:</p>
+<div id="interpretation-des-outcomes" class="section level1">
+<h1><span class="header-section-number">7</span> Interpretation des Outcomes</h1>
+<div id="odds-vs.-probabilty" class="section level2">
+<h2><span class="header-section-number">7.1</span> Odds vs. Probabilty</h2>
+<p>Umgangssprachlich werden die Begriffe <span style=" font-weight: bold;    color: #E8793A !important;">Odds</span> und <span style=" font-weight: bold;    color: #E8793A !important;">Probability</span> nicht unterschieden (im Deutschen ist es mit einem einzigen Wort, “Wahrscheinlichkeit” noch schlimmer). Mathematisch sind sie aber nicht dasselbe! Sie messen dasselbe (wie wahrscheinlich ein Outcome ist), liegen aber nicht auf derselben Skala - ein bisschen wie mit Fahrenheit und Celsius.</p>
+<div id="probability" class="section level3">
+<h3><span class="header-section-number">7.1.1</span> Probability</h3>
 <ul>
-<li>Michael Clark. <a href="https://m-clark.github.io/mixed-models-with-R/">Mixed Models in R</a></li>
-<li>Einzelne Infos auch aus einem <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5810264/">Paper</a> von <span class="citation">Frömer, Maier, &amp; Abdel Rahman (2018)</span>.</li>
-<li>Generelle Logik von Regressionen adaptiert aus dem <a href="https://www.ncbi.nlm.nih.gov/pubmed/25141770">Paper</a> von <span class="citation">Smith &amp; Kutas (2015)</span>.</li>
-<li>Infos zu logistischer Regression aus <a href="https://www.theanalysisfactor.com/introduction-to-logistic-regression/">dieser kurzen Einführung</a> von <span class="citation">Grace-Martin (n.d.)</span>. Auch nett: Das <a href="https://thecraftofstatisticalanalysis.com/video-binary-ordinal-multinomial-regression/">Webinar</a> dazu.</li>
+<li>Vertrautes Maß von 0 - 1.</li>
+<li>Die Anzahl der Erfolge innerhalb der Gesamtzahl an Trials.</li>
 </ul>
+</div>
+<div id="odds" class="section level3">
+<h3><span class="header-section-number">7.1.2</span> Odds</h3>
+<ul>
+<li>Weniger im Alltag genutzt; von 0 - <span class="math inline">\(\infty\)</span>.</li>
+<li>Anzahl der Erfolge geteilt durch Anzahl der Misserfolge.</li>
+</ul>
+</div>
+</div>
+<div id="die-sache-mit-dem-log" class="section level2">
+<h2><span class="header-section-number">7.2</span> Die Sache mit dem Log</h2>
+<p>Komplizierter werden die Odds auch noch dadurch, dass wir sie bei der logistischen Regression auf einer logarithmischen Skala vorliegen haben. Das heißt aber nur: Wenn meine Regressionsgleichung den Logarithmus der Odds als Outcome hat, kann ich einfach beide Seiten der Gleichung exponieren. Dann ergibt sich: Die <span style=" font-weight: bold;    color: #6BBFA6 !important;">exponierte Regressionsgleichung</span> hat die Odds als Outcome. Das wiederum bedeutet: Die <span style=" font-weight: bold;    color: #6BBFA6 !important;">exponierten Regressionskoeffizienten</span> sind als Odds interpretierbar!</p>
+<p>Sagen wir, wir haben eine Prüfung als Outcome (1 = bestanden, 0 = durchgefallen) und der Beta-Koeffizient für die Tags zuvor getrunkene Menge Alkohol läge bei - .021. Ganz allgemein ist die Interpretation einleuchtend: Wenn die Alkoholmenge um eine Einheit steigt, wird das bestehen der Prüfung weniger wahrscheinlich, da der Zusammenhang negativ ist. Das war’s aber auch schon: Die Aussage: “Wenn die Alkoholmenge um eine Einheit steigt, sinkt der Log der Odds, die Prüfung zu bestehen um 0.21.” enthält für die allermeisten Leute nichts an verwertbarer Information.</p>
+<p>Wenn wir jetzt den Beta-Koeffizienten exponieren (<code>exp(-.021)</code> <span class="math inline">\(\approx\)</span> 0.979), erhalten wir einen Wert, der ein Verhältnis darstellt. Nun lautet die Interpretation also: Mit jeder Tags zuvor zusätzlich getrunkenen Einheit an Alkohol verringert sich die Wahrscheinlichkeit, die Prüfung zu bestehen um den Faktor 0.979. Das heißt: Hat ein Student zwei Einheiten Alkohol getrunken und seine Odds, die Prüfung zu bestehen, liegen bei 2, dann liegen die Odds eines anderen Studenten, der drei Einheiten Alkohol getrunken hat, bei 2 * 0.979 <span class="math inline">\(=\)</span> 1.958, also etwas niedriger. Anders als bei einer linearen Regression findet die Veränderung also nicht durch Addition statt, sondern durch Multiplikation. Man könnte hier auch sagen: Die Odds, die Prüfung zu bestehen, sinken um etwa 2 % mit jeder zusätzlichen Einheit an Alkohol.</p>
+</div>
+<div id="odd-ratios-als-effektgroen" class="section level2">
+<h2><span class="header-section-number">7.3</span> Odd Ratios als Effektgrößen</h2>
+<p>Odd Ratios können als <span style=" font-weight: bold;    color: #E8793A !important;">Effektgrößen</span> interpretiert werden, aber nicht unbedingt als standardisierte Effektgrößen. Wenn man aber die <span style=" font-weight: bold;    color: #6BBFA6 !important;">x-Werte standardisiert</span> (z-zentriert), erhält man damit auch standardisierte Odds Ratios.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="2-mixed-models.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="6-logistische-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="8-logistische-regression-the-bayes-way.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

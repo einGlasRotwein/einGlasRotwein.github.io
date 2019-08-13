@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Mixed Models</title>
-  <meta name="description" content="Mixed Models" />
+  <title>6 Logistische Regression | Mixed Models</title>
+  <meta name="description" content="6 Logistische Regression | Mixed Models" />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Mixed Models" />
+  <meta property="og:title" content="6 Logistische Regression | Mixed Models" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Mixed Models" />
+  <meta name="twitter:title" content="6 Logistische Regression | Mixed Models" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="2-mixed-models.html">
+<link rel="prev" href="5-randomslopes.html">
+<link rel="next" href="7-interpretation-des-outcomes.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -175,29 +175,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Mixed Models</h1>
-<h2 class="subtitle"><em>Gemischtes zu (gemischten) Modellen</em></h2>
+<div id="logistische-regression" class="section level1">
+<h1><span class="header-section-number">6</span> Logistische Regression</h1>
+<p>In einer herkömmlichen linearen Regression ist die vorhergesagte Variable eine lineare Funktion der Koeffizienten, die die Prädiktoren abbilden. Wenn wir es aber mit einer <span style=" font-weight: bold;    color: #6BBFA6 !important;">dichotomen Variable</span> zu tun haben, deren Outcomes als 0 und 1 kodiert sind, ergibt eine lineare Vorhersage wenig Sinn: 0 und 1 sind arbiträr gewählt und haben nichts mit den tatsächlichen Werten zu tun. Was uns in diesem Fall stattdessen interessiert ist die <span style=" font-weight: bold;    color: #6BBFA6 !important;">Wahrscheinlichkeit</span>, ob jemand in einem Trial den Wert 1 oder 0 erhält. Zum Beispiel um vorherzusagen, ob ein Versuchsteilnehmer einen Treffer in einer Klassifizierungsaufgabe erzielt.</p>
+<div id="die-logit-linkfunktion" class="section level2">
+<h2><span class="header-section-number">6.1</span> Die Logit-Linkfunktion</h2>
+<p>Da Wahrscheinlichkeiten innerhalb der Grenzen von 0 und 1 liegen, ist ihr Zusammenhang mit einem Prädiktor aber nicht linear, sondern <span style=" font-weight: bold;    color: #6BBFA6 !important;">S-förmig (sigmoid)</span>. Es ist aber möglich, einen linearen Zusammenhang zwischen einem Prädiktor und einer Funktion der Wahrscheinlichkeit P zu modellieren. Dafür bietet sich die <span style=" font-weight: bold;    color: #E8793A !important;">Logit-Funktion</span> an, die den <span style=" font-weight: bold;    color: #6BBFA6 !important;">natürlichen Logarithmus</span> der Wahrscheinlichkeit abbildet, dass das Outcome <span class="math inline">\(Y = 1\)</span> ist. Das wiederum ist lediglich das Verhältnis von <span class="math inline">\(P(Y = 1)\)</span> zu <span class="math inline">\(P(Y = 0)\)</span>. Also der Log der Erfolgswahrscheinlichkeit. Dabei ist das Verhältnis von diesem <span style=" font-weight: bold;    color: #6BBFA6 !important;">Logit</span> und <span class="math inline">\(P\)</span> selbst wiederum sigmoidförmig.</p>
+<p>Wir haben also nicht wie zuvor</p>
+<p><span class="math display">\[
+y_i = \beta_{0} + \beta_{1} x_{1i}+\beta_{2} x_{2i} + ... + \varepsilon_i
+\]</span></p>
+<p>sondern nun</p>
+<p><span class="math display">\[
+\ln{\left(\frac{P}{(1-P)}\right)} = \beta_{0} + \beta_{1} x_{1}+\beta_{2} x_{2} + ...
+\]</span></p>
+<p>Das heißt auch: Mit <span style=" font-weight: bold;    color: #E8793A !important;">Generalised Linear Models</span> (und eine logistische Regression ist so eins) modellieren wir nicht direkt die Outcomewerte Y, sondern <span style=" font-weight: bold;    color: #6BBFA6 !important;">Outcomes auf Gruppenebene</span>. Alle Generalised Linear Models haben eine sogenannte <span style=" font-weight: bold;    color: #E8793A !important;">Link Function</span>, die eine Funktion des <span style=" font-weight: bold;    color: #6BBFA6 !important;">Mittelwerts von Y</span> darstellt. Anstatt zum Beispiel eine Aussage darüber zu machen, wie wahrscheinlich es ist, dass ein einzelner Student eine Prüfung besteht oder nicht, machen wir eine Aussage über die Wahrscheinlichkeit, mit der ein Student mit z.B. einem bestimmten IQ die Prüfung besteht. Für einen IQ von 100 ist das letztendlich der Mittelwert der Studenten, die bestanden haben (= 1) und der Studenten, die durchgefallen sind (= 0).</p>
+<p>Deswegen gibt es in der Gleichung auch kein <span class="math inline">\(i\)</span> für die individuellen Effekte oder die individuellen Abweichungen von der Regressionsgeraden (Fehlerterm). (Wobei sich natürlich auch die lineare Regression als allgemeine Form ohne individuelle Werte darstellen lässt.)</p>
 </div>
-<div id="first-things-first" class="section level1">
-<h1><span class="header-section-number">1</span> First Things First</h1>
-<p><span style=" font-weight: bold;    color: #E8793A !important;">wichtiges Highlight</span> – <span style=" font-weight: bold;    color: #6BBFA6 !important;">nicht ganz so wichtiges Highlight</span> – <span style=" font-weight: bold;    color: #397367 !important;">Link</span></p>
-<p>Angefangen hat alles als Notizen zu Mixed Models, aber über die Zeit sind viel mehr grundlegende Notizen zu verschiedenen Formen von Regressionen und Modelling an sich dazu gekommen. Witzigerweise passt der Titel “Mixed Models” also immer noch, wenn auch mit einer anderen Interpretation. Dieses GitHub ist eine lebende und atmende Notizensammlung und beruht größtenteils auf Zitaten und Übersetzungen von Texten, die auch in den Referenzen angeführt sind. Es handelt sich also nicht um eigene Gedanken, sondern über weite Strecken um ein hübsch zusammengefasstes Plagiat.</p>
-<p>Quellen:</p>
-<ul>
-<li>Michael Clark. <a href="https://m-clark.github.io/mixed-models-with-R/">Mixed Models in R</a></li>
-<li>Einzelne Infos auch aus einem <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5810264/">Paper</a> von <span class="citation">Frömer, Maier, &amp; Abdel Rahman (2018)</span>.</li>
-<li>Generelle Logik von Regressionen adaptiert aus dem <a href="https://www.ncbi.nlm.nih.gov/pubmed/25141770">Paper</a> von <span class="citation">Smith &amp; Kutas (2015)</span>.</li>
-<li>Infos zu logistischer Regression aus <a href="https://www.theanalysisfactor.com/introduction-to-logistic-regression/">dieser kurzen Einführung</a> von <span class="citation">Grace-Martin (n.d.)</span>. Auch nett: Das <a href="https://thecraftofstatisticalanalysis.com/video-binary-ordinal-multinomial-regression/">Webinar</a> dazu.</li>
-</ul>
+<div id="parameterschatzung" class="section level2">
+<h2><span class="header-section-number">6.2</span> Parameterschätzung</h2>
+<p>Least-Squares funktioniert bei einer logistischen Regression nicht. Stattdessen verwenden wir die <span style=" font-weight: bold;    color: #E8793A !important;">Maximum Likelihood</span> zur Parameterschätzung. Eine algebraische Lösung ist also nicht möglich - Maximum Likelihood ist iterativ, hat aber ansonsten dieselben Eigenschaften wie Least Squares. In den Fällen, in denen Least Squares nutzbar ist (lineare Regression), erhält man mit Maximum Likelihood identische Ergebnisse. Least Squares wird als Subform von Maximum Likelihood betrachtet.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="2-mixed-models.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="5-randomslopes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="7-interpretation-des-outcomes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

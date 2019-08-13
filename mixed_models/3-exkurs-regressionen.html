@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Exkurs Regressionen | Mixed Models</title>
+  <meta name="description" content="3 Exkurs Regressionen | Mixed Models" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Exkurs Regressionen | Mixed Models" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Exkurs Regressionen | Mixed Models" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="2-mixed-models.html">
+<link rel="next" href="4-random-intercept-models.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="1-first-things-first.html"><a href="1-first-things-first.html"><i class="fa fa-check"></i><b>1</b> First Things First</a></li>
+<li class="chapter" data-level="2" data-path="2-mixed-models.html"><a href="2-mixed-models.html"><i class="fa fa-check"></i><b>2</b> Mixed Models</a><ul>
+<li class="chapter" data-level="2.1" data-path="2-mixed-models.html"><a href="2-mixed-models.html#uberblick"><i class="fa fa-check"></i><b>2.1</b> Überblick</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="3-exkurs-regressionen.html"><a href="3-exkurs-regressionen.html"><i class="fa fa-check"></i><b>3</b> Exkurs Regressionen</a><ul>
+<li class="chapter" data-level="3.1" data-path="3-exkurs-regressionen.html"><a href="3-exkurs-regressionen.html#averaging-ist-eine-least-squares-regression"><i class="fa fa-check"></i><b>3.1</b> Averaging ist eine Least-Squares Regression</a></li>
+<li class="chapter" data-level="3.2" data-path="3-exkurs-regressionen.html"><a href="3-exkurs-regressionen.html#von-averaging-zur-regression"><i class="fa fa-check"></i><b>3.2</b> Von Averaging zur Regression</a></li>
+<li class="chapter" data-level="3.3" data-path="3-exkurs-regressionen.html"><a href="3-exkurs-regressionen.html#pradiktoren-definieren"><i class="fa fa-check"></i><b>3.3</b> Prädiktoren definieren</a></li>
+<li class="chapter" data-level="3.4" data-path="3-exkurs-regressionen.html"><a href="3-exkurs-regressionen.html#kollinearitat"><i class="fa fa-check"></i><b>3.4</b> Kollinearität</a></li>
+<li class="chapter" data-level="3.5" data-path="3-exkurs-regressionen.html"><a href="3-exkurs-regressionen.html#codinginr"><i class="fa fa-check"></i><b>3.5</b> Variablenkodierung in R</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="4-random-intercept-models.html"><a href="4-random-intercept-models.html"><i class="fa fa-check"></i><b>4</b> Random intercept models</a><ul>
+<li class="chapter" data-level="4.1" data-path="4-random-intercept-models.html"><a href="4-random-intercept-models.html#generelle-logik"><i class="fa fa-check"></i><b>4.1</b> Generelle Logik</a></li>
+<li class="chapter" data-level="4.2" data-path="4-random-intercept-models.html"><a href="4-random-intercept-models.html#in-r"><i class="fa fa-check"></i><b>4.2</b> in R</a></li>
+<li class="chapter" data-level="4.3" data-path="4-random-intercept-models.html"><a href="4-random-intercept-models.html#simulationen"><i class="fa fa-check"></i><b>4.3</b> Simulationen</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-randomslopes.html"><a href="5-randomslopes.html"><i class="fa fa-check"></i><b>5</b> Random slope models</a><ul>
+<li class="chapter" data-level="5.1" data-path="5-randomslopes.html"><a href="5-randomslopes.html#mixed-models-vs.-einzelne-regressionen"><i class="fa fa-check"></i><b>5.1</b> Mixed Models vs. einzelne Regressionen</a></li>
+<li class="chapter" data-level="5.2" data-path="5-randomslopes.html"><a href="5-randomslopes.html#simulationen-1"><i class="fa fa-check"></i><b>5.2</b> Simulationen</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="6-logistische-regression.html"><a href="6-logistische-regression.html"><i class="fa fa-check"></i><b>6</b> Logistische Regression</a><ul>
+<li class="chapter" data-level="6.1" data-path="6-logistische-regression.html"><a href="6-logistische-regression.html#die-logit-linkfunktion"><i class="fa fa-check"></i><b>6.1</b> Die Logit-Linkfunktion</a></li>
+<li class="chapter" data-level="6.2" data-path="6-logistische-regression.html"><a href="6-logistische-regression.html#parameterschatzung"><i class="fa fa-check"></i><b>6.2</b> Parameterschätzung</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="7-interpretation-des-outcomes.html"><a href="7-interpretation-des-outcomes.html"><i class="fa fa-check"></i><b>7</b> Interpretation des Outcomes</a><ul>
+<li class="chapter" data-level="7.1" data-path="7-interpretation-des-outcomes.html"><a href="7-interpretation-des-outcomes.html#odds-vs.-probabilty"><i class="fa fa-check"></i><b>7.1</b> Odds vs. Probabilty</a></li>
+<li class="chapter" data-level="7.2" data-path="7-interpretation-des-outcomes.html"><a href="7-interpretation-des-outcomes.html#die-sache-mit-dem-log"><i class="fa fa-check"></i><b>7.2</b> Die Sache mit dem Log</a></li>
+<li class="chapter" data-level="7.3" data-path="7-interpretation-des-outcomes.html"><a href="7-interpretation-des-outcomes.html#odd-ratios-als-effektgroen"><i class="fa fa-check"></i><b>7.3</b> Odd Ratios als Effektgrößen</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="8-logistische-regression-the-bayes-way.html"><a href="8-logistische-regression-the-bayes-way.html"><i class="fa fa-check"></i><b>8</b> Logistische Regression - the Bayes way</a></li>
+<li class="chapter" data-level="9" data-path="9-multinomiale-logistische-regressionen.html"><a href="9-multinomiale-logistische-regressionen.html"><i class="fa fa-check"></i><b>9</b> Multinomiale logistische Regressionen</a></li>
+<li class="chapter" data-level="" data-path="referenzen.html"><a href="referenzen.html"><i class="fa fa-check"></i>Referenzen</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Mixed Models</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="exkurs-regressionen" class="section level1">
+<h1><span class="header-section-number">3</span> Exkurs Regressionen</h1>
+<p>Basierend auf dem <a href="https://www.ncbi.nlm.nih.gov/pubmed/25141770">Paper</a> von <span class="citation">Smith &amp; Kutas (2015)</span>, das sich eigentlich mit der Analyse von <span style=" font-weight: bold;    color: #6BBFA6 !important;">event related potentials (ERPs)</span> im Gehirn befasst, aber einen großartigen Job darin macht, <span style=" font-weight: bold;    color: #E8793A !important;">Regressionen</span> zu erklären, wie diese im Verhältnis zu <span style=" font-weight: bold;    color: #6BBFA6 !important;">Averaging</span> stehen und wie <span style=" font-weight: bold;    color: #6BBFA6 !important;">Dummycoding</span> mathematisch funktioniert.</p>
+<p>Background EEG: Normalerweise werden diese schicken EEG-Kurven über Versuchspersonen und Trials gemittelt, um die Kurve für einen bestimmten Stimulus rauszubekommen. Dabei gehen natürlich viele Daten verloren und deswegen werden <span style=" font-weight: bold;    color: #E8793A !important;">mixed Models</span> vermehrt angewendet, aber zunächst erklären <span class="citation">Smith &amp; Kutas (2015)</span>, wieso dieser Ansatz allgemein für sämtliche Datenstrukturen und Problemstellungen funktioniert und wie das Mitteln von Daten eigentlich nur einen Spezialfall darstellt. Im Speziellen ist die beschriebene <span style=" font-weight: bold;    color: #6BBFA6 !important;">regressionsbasierte Methode</span> anwendbar für:</p>
+<ul>
+<li>Faktorielle kontinuierliche Designs - oder beides.</li>
+<li>Orthogonale oder partiell konfundierte Designs.</li>
+<li>Lineare oder non-lineare Effekte von kontinuierlichen Kovariaten.</li>
+</ul>
+<div id="averaging-ist-eine-least-squares-regression" class="section level2">
+<h2><span class="header-section-number">3.1</span> Averaging ist eine Least-Squares Regression</h2>
+<p>Anstatt die gesamte EEG-Welle als Ganzes zu schätzen, schätzen wir zunächst den Wert jeder Elektrode zu jedem Messzeitpunkt - also z.B. 136 ms nach einem Stimulus an der Elektrode Cz. Wenn wir das hinkriegen, können wir den Rest der Welle schätzen, indem wir die Prozedur für jede Elektrode und jeden Messzeitpunkt (davon haben wir im EEG natürlich … viele) wiederholen. Die Schätzung für jeden Trial sieht so aus:</p>
+<p><span class="math display">\[
+y_i =\beta + \textrm{noise}_i
+\]</span></p>
+<ul>
+<li>Das Noise ist in jedem Trial anders, aber der Wert des ERPs (also das vom Gehirn produzierte Signal) ist - zu diesem Zeitpunkt an dieser Elektrode - immer dasselbe.</li>
+<li>Standardmäßige Schätzung von <span class="math inline">\(\beta\)</span>: Über <span class="math inline">\(y_i\)</span> mitteln.</li>
+<li>Würden wir das Noise in jedem Trial oder die Schätzung von <span class="math inline">\(\beta\)</span> kennen, könnten wir die Gleichung(en) einfach lösen, aber wir kennen beides nicht.</li>
+</ul>
+<p>Was wir stattdessen tun könnenn: Das Prinzip der <span style=" font-weight: bold;    color: #E8793A !important;">least squares</span> anwenden: Wir sollten für unsere Schätzung das <span class="math inline">\(\beta\)</span> wählen, das unsere Schätzung des <span style=" font-weight: bold;    color: #6BBFA6 !important;">total squared noise</span>,</p>
+<p><span class="math display">\[
+\textrm{squared noise} =\sum_{i=1}^{n}\left(\textrm{noise }_{i}\right)^{2}=\sum_{i=1}^{n}\left(y_{i}-\beta\right)^{2}
+\]</span></p>
+<p>so klein wie möglich macht. Wir ziehen also die <span style=" font-weight: bold;    color: #E8793A !important;">Ableitung</span> der Formel:</p>
+<p><span class="math display">\[
+\frac{d}{d \beta} \textrm{ squared noise }=\frac{d}{d \beta} \sum_{i=1}^{n}\left(y_{i}-\beta\right)^{2}=\sum_{i=1}^{n}-2\left(y_{i}-\beta\right)
+\]</span></p>
+<p>Und setzen sie gleich Null:</p>
+<p><span class="math display">\[
+\sum_{i=1}^{n}-2\left(y_{i}-\beta\right)=0
+\]</span></p>
+<p>Und lösen nach <span class="math inline">\(\beta\)</span> auf:</p>
+<p><span class="math display">\[
+\begin{aligned}-2\left(\sum_{i=1}^{n} y_{i}-\sum_{i=1}^{n} \beta\right) &amp;=0 \\ \sum_{i=1}^{n} y_{i} &amp;=\sum_{i=1}^{n} \beta \\ \sum_{i=1}^{n} y_{i} &amp;=n \beta \\ \frac{1}{n} \sum_{i=1}^{n} y_{i} &amp;=\beta \end{aligned}
+\]</span></p>
+<p><span style=" font-weight: bold;    color: #6BBFA6 !important;">Bäm: Die finale Formel ist auch die Standardformul, um den Mittelwert zu berechnen!</span> Das bedeutet, gemäß des Least-Squares-Prinzips ist der beste Weg, um <span class="math inline">\(\beta\)</span> zu schätzen: Alle gemessenen Werte <span class="math inline">\(y_i, ..., y_n\)</span> mitteln. Daher ergibt es zunächst Sinn zu mitteln, wenn man ERPs schätzen will.</p>
+</div>
+<div id="von-averaging-zur-regression" class="section level2">
+<h2><span class="header-section-number">3.2</span> Von Averaging zur Regression</h2>
+<p>Auf der anderen Seite ist diese Formel …</p>
+<p><span class="math display">\[
+y_i =\beta + \textrm{noise}_i
+\]</span></p>
+<p>… lediglich ein einfaches Beispiel der allgemeinen Least-Squares-Regressionsgleichung:</p>
+<p><span class="math display">\[
+y_{i}=\beta_{1} x_{1}+\beta_{2} x_{2}+\cdots+\textrm{ noise}_{i}
+\]</span></p>
+<p>Wir schauen also was passiert wenn wir ERPs mit der vollständigen Regressionsgleichung schätzen wollen anstatt mit der vereinfachten. Wieder sind die Werte für <span class="math inline">\(y_i\)</span> hierbei das Skalppotenzial an einer einzelnen Elektrode zu einem einzelnen Messzeitpunkt, über verschiedene Trials hinweg. Die Werte für <span class="math inline">\(x_{ji}\)</span> sind die <span style=" font-weight: bold;    color: #6BBFA6 !important;">Prädiktoren</span> und stehen für verschiedene Stimuluseigenschaften, die im Trial <span class="math inline">\(i\)</span> vorhanden sind, numerisch kodiert.</p>
+<ul>
+<li><p>DIe ERP-Gleichung von oben hatte nur einen einzigen Prädiktor, <span class="math inline">\(x_{1i}\)</span>, dessen Wert immer 1 war. Wir können uns das als sehr vage Eigenschaft vorstellen, die einfach nur anzeigt, ob ein Event stattgefunden hat oder nicht.</p></li>
+<li><p>Wir messen die Werte für <span class="math inline">\(y_i\)</span>, spezifizieren die Werte für <span class="math inline">\(x_{ji}\)</span> und nutzen dann wieder das Prinzip der Least Squares, um die Werte für <span class="math inline">\(\beta_1, \beta_2, ...\)</span> zu finden, die zusammen das total squared Noise minimieren.</p>
+<ul>
+<li>Jeder <span class="math inline">\(\beta\)</span>-Wert repräsentiert einen Anteil des ERPs an dieser Elektrode zu diesem Messzeitpunkt.</li>
+<li>Man kann auch für einen Stimulus <span class="math inline">\(i\)</span> die Summe <span class="math inline">\(\beta_{1x_{1i}} + \beta_{2x_{2i}} + …\)</span> berechnen, was der Schätzung des ERPs für einen Stimulus mit diesen Eigenschaften zu diesem Messzeitpunkt an dieser Elektrode entspricht.</li>
+</ul></li>
+<li><p>Alle <span class="math inline">\(\beta\)</span>-Werte zu finden, die das Least-Squares-Prinzip erfüllen ist etwas komplizierter als einfach zu mitteln, aber nicht sehr.</p>
+<ul>
+<li>Computer kriegen das mit Standardtechniken fix und zuverlässig hin.</li>
+</ul></li>
+<li><p>Wir <span style=" font-weight: bold;    color: #6BBFA6 !important;">wiederholen diese Berechnungen</span> dann sehr oft, jeweils für <span style=" font-weight: bold;    color: #6BBFA6 !important;">jede Elektrode und jeden Messzeitpunkt</span>.</p></li>
+<li><p>Dann sammeln wir alle berechneten <span class="math inline">\(\beta_1\)</span>-Werte, um eine EEG-Welle zu bauen, alle <span class="math inline">\(\beta_2\)</span>- Werte für eine zweite Welle und so weiter, für alle <span class="math inline">\(\beta\)</span>s.</p>
+<ul>
+<li>Die resultierende Welle kann behandelt werden wie eine Welle, die durch Averaging zu Stande gekommen ist.</li>
+</ul></li>
+<li><p>Auch die kombinierten <span class="math inline">\(\beta\)</span>s, die die Welle für einen spezifischen Stimulus ergeben, können wir ERP-Schätzungen behandelt werden, die durch Averaging ermittelt wurden.</p></li>
+<li><p>Um auf die Schätzung der ERPs durch Regressionen hinzuweisen, nennen wir sie rERPs.</p></li>
+</ul>
+</div>
+<div id="pradiktoren-definieren" class="section level2">
+<h2><span class="header-section-number">3.3</span> Prädiktoren definieren</h2>
+<div id="beispielexperiment" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> Beispielexperiment</h3>
+<p>Beispiel ist hier ein Sprachverständnisexperiment, in dem ein Kontext Erwartungen bei den Teilnehmern für ein bestimmtes Wort, <em>a</em> oder <em>an</em>, generiert. Siehe: <em>The day was breezy so the boy went outside to fly (<strong>a</strong> kite/<strong>an</strong> airplane)</em>. Wir haben also eine kategorische Kovariate (Wort: <em>a</em> vs. <em>an</em>) und eine kontinuierliche Kovariate: Die Erwartung des Wortes, die zwischen 0 und 1 liegt.</p>
+</div>
+<div id="das-traditionelle-erp-als-intercept" class="section level3">
+<h3><span class="header-section-number">3.3.2</span> Das traditionelle ERP als Intercept</h3>
+<p>Angenommen, wir haben einen einzigen Prädiktor: <span class="math inline">\(x_{1i} = 1\)</span></p>
+<p>In der Sprache linearer Regressionen ist dieser Prädiktor ein Intercept. Unsere Regressionsgleichung ist dann:</p>
+<p><span class="math display">\[
+y_{i}=\beta_{1} x_{1 i}+\textrm{ noise }_{i}=\beta_{1}+\textrm{ noise }_{i}
+\]</span></p>
+<p>Wie oben: Wenn wir die Least-Squares-Lösung finden, ist <span class="math inline">\(\beta_{1}\)</span> gleich der Mittelwert aller <span class="math inline">\(y_i\)</span>-Werte.</p>
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<img src="pics/smith_a_fig1_1.jpg" alt="Separate Modelle für a- und an-Trials." width="1560" />
+<p class="caption">
+Figure 3.1: Separate Modelle für a- und an-Trials.
+</p>
+</div>
+<p>Die Ergebnisse stimmen mit denen des Mittelns überein, aber sind ein wenig nervig zu ermitteln: Bei kategorischen Faktoren über mehrere Stufen müssen wir mehrere Modelle fitten, hier zwei: Eins für <em>a</em>-Trials, eins für <em>an</em>-Trials.</p>
+</div>
+<div id="multiple-erps-via-dummy-coding" class="section level3">
+<h3><span class="header-section-number">3.3.3</span> Multiple ERPs via Dummy-Coding</h3>
+<p>Anstatt mehrere Modelle zu fitten, können wir auch beide ERPs gleichzeitig mit einem einzelnen Modell schätzen, indem wir Dummy-Coding als Trick verwenden - der Standardweg, um kategorische Daten in einem Regressionsmodell anzupacken.</p>
+<ul>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Siehe:</span> “This is the default method of coding categorical variables used by SAS, and is also used by default by <code>R</code> for models that do not contain an intercept term.”
+<ul>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">TO DO:</span> Modelle ohne Intercept in <code>R</code> nachschlagen und schauen, was da passiert?</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[
+x_{1 i}=\left\{\begin{array}{ll}{1,} &amp; {\text { if stimulus } i \text { is a}} \\ {0,} &amp; {\text { if stimulus } i \text { is an }}\end{array} \quad x_{2 i}=\left\{\begin{array}{ll}{0,} &amp; {\text { if stimulus } i \text { is a}} \\ {1,} &amp; {\text { if stimulus } i \text { is an }}\end{array}\right.\right.
+\]</span></p>
+<p><span style=" font-weight: bold;    color: #6BBFA6 !important;">Fand ich erst etwas verwirrend:</span> Im Paper steht vor beiden Klammern <span class="math inline">\(x_{1i}\)</span>, aber das ergibt für mich keinen Sinn wenn ich mir die entsprechende Grafik dazu, das Einsetzen in die Formel und spätere Gleichungen anschaue … ?</p>
+<p>Wenn wir das in die Regressionsgleichung packen …</p>
+<p><span class="math display">\[
+y_{i}=\beta_{1} x_{1 i}+\beta_{2} x_{2 i}+\textrm{noise}_{i}
+\]</span></p>
+<p>dann wird Least-Squares-Fitting dafür sorgen, dass <span class="math inline">\(\beta_{1}\)</span> dem Mittel aller <em>a</em>-Trials entspricht, und <span class="math inline">\(\beta_{2}\)</span> dem Mittel aller <em>an</em>-Trials.</p>
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="pics/smith_a_fig1_2.jpg" alt="Dummy-Coding, um die Modelle für a- und an-Trials zu kombinieren." width="1560" />
+<p class="caption">
+Figure 3.2: Dummy-Coding, um die Modelle für a- und an-Trials zu kombinieren.
+</p>
+</div>
+<p>Denn: Wenn wir in einem Trial <em>i</em> das Wort <em>a</em> präsentiert haben, ist <span class="math inline">\(x_{1i} =\)</span> 1 und <span class="math inline">\(x_{2i} =\)</span> 0, was bedeutet:</p>
+<p><span class="math display">\[
+y_{i}=\beta_{1} \times 1+\beta_{2} \times 0+\textrm{noise}_{i}=\beta_{1}+\textrm{noise}_{i}
+\]</span></p>
+<p>Und wenn wir in einem Trial <em>i</em> das Wort <em>an</em> gezeigt haben, ist <span class="math inline">\(x_{1i} =\)</span> 0 und <span class="math inline">\(x_{2i} =\)</span> 1, was bedeutet:</p>
+<p><span class="math display">\[
+y_{i}=\beta_{1} \times 0+\beta_{2} \times 1+\textrm{noise}_{i}=\beta_{2}+\textrm{noise}_{i}
+\]</span></p>
+<p>Letztendlich <span style=" font-weight: bold;    color: #6BBFA6 !important;">fitten wir also zwei Versionen unseres Intercept-Only-Models</span> auf verschiedene Subsets der Daten. Der einzige Unterschied ist, dass wir vorher die Daten explizit aufgeteilt haben; jetzt definieren wir unsere <span class="math inline">\(x\)</span>e und der Split der Daten passiert automatisch als Ergebnis des Least-Squares-Fitting-Prozesses. Eine allgemeine Variante des “Zero-Tricks” kann genutzt werden, um arbiträre Regressionsmodelle in einen einzigen Fit zu kombinieren, was für verschiedene Zwecke nützlich sein kann.</p>
+</div>
+<div id="treatmentcoding" class="section level3">
+<h3><span class="header-section-number">3.3.4</span> Unterschieds-ERPs via Treament-Coding</h3>
+<p>Gängigerer Ansatz, um kategoriale Variablen in Regressionen zu händeln: <span style=" font-weight: bold;    color: #E8793A !important;">Treatment-Coding</span>, d.h. <span style=" font-weight: bold;    color: #6BBFA6 !important;">Dummy-Coding für alle Level eines Faktors - bis auf eins</span> und dann einen <span style=" font-weight: bold;    color: #6BBFA6 !important;">Intercept-Term</span> hinzufügen. (Das Level, das ausgelassen wird, heißt <span style=" font-weight: bold;    color: #6BBFA6 !important;">Referenzlevel</span>.)</p>
+<p>Wenn z.B. der <em>a</em>-Stimulus das Referenzlevel ist:</p>
+<p><span class="math display">\[
+x_{1 i}=1, \quad x_{2 i}=\left\{\begin{array}{ll}{0,} &amp; {\text { if stimulus } i \textrm{ is a}} \\ {1,} &amp; {\textrm{ if stimulus } i \textrm{ is an }}\end{array}\right.
+\]</span></p>
+<p>Mit diesem Kodierungsschema spiegelt <span class="math inline">\(\beta_{1}\)</span> nach Least-Squares-Fitting den Mittelwert für <em>a</em>-Trials wider (also das Intercept für <em>a</em>!) und <span class="math inline">\(\beta_{2}\)</span> den <span style=" font-weight: bold;    color: #6BBFA6 !important;">Unterschied zwischen <em>an</em>-Trials und <em>a</em>-Trials</span> (wie viel ich zum/vom Intercept für <em>a</em> hinzufügen/abziehen muss, um beim Intercept für <em>an</em> zu landen), d.h., <span class="math inline">\(\beta_{2}\)</span> ergibt das Differenz-ERP.</p>
+<ul>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Note:</span> “This is the default method of coding categorical variables in <code>R</code> and SPSS.”
+<ul>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Data coding in R:</span> Siehe dazu den <a href="3-exkurs-regressionen.html#codinginr">Abschnitt</a></li>
+</ul></li>
+</ul>
+<div class="figure"><span id="fig:unnamed-chunk-5"></span>
+<img src="pics/smith_a_fig1_3.jpg" alt="Treatment-Coding, um die Modelle für a- und an-Trials zu kombinieren." width="1560" />
+<p class="caption">
+Figure 3.3: Treatment-Coding, um die Modelle für a- und an-Trials zu kombinieren.
+</p>
+</div>
+<p>Das ist der Grund, warum es <span style=" font-weight: bold;    color: #E8793A !important;">Treatment-Coding</span> heißt: Wenn die Kontrollgruppe das Referenzlevel ist und man verschiedene “Treatments” hinzufügt, zeigt das resultierende <span class="math inline">\(\beta\)</span> inwiefern diese “Treatments” das Outcome im Vergleich zur Kontrolle verändern.</p>
+<p><span style=" font-weight: bold;    color: #E8793A !important;">Wichtig:</span> Die gefitteten Werte für <span class="math inline">\(\beta_j\)</span> hängen nicht nur davon ab, wie der <span class="math inline">\(j\)</span>te Prädiktor definiert ist, sondern wie <span style=" font-weight: bold;    color: #6BBFA6 !important;">alle</span> Prädiktoren <span class="math inline">\(x_{1i}, ..., x_{ni}\)</span> definiert sind. Von Beispiel b) zu c) hat sich lediglich die Definition <span class="math inline">\(x_{1i}\)</span> verändert, aber es war die Interpretation von <span class="math inline">\(\beta_2\)</span>, die sich verändert hat (während <span class="math inline">\(\beta_1\)</span> gleich geblieben ist).</p>
+<p><span class="citation">Smith &amp; Kutas (2015)</span> beschreiben das sehr schön: Der Least-Squares-Fitting-Prozess interessiert sich nicht direkt für die <span class="math inline">\(\beta\)</span>-Werte, sondern nur für die predicted Values (jeweils die ganz rechte Spalte in den Grafiken). Er findet die <span class="math inline">\(\beta\)</span>-Werte, die dafür sorgen, dass die predicted Values den Daten so nahe wie möglich kommen. Weil diese predicted Values aber dadurch zu Stande kommen, dass viele <span class="math inline">\(\beta\)</span>-Werte kombiniert werden, bedeutet das, dass die gewählten <span class="math inline">\(\beta\)</span>-Werte nicht diejenigen sind, die individuell am besten zu den Daten passen, sondern die, die “am effektivsten zusammenarbeiten”. Im Falle von Treatment-Coding muss <span class="math inline">\(\beta_1\)</span> alleine “arbeiten”, um zu den <em>a</em>-Stimuli zu passen, während <span class="math inline">\(\beta_1\)</span> und <span class="math inline">\(\beta_2\)</span> für <em>an</em>-Stimuli zusammenarbeiten können. Das “effizienteste Teamwork” ist dann erreicht, wenn <span class="math inline">\(\beta_1\)</span> sich darauf konzentriert, zu den <em>a</em>-Stimuli zu passen, während <span class="math inline">\(\beta_2\)</span> sich darauf konzentriert, <span class="math inline">\(\beta_1\)</span> zu korrigieren, sodass sie in Kombination zu den <em>an</em>-Stimuli passen.</p>
+</div>
+<div id="probleme-mit-dummycoding" class="section level3">
+<h3><span class="header-section-number">3.3.5</span> Probleme mit Dummycoding</h3>
+<p>Dummykodierung führt allerdings auch zu <span style=" font-weight: bold;    color: #6BBFA6 !important;">möglichen Problemen</span> für einige Kodierungsschemata, die zunächst schlüssig erscheinen: Solche, in denen <span style=" font-weight: bold;    color: #6BBFA6 !important;">mehrere Prädiktoren perfekt kolinear sind</span>, d.h., redundant.
+- Wenn versehentlich derselbe Prädiktor zwei mal eingefüttert wird.
+- Wenn manche Zellen aus dem Design ausgelassen werden.</p>
+<p>Oder - weniger offensichtlich - wenn man das ursprüngliche Dummy-Coding-Schema gleichzeitig für zwei verschiedene Faktoren verwendet. In unserem Beispielexperiment könnte man sich vorstellen, dass die Items GROßGESCHRIEBEN präsentiert wurden. Wir könnten dann folgende dummy-kodierte Prädiktoren definieren:</p>
+<p><span class="math display">\[
+x_{1 i}=\left\{\begin{array}{ll}{1,} &amp; {\text { if stimulus } i \text { is a}} \\ {0,} &amp; {\text { if stimulus } i \text { is an }}\end{array} \quad x_{2 i}=\left\{\begin{array}{l}{0, \text { if stimulus } i \text { is a}} \\ {1, \text { if stimulus } i \text { is an }}\end{array}\right.\right.
+\]</span></p>
+<p><span class="math display">\[
+x_{3 i}=\left\{\begin{array}{ll}{1,} &amp; {\text { if stimulus } i \text { is lowercase }} \\ {0,} &amp; {\text { if stimulus } i \text { is UPPERCASE }}\end{array} \quad x_{4 i}=\left\{\begin{array}{ll}{0,} &amp; {\text { if stimulus } i \text { is lowercase }} \\ {1,} &amp; {\text { if stimulus } i \text { is UPPERCASE }}\end{array}\right.\right.
+\]</span></p>
+<p>Angenommen, es gibt nun eine EEG-Komponente (z.B. die N1), die über alle vier Bedingungen hinweg identisch ist. (Mit anderen Worten: Ein Outcome, das über alle vier Bedingungen hinweg denselben Wert annimmt.) Die <span class="math inline">\(\beta\)</span>s könnten nun “zusammenarbeiten” und abbilden, dass <em>a</em> und <em>an</em> beide mit der N1 zusammenhängen - wodurch wir die N1 in der EEG-Welle für <span class="math inline">\(\beta_1\)</span> und <span class="math inline">\(\beta_2\)</span> packen würden. Eine genau so gute Erklärung wäre es anzunehmen, dass die N1 durch groß geschriebene wie auch klein geschriebene Wörter ausgelöst wird, was sich in den Wellen für <span class="math inline">\(\beta_3\)</span> und <span class="math inline">\(\beta_4\)</span> widerspiegeln würde. Oder aber <em>a</em> und <em>an</em> verursachen beide einen positiven (also entgegengesetzten) Ausschlag, aber groß und klein geschriebene Wörter generieren beide ein so großes negatives Signal, dass sie diesem Effekt entgegenwirken und der Gesamteffekt negativ (N2) ist. Alle Interpretationen würden zu den Daten passen. Weil all diese <span class="math inline">\(\beta\)</span>-Kombinationen zu denselben Vorhersagen führen würden, kann Least-Squares-Fitting nicht zwischen ihnen unterscheiden. In mancher Software wird dann einfach stillschweigend und semi-arbiträr eine der Möglichkeiten ausgewählt.</p>
+<p>Treatment-Coding erlaubt es allerdings, kategorische Variablen und deren Interaktionen nicht-redundant zu kodieren. In unserem Beispiel erhalten wir so:</p>
+<p><span class="math display">\[
+x_{1 i}=1 \quad x_{2 i}=\left\{\begin{array}{ll}{0,} &amp; {\text { if stimulus } i \text { is a}} \\ {1,} &amp; {\text { if stimulus } i \text { is an }}\end{array}\right.
+\]</span></p>
+<p><span class="math display">\[
+x_{3 i}=\left\{\begin{array}{ll}{0,} &amp; {\text { if stimulus } i \text { is lowercase }} \\ {1,} &amp; {\text { if stimulus } i \text { is UPPERCASE }}\end{array} \quad x_{4 i}=\left\{\begin{array}{ll}{0,} &amp; {\text { if stimulus } i \text { is either lowercase or a }} \\ {1,} &amp; {\text { if stimulus } i \text { is an UPPERCASE an }}\end{array}\right.\right.
+\]</span></p>
+<p>Sofern mit ins Modell aufgenommen, ist <span class="math inline">\(x_{4i} = x_{2i} \times x_{3i}\)</span> - die Interaktion. <span class="math inline">\(\beta_1\)</span> wird hier also das ERP für <strong>klein geschriebene</strong> <em>a</em>s, <span class="math inline">\(\beta_2\)</span> den Unterschied zwischen <strong>klein geschriebenen</strong> <em>a</em>s und <strong>klein geschriebenen</strong> <em>an</em>s, <span class="math inline">\(\beta_3\)</span> den Unterschied zwischen <strong>klein geschriebenen</strong> <em>a</em>s und <strong>groß geschriebenen</strong> <em>A</em>s - und <span class="math inline">\(\beta_4\)</span> den <span style=" font-weight: bold;    color: #E8793A !important;">Unterschied der Unterschiede</span> abbilden: Wenn wir erst den Unterschied zwischen <strong>groß geschriebenen</strong> <em>AN</em>s und <strong>groß geschriebenen</strong> <em>A</em>s berechnen und dann den Unterschied zwischen <strong>klein geschriebenen</strong> <em>an</em>s und <strong>klein geschriebenen</strong> <em>a</em>s, dann ist <span class="math inline">\(\beta_4\)</span> der Unterschied zwischen diesen beiden Unterschieden. Das heißt auch, dass <span class="math inline">\(\beta_4\)</span> dann signifikant von Null verschieden sein wird, wenn es eine <span style=" font-weight: bold;    color: #6BBFA6 !important;">nicht-additive Interaktion</span> zwischen den beiden Faktoren gibt.</p>
+<p>An sich gibt es viele <span style=" font-weight: bold;    color: #E8793A !important;">unterschiedliche, aber gleichwertige Möglichkeiten</span>, ein lineares Modell zu repräsentieren: zum Beispiel Fig. b) vs. Fig. c). <span style=" font-weight: bold;    color: #E8793A !important;">Non-redundante Kodierungen</span> ermöglichen uns die Repräsentation auszuwählen, die wir am leichtesten zu interpretieren finden.</p>
+</div>
+<div id="slope-fur-numerische-pradiktoren" class="section level3">
+<h3><span class="header-section-number">3.3.6</span> Slope für numerische Prädiktoren</h3>
+<ul>
+<li>Bisher hätte man all diese Dinge auch mit Averaging/Berechnungen von Unterschieden lösen können.
+<ul>
+<li>Jetzt kommen aber <span style=" font-weight: bold;    color: #E8793A !important;">kontinuierliche Kovariaten</span> dazu.</li>
+<li>Hier: <span style=" font-weight: bold;    color: #E8793A !important;">Word Expectancy</span> von 0 - 1.</li>
+<li>Die Expectancy für jedes Wort wurde zuvor außerhalb der Studie normiert (<a href="https://en.wikipedia.org/wiki/Cloze_test">Lückentext</a>).</li>
+</ul></li>
+<li>Ein Intercept kommt in der Regel trotzdem immer dazu, denn sonst würden wir davon ausgehen, dass das Outcome Null ist, wenn der Prädiktor Null ist; und das ist meistens unrealistisch.</li>
+</ul>
+<p>Definition von Prädiktoren für den Word-Expectancy-Effekt:</p>
+<p><span class="math display">\[
+\boldsymbol{x}_{1 i}=\mathbf{1}, \quad x_{2 i}=\textrm{ word expectancy on trial } i
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\beta_1\)</span> ist jetzt eine Art <span style=" font-weight: bold;    color: #E8793A !important;">Baseline</span>: Das Hirnpotenzial, das wir als Antwort auf Items <span class="math inline">\(x_{2i} = 0\)</span> erwarten, also Items die in der Normierungstask niemals geraten wurden (maximal unerwartet waren).</li>
+<li><span class="math inline">\(\beta_2\)</span> schätzt, wie sehr dieses ERP sich <span style=" font-weight: bold;    color: #6BBFA6 !important;">pro Einheit</span> von Expectancy verändert.
+<ul>
+<li>Wenn wir uns von einer Expectancy von 0 zu einer Expectancy von 0.5 bewegen, verursacht das eine Veränderung von <span class="math inline">\(0.5 \times \beta_2\)</span> im vorhergesagten ERP.</li>
+<li><span class="math inline">\(\beta_2\)</span> ist der <span style=" font-weight: bold;    color: #E8793A !important;">Slope der Regressionslinie</span>, der <span class="math inline">\(x_{2i}\)</span> mit <span class="math inline">\(y_i\)</span> verbindet.</li>
+</ul></li>
+</ul>
+<div class="figure"><span id="fig:unnamed-chunk-6"></span>
+<img src="pics/smith_a_fig2.jpg" alt="Modell mit einem kategorialen Prädiktor." width="1522" />
+<p class="caption">
+Figure 3.4: Modell mit einem kategorialen Prädiktor.
+</p>
+</div>
+<ul>
+<li><p>Der <span style=" font-weight: bold;    color: #E8793A !important;">positive Ausschlag</span> in der <span class="math inline">\(\beta_2\)</span>-Welle bei 300 ms bedeutet eine verstärkte Positivierung für besonders erwartete Wörter …</p>
+<ul>
+<li>… was im Umkehrschluss eine Negativierung für wenig erwartete Wörter bedeutet.</li>
+</ul></li>
+<li><p>Dieser Effekt schlägt sich in den vorhergesagten ERPs wieder: Es ist <span style=" font-weight: bold;    color: #6BBFA6 !important;">positiver für erwartete Wörter</span> (<span class="math inline">\(x_{2i} = 1\)</span>) <span style=" font-weight: bold;    color: #375B42 !important;">als für unerwartete Wörter</span> (<span class="math inline">\(x_{2i} = 0\)</span>).</p></li>
+<li><p>Die Prädiktoren sind denen sehr ähnlich, die wir fürs Treatment-Coding zuvor benutzt haben:</p>
+<ul>
+<li>Wir haben einen <span style=" font-weight: bold;    color: #6BBFA6 !important;">Intercept-Term</span> <span class="math inline">\(x_{1i}\)</span>, dessen dazugehöriger Parameter <span class="math inline">\(\beta_1\)</span> uns eine Art <span style=" font-weight: bold;    color: #6BBFA6 !important;">Baseline</span> gibt.</li>
+<li>Wir haben zusätzlich <span class="math inline">\(x_{2i}\)</span>, das <span style=" font-weight: bold;    color: #6BBFA6 !important;">Abweichungen von dieser Baseline</span> kodiert.</li>
+</ul></li>
+<li><p>Der Unterschied ist:</p>
+<ul>
+<li>Im Treatment-Coding vorhin hat der Parameter <span class="math inline">\(\beta_2\)</span> den Unterschied in der Skalp-Spannung <span style=" font-weight: bold;    color: #6BBFA6 !important;">zwischen <em>a</em>- and <em>an</em>-Stimuli</span>, in der Einheit <span class="math inline">\(\mu V\)</span>.</li>
+<li>Hier misst <span class="math inline">\(\beta_2\)</span> den Unterschied in der Skalp-Spannung, der mit der <span style=" font-weight: bold;    color: #6BBFA6 !important;">Änderung von Expectancy um eine Einheit</span>, einhergeht, in der Einheit von <span class="math inline">\(\mu V\)</span> pro Einheitsänderung in Expectancy.</li>
+</ul></li>
+<li><p>Ist also ziemlich dasselbe wie das Unterschieds-ERP vorher, außer dass wir den Stimuli diesmal erlauben, Werte zwischen den beiden Extremen anzunehmen.</p></li>
+</ul>
+</div>
+<div id="kombination-kategorialer-und-kontinuierlicher-pradiktoren" class="section level3">
+<h3><span class="header-section-number">3.3.7</span> Kombination kategorialer und kontinuierlicher Prädiktoren</h3>
+<p>Wir kombinieren die kategorialen und kontinuierlichen Prädiktoren von vorhin:</p>
+<p><span class="math display">\[
+\boldsymbol{x}_{1 i}=\mathbf{1} \quad \boldsymbol{x}_{2 i}=\left\{\begin{array}{ll}{\mathbf{0},} &amp; {\text { if stimulus } i \text { is a}} \\ {\mathbf{1},} &amp; {\text { if stimulus } \boldsymbol{i} \text { is an }}\end{array} \quad \boldsymbol{x}_{3 i}=\text { word expectancy on trial } i\right.
+\]</span></p>
+<div class="figure"><span id="fig:unnamed-chunk-7"></span>
+<img src="pics/smith_a_fig3_full.jpg" alt="Modell mit einem kontinuierlichen und einem kategorialen Prädiktor." width="100%" />
+<p class="caption">
+Figure 3.5: Modell mit einem kontinuierlichen und einem kategorialen Prädiktor.
+</p>
+</div>
+<p>Die resultierenden <span class="math inline">\(\beta\)</span>s haben dieselbe Interpretation wie in den vorherigen Beispielen:</p>
+<ul>
+<li><span class="math inline">\(\beta_1\)</span> spiegelt die vorhergesagten ERPs für <em>a</em>-Trials wider, wenn die <span style=" font-weight: bold;    color: #6BBFA6 !important;">Worterwartung Null ist</span>.</li>
+<li><span class="math inline">\(\beta_2\)</span> spiegelt den Unterschied zwischen <em>an</em>-Trials und <em>a</em>-Trials wider.
+<ul>
+<li>Dieses Modell nimmt an, dass der über alle Trials hinweg derselbe ist.</li>
+</ul></li>
+<li><span class="math inline">\(\beta_3\)</span> spiegelt das vorhergesagte ERP pro Änderung von Expectancy um eine Einheit wider.</li>
+</ul>
+<div id="mit-interaktion" class="section level4">
+<h4><span class="header-section-number">3.3.7.1</span> Mit Interaktion</h4>
+<p>Für eine Interaktion müssen wir <span class="math inline">\(x_{4i} = x_{2i} \times x_{3i}\)</span> hinzufügen, und dann passiert Folgendes:</p>
+<ul>
+<li><span class="math inline">\(\beta_3\)</span> spiegelt den Expectancy-Effekt für <em>a</em>-Stimuli wider.</li>
+<li><span class="math inline">\(\beta_4\)</span> spiegelt den <span style=" font-weight: bold;    color: #6BBFA6 !important;">Unterschied zwischen</span> dem Erwartungseffekt für <em>a</em>-Stimuli und dem Erwartungseffekt für <em>an</em>-Stimuli wider.</li>
+</ul>
+</div>
+<div id="komplexere-falle" class="section level4">
+<h4><span class="header-section-number">3.3.7.2</span> Komplexere Fälle</h4>
+<ul>
+<li>Manchmal gehören zu Ereignissen <span style=" font-weight: bold;    color: #6BBFA6 !important;">mehr oder andere Prädiktoren</span> als zu anderen.
+<ul>
+<li>Z.B. gibt es in einem Go/No-Go-Paradigma Reaktionszeiten für Go-Trials, aber nicht für No-Go-Trials</li>
+</ul></li>
+<li>Zwei Möglichkeiten:
+<ul>
+<li><ol style="list-style-type: lower-alpha">
+<li>Die Trials aufteilen und getrennte Analysen für beide Sets rechnen.</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-alpha">
+<li>Wieder den “Zero-Trick” benutzen: Einfach <span style=" font-weight: bold;    color: #6BBFA6 !important;">beide Prädiktorensets in ein einziges Model packen</span>, mit folgender Regel: <span style=" font-weight: bold;    color: #6BBFA6 !important;">Immer wenn wir einen Trial haben, zu dem ein bestimmter Prädiktor nicht passt, setzen wir diesen auf Null</span>:</li>
+</ol></li>
+</ul></li>
+</ul>
+<p><span class="math display">\[
+x_{1 i}=\left\{\begin{array}{ll}{1,} &amp; {\text { on } \mathrm{no}-\mathrm{go} \text { trials }} \\ {0,} &amp; {\text { on go trials }}\end{array}\right.
+\]</span></p>
+<p><span class="math display">\[
+x_{2 i}=\left\{\begin{array}{ll}{0,} &amp; {\text { on } \mathrm{no}-\mathrm{go} \text { trials }} \\ {1,} &amp; {\text { on go trials }}\end{array}\right.
+\]</span></p>
+<p><span class="math display">\[
+x_{3 i}=\left\{\begin{array}{cc}{0,} &amp; {\text { on no-go trials }} \\ {\mathrm{RT}_{i},} &amp; {\text { on go trials }}\end{array}\right.
+\]</span></p>
+<p>Auf diese Weise hat der <span class="math inline">\(\beta\)</span>-Wert des Prädiktors <span class="math inline">\(x_{3i}\)</span> keine Auswirkungen auf die Vorhersagen unseres Modells für No-Go-Trials.</p>
+</div>
+</div>
+</div>
+<div id="kollinearitat" class="section level2">
+<h2><span class="header-section-number">3.4</span> Kollinearität</h2>
+<ul>
+<li>Stellt ein Problem dar für Modelle mit <span style=" font-weight: bold;    color: #6BBFA6 !important;">sehr vielen Prädiktoren</span> und/oder <span style=" font-weight: bold;    color: #6BBFA6 !important;">partiell konfundierten Kovariaten</span>.</li>
+</ul>
+<div id="definition" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> Definition</h3>
+<ul>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Kollinearität</span> wird in der Regel verwendet, um <span style=" font-weight: bold;    color: #6BBFA6 !important;">zwei sehr verschiedene Phänomene</span> zu beschreiben.
+<ul>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Perfekte Kollinearität</span> liegt vor, wenn die Prädiktoren <span style=" font-weight: bold;    color: #6BBFA6 !important;">vollkommen redundant</span> miteinander sind.
+– Sie machen genau <span style=" font-weight: bold;    color: #6BBFA6 !important;">dieselben Vorhersagen auf unterschiedliche Weise</span>.
+– Siehe oben: Das ist die Grundlage von <a href="3-exkurs-regressionen.html#treatmentcoding">Treatment-Coding</a>.
+<ul>
+<li>Die Effekte sind leicht nachvollziehbar und ebenso leicht zu vermeiden.</li>
+</ul></li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Partielle Kollinearität</span> (aka <span style=" font-weight: bold;    color: #6BBFA6 !important;">partial confounding</span> oder <span style=" font-weight: bold;    color: #6BBFA6 !important;">Non-Orthogonalität</span>) beschreibt den Fall, in dem einige Prädiktoren <span style=" font-weight: bold;    color: #6BBFA6 !important;">korreliert, aber nicht identisch</span> sind.
+<ul>
+<li>Manchmal wird der Begriff “Kollinearität” nur für besonders “schwere” Fälle verwendet, in denen die Korrelation zwischen Prädiktoren eine gewisse Schwelle überschreitet.</li>
+<li>Da solche Schwellen aber arbiträr sind, bezieht sich die grundlegende Diskussion sowohl auf leichte wie auch schwere Fälle.</li>
+</ul></li>
+</ul></li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Partielle Kollinearität</span> verletzt keine Annahmen der Least-Squares-Regression.
+<ul>
+<li>Allerdings muss man auf zwei Dinge achten: Ob man <span style=" font-weight: bold;    color: #6BBFA6 !important;">genügend Prädiktoren</span> und <span style=" font-weight: bold;    color: #6BBFA6 !important;">ausreichende Daten</span> hat.</li>
+</ul></li>
+</ul>
+</div>
+<div id="genugend-pradiktoren" class="section level3">
+<h3><span class="header-section-number">3.4.2</span> Genügend Prädiktoren</h3>
+<ul>
+<li>Relevante Prädiktoren auszulassen, kann zu Problemen führen:</li>
+<li>Figs. 2.4 und 2.5 zeigen beide die Schätzungen für den Slope für Expectancy.
+<ul>
+<li>Fig. 2.5 schließt einen Prädiktor für <em>a</em>/<em>an</em> mit ein.</li>
+<li>Fig. 2.4 lässt den Prädiktor für <em>a</em>/<em>an</em> aus.</li>
+</ul></li>
+<li>In unserem Fall sind die Schätzungen nahezu identisch.
+<ul>
+<li>Das ist typisch für <span style=" font-weight: bold;    color: #6BBFA6 !important;">(beinahe) orthogonale</span> Experimente: Das vorliegende war so designed, dass die <em>a</em>- und <em>an</em>-Stimuli hinsichtlich der Expectancy <span style=" font-weight: bold;    color: #6BBFA6 !important;">balanced</span> waren.</li>
+<li>In orthogonalen Designs ändern sich die Schätzungen für die verbleibenden Kovariaten nicht, wenn Kovariaten ausgelassen werden.</li>
+</ul></li>
+<li>Nehmen wir eine Version des Beispielexperiments an, wo die <em>an</em>-Stimuli im Mittel eine niedrigere Expectancy als die <em>a</em>-Stimuli haben.
+<ul>
+<li>Dann ist die beste Lösung für das <span style=" font-weight: bold;    color: #6BBFA6 !important;">Expectancy-only-Modell</span>, um das Datenmuster zu erklären: Einen Teil des kategorialen <em>an</em>-Effekts dem Expectancy-Effekt zuordnen.</li>
+<li>Die Analyse wird <span style=" font-weight: bold;    color: #6BBFA6 !important;">inkonsistent</span>: Es spielt keine Rolle, <span style=" font-weight: bold;    color: #6BBFA6 !important;">wie viele Daten wir sammeln</span>; das Ergebnis wird immer irreführend sein.</li>
+</ul></li>
+<li>Aber im <span style=" font-weight: bold;    color: #E8793A !important;">kombinierten Modell</span> kann jedes Muster, das mit dem Wort <em>an</em> assoziiert ist, diesem direkt zugeschrieben werden.
+<ul>
+<li>“Because the least-squares fitting process selects whichever <span class="math inline">\(\beta\)</span> coefficients are best at working together to explain the patterns in the data, and ultimately, the covariates that are actually responsible for a pattern are always the best way to explain it. As long as we include those covariates in our model, and have enough data, then regression will work out the correct waveforms even if our predictors are confounded.”</li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Vorsicht:</span> Ich bezweifle, dass das in jedem Fall zutrifft; das klingt so, als könnten Regressionen kausale Effekte aufdecken, was nicht der Fall ist.</li>
+</ul></li>
+</ul>
+</div>
+<div id="ausreichend-daten" class="section level3">
+<h3><span class="header-section-number">3.4.3</span> Ausreichend Daten</h3>
+<ul>
+<li>Kollinearität beeinflusst auch <span style=" font-weight: bold;    color: #6BBFA6 !important;">das Noise unserer Schätzungen</span> und <span style=" font-weight: bold;    color: #6BBFA6 !important;">wie viele Datenpunkte wir benötigen</span>.</li>
+<li>Das lässt sich nachvollziehen, wenn man sich <span style=" font-weight: bold;    color: #E8793A !important;">Variance Inflation Factors</span> (VIFs) ansieht.
+<ul>
+<li>Jeder VIF misst <span style=" font-weight: bold;    color: #6BBFA6 !important;">inwiefern die Sampling-Varianz eines geschätzten</span> <span class="math inline">\(\beta\)</span>-<span style=" font-weight: bold;    color: #6BBFA6 !important;">Koeffizienten durch vorhandene Kollinearität beeinflusst wird</span> und entspricht <span class="math inline">\(1/(1 − R^2)\)</span>.</li>
+<li><span class="math inline">\(R^2\)</span> hat hier nichts mit dem gesamten Modell zu tun, sondern misst wie viel der <span style=" font-weight: bold;    color: #6BBFA6 !important;">Varianz in diesem Prädiktor</span> durch <span style=" font-weight: bold;    color: #6BBFA6 !important;">die anderen Prädiktoren</span> im Modell erklärt werden kann.
+<ul>
+<li>Beispiel: Wenn wir ein Modell mit nur zwei Prädiktoren haben und deren Korrelation <span class="math inline">\(r = 0.5\)</span> beträgt, dann sind die VIFs <span class="math inline">\(1/(1 − 0.5^2) \approx 1.33\)</span>.</li>
+<li>Das bedeutet: Wenn wir wissen, dass wir normalerweise 60 Trials benötigen, um eine akzeptable Schätzung für einen einzigen Prädiktor in einem orthogonalen Design zu erhalten, dann brauchen wir nun 60 <span class="math inline">\(\times\)</span> 1.33 = 80 Trials, um eine ebenso akkurate Schätzung zu erhalten <span class="citation">(O’brien, 2007)</span>.</li>
+<li>Anders gesagt: Jeder Trial in diesem Design ist das Drittel eines Trials in einem orthogonalen Design wert, zumindest im Bezug auf die genannten Prädiktoren.</li>
+<li>Generell ist es daher clever, die VIFs in der Planungsphase eines Experiments zu berechnen (wenn möglich) anstatt bis zur Analyse zu warten.</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Implikationen der VIF-Formel:</p>
+<ul>
+<li>Wenn wir <span style=" font-weight: bold;    color: #6BBFA6 !important;">weitere unkorrelierte Prädiktoren</span> zu unserem Modell hinzufügen, hat das absolut <span style=" font-weight: bold;    color: #6BBFA6 !important;">keinen Effekt auf die Noisiness</span> unserer Schätzungen.
+<ul>
+<li>Jeder Prädiktor in einem orthogonalen Design hat einen VIF von 1, was bedeutet: Solange unsere Kovariaten unkorreliert sind, können wir mit derselben Menge Daten ein Dutzend Parameter genau so gut schätzen wie einen einzigen. Wobei es allerdings schwierig werden dürfte, ein Dutzend unkorrlierter Prädiktoren zu finden.</li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">Kollinearität ist nicht ansteckend:</span> Wenn wir zwei Prädiktoren haben, die miteinander korrelieren, aber nicht mit einem driten, dann brauchen wir mehr Datenpunkte, um den Effekt der ersten beiden Prädiktoren schätzen zu können, aber ihre Anwesenheit im Modell wird die Schätzung des dritten Prädiktors nicht beeinflussen.</li>
+</ul></li>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">VIFs &gt; 1 travel in packs:</span> Korrelation verläuft immer in (mindestens) zwei Richtungen.
+<ul>
+<li>Sobald ein Prädiktor ein VIF &gt; 1 hat, sind andere auch betroffen.</li>
+</ul></li>
+</ul>
+<p>Das hängt eng mit dem Grund für die Varianzinflation zusammen. Oben haben wir festgestellt, dass das Modell im Fall von zwei <span style=" font-weight: bold;    color: #6BBFA6 !important;">identischen Prädiktoren</span> zwar wusste, dass es <span class="math inline">\(\beta_1 + \beta_2 = 1\)</span> braucht, um eine Passung zu den Daten herzustellen. Aber es konnte nicht unterscheiden zwischen Optionen wie <span class="math inline">\(\beta_1 = 0, \beta_2 = 1\)</span> und <span class="math inline">\(\beta_1 = 100, \beta_2 = -99\)</span>. Wenn unsere Prädiktoren nicht identisch, sondern <span style=" font-weight: bold;    color: #6BBFA6 !important;">bloß ähnlich</span> sind, kann usner Modell diese Fälle prinzipiell unterscheiden - aber angesichts <span style=" font-weight: bold;    color: #6BBFA6 !important;">endlicher Daten</span> hat es womöglich Probleme: Die beiden Beispieloptionen ergeben sehr ähnliche Predictions und je nachdem, wie das Rauschen aussieht, mag es ungerechtfertigterweise viel attraktiver erscheinen, <span class="math inline">\(\beta_1 = 100, \beta_2 = -99\)</span> zu setzen.</p>
+<p>Dieses Problem manifestiert sich als <span style=" font-weight: bold;    color: #6BBFA6 !important;">erhöhte Sampling-Varianz</span> für alle beteiligten <span class="math inline">\(\beta\)</span>s. Das ist genau die zusätzliche Sampling-Varianz, die VIFs messen; und sie schlägt sich auf charakteristische Weise nieder: In orthogonalen Designs verzerrt das Rauschen die Schätzungen für jedes <span class="math inline">\(\beta\)</span> unabhängig von denen der anderen: <span class="math inline">\(\beta_1\)</span> kann fälschlicherweise hoch und <span class="math inline">\(\beta_2\)</span> fälschlicherweise niedrig liegen, oder umgekehrt. Oder beide könnten fälschlicherweise hoch bzw. fäschlicherweise niedrig sein. Es gibt keine Korrelation zwischen dem Rauschen in <span class="math inline">\(\beta_1\)</span> und dem in <span class="math inline">\(\beta_2\)</span>.</p>
+<p>Wenn Kollinearität auftritt, sieht das anders aus: Dasselbe Rauschen beeinflusst mehrere <span class="math inline">\(\beta\)</span>-Werte zugleich und hat <span style=" font-weight: bold;    color: #6BBFA6 !important;">merkwürdiges, strukturiertes Verhalten</span> zur Folge. Zum Beispiel wird <span class="math inline">\(\beta_2\)</span> immer dann fälschlicherweise besonders niedrig geschätzt, wenn <span class="math inline">\(\beta_1\)</span> fälschlicherweise besonders hoch geschätzt wird - und umgekehrt. Und weil <span style=" font-weight: bold;    color: #6BBFA6 !important;">Kollinearität das Rauschen unserer Schätzungen verstärkt</span>, wird die Schätzung für <span class="math inline">\(\beta_1\)</span> manchmal <em>sehr</em> hoch liegen (<span class="math inline">\(\beta_1 = 100\)</span>), während die für <span class="math inline">\(\beta_2\)</span> <em>sehr</em> niedrig liegt (<span class="math inline">\(\beta_2 = -99\)</span>). Das ist in der <span style=" font-weight: bold;    color: #E8793A !important;">Theorie der linearen Regression vollkommen erwartet</span> und wird in herkömmlichen statistischen Tests berücksichtigt. Wenn für einen Teilnehmer <span class="math inline">\(\beta_1 = 100\)</span>, <span class="math inline">\(\beta_2 = -99\)</span> geschätzt wird, wird für den nächsten <span class="math inline">\(\beta_1 = -99\)</span>, <span class="math inline">\(\beta_2 = 100\)</span> geschätzt und unsere statistischen Tests werden folgern, dass unsere Schätzungen zu verrauscht sind, um irgendetwas auszusagen.</p>
+</div>
+<div id="vereinfachte-modelle-als-losung" class="section level3">
+<h3><span class="header-section-number">3.4.4</span> Vereinfachte Modelle als Lösung?</h3>
+<p>Wenn Kollinearität zu hoch liegt und wir nicht genügend Daten sammeln können, um verlässliche Schätzungen unserer <span class="math inline">\(\beta\)</span>-Parameters zu erhalten, könnte man denken, dass es eine gute Idee ist, einige Prädiktoren rauszuwerfen und das Modell zu vereinfachen. Ist es aber nicht.</p>
+<div id="collinearcontrols" class="section level4">
+<h4><span class="header-section-number">3.4.4.1</span> Im Fall von kollinearen Kontrollvariablen</h4>
+<p>Wenn Prädiktoren mit hohen VIFs als <span style=" font-weight: bold;    color: #E8793A !important;">Kontrollvariablen</span> enthalten sind, die nicht das eigentliche Ziel unserer Fragestellung sind (d.h. wir sie nicht interpretieren), dann werden die Schätzungen dieser Kontrollvariablen sehr verrauscht sein, aber <span style=" font-weight: bold;    color: #6BBFA6 !important;">Kollinearität ist kein Problem</span>.</p>
+<ul>
+<li>Wenn unsere Kontrollvariablen stark miteinander korreliert sind, aber nur schwach mit den Prädiktoren, die das eigentliche Ziel unserer Analyse snd, können wir die Kontrollvariablen im Modell belassen ohne befürchten zu müssen, dass ihre Instabilität die anderen <span class="math inline">\(\beta\)</span>s beeinflussen wird.</li>
+<li>Zwar werden unsere geschätzten <span class="math inline">\(\beta\)</span>s für die Kontrollvariablen verrauscht und nicht interpretiertbar sein, aber sie stellen dennoch eine <span style=" font-weight: bold;    color: #6BBFA6 !important;">gute Kontrolle</span> für die <span class="math inline">\(\beta\)</span>s dar, die uns interessieren, und reduzieren die Chance, durch Konfundierung zu inkonsistenten und irreführenden Ergebnissen zu gelangen.
+<ul>
+<li><span style=" font-weight: bold;    color: #E8793A !important;">NOTE:</span> Für eine Kovariate zu kontrollieren ist allerdings nicht immer eine gute Idee. Siehe <span class="citation">Cole et al. (2009)</span>: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2846442/">Conditioning on a collider</a>. <span style=" font-weight: bold;    color: #E8793A !important;">TO DO:</span> Nochmal den Unterschied zwischen <span style=" font-weight: bold;    color: #E8793A !important;">controlling for</span> und <span style=" font-weight: bold;    color: #E8793A !important;">conditioning on</span> klar kriegen, was eine Regression in diesem Kontext tut und worauf man achten muss.</li>
+</ul></li>
+</ul>
+</div>
+<div id="im-fall-von-kollinearen-targets" class="section level4">
+<h4><span class="header-section-number">3.4.4.2</span> Im Fall von kollinearen Targets</h4>
+<p>Wenn die <span style=" font-weight: bold;    color: #E8793A !important;">Prädiktoren, die uns interessieren</span>, hohe VIFs haben, gibt uns das Auslassen von Kontrollvariablen mehr statistische Power, das heißt unsere VIFs sinken und die Effektivität unseres Datensets steigt.</p>
+<ul>
+<li>Aber: Wenn wir die falschen Prädiktoren rauswerfen, würde selbst eine unendliche Power bloß dafür sorgen, dass wir umso präziser zur falschen Antwort gelangen.</li>
+<li>Wir verlieren die Fähigkeit, zwischen Kontrollvariablen und den Kovariaten zu unterscheiden, für die wir uns interessieren.</li>
+</ul>
+<p><span style=" font-weight: bold;    color: #E8793A !important;">Allerdings:</span> “When we remove a control variable, what we’re assuming is that we know a priori that it has no effect; but if we know that, then we why did we include it in the first place?”</p>
+<ul>
+<li><p>Es ist ein wenig komplizierter, als er hier schreibt. Wenn z.B. Collider vorhanden sind, ist die Kontrolle einiger Variablen vielleicht gar nicht nötig bzw. es könnte sogar erst einen Bias verursachen, für bestimmte Variablen zu kontrollieren, siehe wieder <span class="citation">Cole et al. (2009)</span>.</p></li>
+<li><p><span style=" font-weight: bold;    color: #E8793A !important;">TO DO:</span> Nochmal die Bedigungen durchgehen, unter denen man für eine Variable kontrolliert (oder nicht); vermutlich mit dem <a href="https://www.amazon.de/Book-Why-Science-Cause-Effect/dp/046509760X">Buch von Pearl</a>.</p></li>
+<li><p>Angenommen, wir haben zwei korrelierte Variablen, aber wollen deren Effekte interpretieren. Wenn beide signifikant werden, wenn sie für sich genommen ins Modell eingehen, aber keiner davon signifikant wird, wenn beide gemeinsam einfließen, bedeutet das, dass <span style=" font-weight: bold;    color: #6BBFA6 !important;">mindestens einer dieser Prädiktoren eine Rolle spielt</span>, aber mehr Datenpunkte benötigt werden, um den Effekt schätzen zu können.</p>
+<ul>
+<li>Eine schrittweise Regression beispielsweise wird einen dieser Prädiktoren zufällig auswählen, ohne eine Warnung auszugeben <span class="math inline">\(\to\)</span> Wir haben also keine verlässliche Evidenz dafür, dass der gewählte Prädiktor wichtiger ist als der nicht gewählte.</li>
+<li>Das kann trotzdem nützlich sein, z.B. für medizinische Screening-Modelle, wo es das Ziel ist, eine gute Vorhersageleistung mit einem möglichst ökonomischen Variablenset zu erzielen, wobei es keine Rolle spielt, ob die gemessenen Items das direkteste Maß der zugrundeliegenden Prozesse darstellen. Für wissenschaftliche Untersuchungen ist das so allerdings nicht brauchbar.</li>
+<li>Man kann die redundanten Maße auch in ein einzelnes Konstrukt mitteln, um das Rauschen zu reduzieren, aber vorhin im Fall von <a href="3-exkurs-regressionen.html#collinearcontrols">kollinearen Kontrollvariablen</a> haben die Autoren noch andere Autoren für genau diese Vorgehensweise geshamed.</li>
+</ul></li>
+<li><p>Verschiedene Arten der Kodierung können das Rauschen reduzieren (z.B. führt Treatment-Coding zu Schätzungen des Unterschieds (was auch eine Art Mittelwert darstellt), die weniger verrauscht sind), aber das verändert nicht den overall Model-Fit oder die Vorhersagen des Modells.</p></li>
+<li><p>“One kind of recoding that in particular is <span style=" font-weight: bold;    color: #6BBFA6 !important;">hard to justify is the use of PCA</span> for the sole purpose of orthogonalizing predictors before entering them into regression. Like other kinds of recoding, this has no effect on model fit overall; the only motivation for doing it is if we want to interpret our individual <span class="math inline">\(\beta\)</span>s, but are prevented by collinearity. Orthogonalization replaces our original <span class="math inline">\(\beta\)</span>s with a new set that have reduced VIFs and thus are less noisy; but in the process it always makes individual <span class="math inline">\(\beta\)</span>s less interpretable, by replacing them with strange and arbitrary linear combinations of our original <span class="math inline">\(\beta\)</span>s. The procedure is therefore self-defeating.”</p></li>
+</ul>
+<p><span style=" font-weight: bold;    color: #E8793A !important;">Ich widerspreche energisch:</span> “The best rule of thumb seems to be, enter all the predictors that may be relevant, report the full list of predictors that were entered along with details of any transformations and coding schemes, and then test and report whichever waveforms and contrasts are of scientific interest.”</p>
+</div>
+</div>
+</div>
+<div id="codinginr" class="section level2">
+<h2><span class="header-section-number">3.5</span> Variablenkodierung in R</h2>
+<p>Illustriert an den Daten meiner Masterarbeit: Was passiert, wenn man die Daten in <code>R</code> unterschiedlich kodiert und dann eine Regression drüberlaufen lässt? Hier drei Tabellen:</p>
+<p><img src="pics/ma_tab.jpg" width="100%" /></p>
+<div id="intercept-und-effekt-der-kodierten-kategorialen-variable" class="section level3">
+<h3><span class="header-section-number">3.5.1</span> Intercept und Effekt der kodierten kategorialen Variable</h3>
+<p>Abhängige Variable ist die wahrgenommene Potency of Science. Kodiert wurde die experimentelle Manipulation Diskursstil.</p>
+<p>In Beispiel a) zunächst mit neutral = -1 und heated = 1. Das <span style=" font-weight: bold;    color: #db0000 !important;">Intercept</span> ist hierbei der mittlere Punktwert, der beim Item für wahrgenommene Potency über alle Teilnehmer hinweg (egal in welcher Bedingung) angegeben wurde. Der Effekt für <span style=" font-weight: bold;    color: #0037b4 !important;">condition</span> gibt hier wieder, wie viel Abweichung von diesem Mittelwert die experimentellen Bedingungen jeweils verursachen: In der Bedingung “neutral” liegt der Mittelwert um .17 höher, in der Bedingung “heated” liegt der Mittelwert um .17 niedriger.</p>
+<p>In Beispiel b) wird die experimentelle Bedingung mit neutral = 0 und heated = 1 kodiert, was bedeutet: Die Interpretation gilt für die Bedingung neutral. Das <span style=" font-weight: bold;    color: #06cb00 !important;">Intercept</span> ist also der Mittelwert für die Bedingung neutral, und wir sehen, dass es tatsächlich .17 Punkte höher liegt, als das <span style=" font-weight: bold;    color: #db0000 !important;">mittlere Intercept insgesamt</span>! Der Effekt für <span style=" font-weight: bold;    color: #db00db !important;">condition</span> heißt diesmal: Der Unterschied im Mittelwert zwischen neutral und heated. Und in der Tat:</p>
+<p>Das <span style=" font-weight: bold;    color: #da7d00 !important;">Intercept in Beispiel c)</span>, das durch die Kodierung neutral = 1 und heated = 0 für die Bedingung heated gilt, stellt den Mittelwert für heated dar - und es ist, wie wir im Effekt von <span style=" font-weight: bold;    color: #db00db !important;">condition für die Gruppe neutral</span> schon ablesen konnten, .34 Punkte höher als der <span style=" font-weight: bold;    color: #06cb00 !important;">Mittelwert der Bedingung neutral</span>. Entsprechend sagt uns der Effekt für <span style=" font-weight: bold;    color: #00aec0 !important;">condition</span> für die Bedingung heated umgekehrt, dass der <span style=" font-weight: bold;    color: #da7d00 !important;">Mittelwert für heated</span> um .34 kleiner ist als der <span style=" font-weight: bold;    color: #06cb00 !important;">Mittelwert für neutral</span>.</p>
+<p>Siehe auch dieser sehr hilfreiche Post auf <a href="https://stats.stackexchange.com/questions/59578/dummy-coding-for-contrasts-0-1-vs-1-1">Stackexchange</a>.</p>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="2-mixed-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="4-random-intercept-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": 3,
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
