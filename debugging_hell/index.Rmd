@@ -1,0 +1,8 @@
+---
+output: html_document
+---
+
+# Debugging hell
+
+- How it matters a lot whether you access your dataframes column's with one or two [squared brackets](https://einglasrotwein.github.io/debugging_hell/brackets).
+- How you should fear [incomplete column names](https://einglasrotwein.github.io/debugging_hell/incomplete_colnames).

@@ -6,7 +6,7 @@ output: html_document
 
 I didn't get around to setting up this page properly yet, but look at this unicorn below presenting you [Benford's Law](https://en.wikipedia.org/wiki/Benford%27s_law) while waiting!
 
-You could also read about how [square brackets matter a lot](https://einglasrotwein.github.io/brackets) when accessing data in a dataframe.
+You could also explore my [debugging hell](https://einglasrotwein.github.io/debugging_hell), where I write about little quirks I encountered when my code wasn't working.
 
 Or at this simulation of the [epic fight](https://einglasrotwein.github.io/wilcoxon_wars) between the t-test and the Wilcoxon rank sum test against the perils of violated assumtions.
 
