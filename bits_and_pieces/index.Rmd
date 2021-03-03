@@ -1,0 +1,7 @@
+---
+output: html_document
+---
+
+# Bits and pieces
+
+- [Consecutive elements in a row](https://einglasrotwein.github.io/bits_and_pieces/consecutive_elements.html)
